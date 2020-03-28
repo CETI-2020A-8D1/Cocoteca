@@ -17,6 +17,6 @@ namespace Cocoteca.Models
         public string Iso3 { get; set; }
 
         public virtual ICollection<MtoCatLibros> MtoCatLibros { get; set; }
-    }{
+    
     }
 }
