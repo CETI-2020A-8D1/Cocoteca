@@ -1,10 +1,23 @@
-﻿
+﻿@model IEnumerable<>
+
 @{
     ViewData["Title"] = "CarritoView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>La Cocoteca</title>
+    <link rel="icon" href="imagenes/coco.png" type="image/icon type">
 
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel=StyleSheet href="css/custom.css" type="text/css" media=screen>
+    <link rel=StyleSheet href="css/carrito.css" type="text/css" media=screen>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+</head>
 
 
 
@@ -24,6 +37,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @*@foreach (var item in Model)
+                        {
+                        <tr style="background-color:#f3f3f3">
+                            <td>
+                                @Html.DisplayFor()
+                            </td>
+                        </tr>
+                        }*@
+
                         <tr style="background-color:#f3f3f3">
                             <td class="pl-4">
                                 <img src="https://libreriashidalgo.com/portadas/9786074576399.jpg" width="80" height="100">
