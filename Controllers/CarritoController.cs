@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Cocoteca.Helper;
+using Cocoteca.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +12,25 @@ namespace Cocoteca.Controllers
 {
     public class CarritoController : Controller
     {
+        CocopelAPI _api = new CocopelAPI();
+
         // GET: Carrito
-        public ActionResult CarritoView()
+        public async Task<IActionResult> CarritoView(int id)   // id del cliente
         {
-            return View();
+            List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
+            List<TraCompras> compras = new List<TraCompras>();
+            List<TraConceptoCompra> conceptoCompras = new List<TraConceptoCompra>();
+
+            HttpClient cliente = _api.Initial();
+            HttpResponseMessage res = await cliente.GetAsync("api/TraCompras" + id);
+
+            if (res.IsSuccessStatusCode)
+            {
+                string result = res.Content.ReadAsStringAsync().Result;
+
+            }
+
+            return View(listaCarrito);
         }
 
         // GET: Carrito/Details/5
