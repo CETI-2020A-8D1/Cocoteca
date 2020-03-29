@@ -3,5 +3,171 @@
     ViewData["Title"] = "CarritoView";
 }
 
-<h1>CarritoView</h1>
 
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #ff9060; font-family: 'Raleway', sans-serif;">
+    <a class="navbar-brand" href="#">
+        <img src="imagenes/imagotipo.png" alt="Cocoteca" width="200px" height="30px">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categor&iacute;as
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Categoria 1</a>
+                    <a class="dropdown-item" href="#">Categoria 2</a>
+                    <a class="dropdown-item" href="#">Categoria 3</a>
+                </div>
+            </li>
+        </ul>
+
+        <form class="form-inline my-1 my-lg-1">
+            <input class="form-control mr-sm-2 w-auto" type="search" placeholder="Ej. El principito..." aria-label="Search">
+            <button class="btn btn-search my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+
+        <li class="nav-item">
+            <div class="box-1">
+                <div class="btn btn-one">
+                    <span><img src="imagenes/usuario.png" width="30px" height="30px"> Inicia sesi&oacute;n</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <a class="btn btn-light btn-circle" href="#">
+                <img class="carrito" src="imagenes/carrito.png" alt="carrito" width="30px" height="30px">
+            </a>
+        </li>
+    </div>
+</nav>
+
+
+<div class="p-4 container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class=" p-4 rounded table-responsive-xl" style="background-color:#FFD1BD">
+                <table class="table">
+                    <thead style="background-color: #ff9060;">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Disponibilidad</th>
+                            <th scope="col" class="text-center">Cantidad</th>
+                            <th scope="col" class="text-right">Precio</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color:#f3f3f3">
+                            <td class="pl-4">
+                                <img src="https://libreriashidalgo.com/portadas/9786074576399.jpg" width="80" height="100">
+                            </td>
+                            <td style="vertical-align:middle;">
+                                Nombre XXXXX1
+                                <br>Descripcion
+                                <br>Autor
+                                <br>Paginas
+                            </td>
+                            <td style="vertical-align:middle;">Disponible</td>
+                            <td style="vertical-align:middle;" class="text-center">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-sm btn-outline-dark">-</button>
+                                        </div>
+                                        <div class="col">1</div>
+                                        <div class="col">
+                                            <button class="btn btn-sm btn-outline-dark">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="vertical-align:middle;" class="text-right">$XXXXX</td>
+                            <td style="vertical-align:middle;" class="text-right">
+                                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr style="background-color:#f3f3f3">
+                            <td><img src="https://dummyimage.com/50x50/55595c/fff" width="80" height="100"> </td>
+                            <td style="vertical-align:middle;">Producto XXXXX2</td>
+                            <td style="vertical-align:middle;">Disponible</td>
+                            <td style="vertical-align:middle;" class="text-center">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-sm btn-outline-dark">-</button>
+                                        </div>
+                                        <div class="col">2</div>
+                                        <div class="col">
+                                            <button class="btn btn-sm btn-outline-dark">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="vertical-align:middle;" class="text-right">$XXXXX</td>
+                            <td style="vertical-align:middle;" class="text-right">
+                                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr style="background-color:#f3f3f3">
+                            <td><img src="https://dummyimage.com/50x50/55595c/fff" width="80" height="100"> </td>
+                            <td style="vertical-align:middle;">Producto XXXXX2</td>
+                            <td style="vertical-align:middle;">Disponible</td>
+                            <td style="vertical-align:middle;" class="text-center">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-sm btn-outline-dark">-</button>
+                                        </div>
+                                        <div class="col">1000</div>
+                                        <div class="col">
+                                            <button class="btn btn-sm btn-outline-dark">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="vertical-align:middle;" class="text-right">$XXXXX</td>
+                            <td style="vertical-align:middle;" class="text-right">
+                                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr style="background-color:#f3f3f3">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Sub-Total</td>
+                            <td class="text-right">$XXXXX</td>
+                        </tr>
+                        <tr style="background-color:#f3f3f3">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total</strong></td>
+                            <td class="text-right"><strong>$XXXXX</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="rounded mx-3 mt-3 p-3 col mb-2 container" style="background-color:#FFD1BD">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <button class="btn btn-lg btn-block btn-search">Continuar Comprando</button>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <button class="btn btn-lg btn-block btn-pagar text-uppercase">PROCEDER AL PAGO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@ namespace Cocoteca.Controllers
     public class CarritoController : Controller
     {
         // GET: Carrito
-        public ActionResult Index()
+        public ActionResult CarritoView()
         {
             return View();
         }
