@@ -7,8 +7,8 @@ namespace Cocoteca.Models
 {
     public  class CarritoCompra
     {
-        TraConceptoCompra conceptoCompra { get; set; }
-        MtoCatLibros libro { get; set; }
+        public TraConceptoCompra conceptoCompra { get; set; }
+        public MtoCatLibros libro { get; set; }
 
         public CarritoCompra(TraConceptoCompra conceptoCompra, MtoCatLibros libro)
         {

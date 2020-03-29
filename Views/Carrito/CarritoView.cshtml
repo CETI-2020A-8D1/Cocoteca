@@ -1,7 +1,6 @@
-﻿@model IEnumerable<>
+﻿@model IEnumerable<Cocoteca.Models.CarritoCompra>
 
 @{
-<<<<<<< HEAD
     ViewData["Title"] = "CarritoView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -19,26 +18,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
-=======
-    ViewData["Title"] = "Carrito";
-}
-
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>La Cocoteca</title>
-        <link rel="icon" href="imagenes/coco.png" type="image/icon type">
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <link rel=StyleSheet href="css/custom.css" type="text/css" media=screen>
-        <link rel=StyleSheet href="css/carrito.css" type="text/css" media=screen>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-    </head>
->>>>>>> a09d413cef3ac29ca70c6d8d8e2034f14706565e
-
-
 
 <div class="p-4 container-fluid">
     <div class="row justify-content-center">
@@ -56,104 +35,58 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @*@foreach (var item in Model)
+                        @foreach (var item in Model)
                         {
-                        <tr style="background-color:#f3f3f3">
-                            <td>
-                                @Html.DisplayFor()
-                            </td>
-                        </tr>
-                        }*@
+                            <tr style="background-color:#f3f3f3">
+                                <td class="pl-4">
+                                    <img src=@Html.DisplayFor(modelItem => item.libro.Imagen) width="80" height="100" />
+                                </td>
 
-                        <tr style="background-color:#f3f3f3">
-                            <td class="pl-4">
-                                <img src="https://libreriashidalgo.com/portadas/9786074576399.jpg" width="80" height="100">
-                            </td>
-                            <td style="vertical-align:middle;">
-                                Nombre XXXXX1
-                                <br>Descripcion
-                                <br>Autor
-                                <br>Paginas
-                            </td>
-                            <td style="vertical-align:middle;">Disponible</td>
-                            <td style="vertical-align:middle;" class="text-center">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <button class="btn btn-sm btn-outline-dark">-</button>
-                                        </div>
-                                        <div class="col">1</div>
-                                        <div class="col">
-                                            <button class="btn btn-sm btn-outline-dark">+</button>
+                                <td style=" vertical-align:middle">
+                                    @Html.DisplayFor(modelItem => item.libro.Titulo);
+                                    @Html.DisplayFor(modelItem => item.libro.Autor);
+                                </td>
+
+                                <td style="vertical-align:middle">
+                                    @Html.DisplayFor(modelItem => item.libro.Stock);
+                                </td>
+                                <td style="vertical-align:middle" class="text-center">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn btn-sm btn-outline-dark">-</button>
+                                            </div>
+                                            <div class="col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad);</div>
+                                            <div class="col">
+                                                <button class="btn btn-sm btn-outline-dark">+</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td style="vertical-align:middle;" class="text-right">$XXXXX</td>
-                            <td style="vertical-align:middle;" class="text-right">
-                                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr style="background-color:#f3f3f3">
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" width="80" height="100"> </td>
-                            <td style="vertical-align:middle;">Producto XXXXX2</td>
-                            <td style="vertical-align:middle;">Disponible</td>
-                            <td style="vertical-align:middle;" class="text-center">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <button class="btn btn-sm btn-outline-dark">-</button>
-                                        </div>
-                                        <div class="col">2</div>
-                                        <div class="col">
-                                            <button class="btn btn-sm btn-outline-dark">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="vertical-align:middle;" class="text-right">$XXXXX</td>
-                            <td style="vertical-align:middle;" class="text-right">
-                                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr style="background-color:#f3f3f3">
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" width="80" height="100"> </td>
-                            <td style="vertical-align:middle;">Producto XXXXX2</td>
-                            <td style="vertical-align:middle;">Disponible</td>
-                            <td style="vertical-align:middle;" class="text-center">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <button class="btn btn-sm btn-outline-dark">-</button>
-                                        </div>
-                                        <div class="col">1000</div>
-                                        <div class="col">
-                                            <button class="btn btn-sm btn-outline-dark">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="vertical-align:middle;" class="text-right">$XXXXX</td>
-                            <td style="vertical-align:middle;" class="text-right">
-                                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr style="background-color:#f3f3f3">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Sub-Total</td>
-                            <td class="text-right">$XXXXX</td>
-                        </tr>
-                        <tr style="background-color:#f3f3f3">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total</strong></td>
-                            <td class="text-right"><strong>$XXXXX</strong></td>
-                        </tr>
+                                </td>
+                                <td style="vertical-align:middle" class="text-right">
+                                    @Html.DisplayFor(modelItem => item.libro.Precio);
+                                </td>
+                                <td style="vertical-align:middle;" class="text-right">
+                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr style="background-color:#f3f3f3">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Sub-Total</td>
+                                <td class="text-right">$XXXXX</td>
+                            </tr>
+                            <tr style="background-color:#f3f3f3">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>Total</strong></td>
+                                <td class="text-right"><strong>$XXXXX</strong></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
