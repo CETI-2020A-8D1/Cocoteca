@@ -7,6 +7,7 @@ using Cocoteca.Helper;
 using Cocoteca.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Cocoteca.Controllers
 {
@@ -19,15 +20,42 @@ namespace Cocoteca.Controllers
         {
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
             List<TraCompras> compras = new List<TraCompras>();
+            //TraCompras compra = new TraCompras();
             List<TraConceptoCompra> conceptoCompras = new List<TraConceptoCompra>();
+            TraCompras carrito = new TraCompras();
+            bool siHayCarrito = false;
 
             HttpClient cliente = _api.Initial();
-            HttpResponseMessage res = await cliente.GetAsync("api/TraCompras" + id);
+            HttpResponseMessage res = await cliente.GetAsync("api/TraCompras/" + id);
 
             if (res.IsSuccessStatusCode)
             {
                 string result = res.Content.ReadAsStringAsync().Result;
+                //compra = JsonConvert.DeserializeObject<TraCompras>(result);
+                compras = JsonConvert.DeserializeObject<List<TraCompras>>(result);
 
+                foreach(var compra in compras)
+                {
+                    if (!compra.Pagado)
+                    {
+                        carrito = compra;
+                        siHayCarrito = true;
+                    }
+                }
+
+                if(siHayCarrito)
+                {
+                    res = await cliente.GetAsync("api/TraConceptoCompras/" + carrito.Idcompra);
+                    result = res.Content.ReadAsStringAsync().Result;
+                    conceptoCompras = JsonConvert.DeserializeObject<List<TraConceptoCompra>>(result);
+
+                    //Buscar libros
+                    //Crear lista de listaCarrito con la lista de libros y la de concoeptoCompras
+                }
+                else
+                {
+                    //TODO mostrar mensaje que el carrito esta vacio
+                }
             }
 
             return View(listaCarrito);
