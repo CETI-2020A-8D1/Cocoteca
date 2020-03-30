@@ -179,12 +179,12 @@ namespace Cocoteca.Controllers
             }
         }
 
-        public HttpResponseMessage Eliminar(int indice)
+        public void Eliminar(int indice)
         {
             HttpClient cliente = _api.Initial();
             try
             {
-                return cliente.DeleteAsync("api/TraConceptoCompras/" + indice).Result;
+                _=cliente.DeleteAsync("api/TraConceptoCompras/" + indice);
             }
             catch (Exception e)
             {

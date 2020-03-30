@@ -38,10 +38,9 @@
                     </thead>
                     <tbody>
                         @{int a = 0; }
-
                         @foreach (var item in Model)
                         {
-                            <tr style="background-color:#f3f3f3">
+                            <tr class="tablaitem" background-color:#f3f3f3">
                                 <td class="pl-4">
                                     <img src=@Html.DisplayFor(modelItem => item.libro.Imagen) width="80" height="100" />
                                 </td>
@@ -72,11 +71,11 @@
                                 @{subtotal += precio;}
                                 <td style="vertical-align:middle" class="precio text-right">@precio</td>
                                 <td style="vertical-align:middle;" class="text-right">
-                                    <button class="btn btn-sm btn-outline-danger"> @Html.ActionLink("Eliminar", "Eliminar", new { indice = item.conceptoCompra.TraCompras }) </button>
+                                    <button class="btn btn-sm btn-outline-danger eliminar" onclick="borrarItem(this) ; eliminarLibro(@a)" data-assigned-id="@item.conceptoCompra.TraCompras">Eliminar</button>
                                 </td>
                             </tr>
                             { a++; }
-                         }
+                        }
                         <tr style="background-color:#f3f3f3">
                             <td></td>
                             <td></td>
@@ -128,6 +127,23 @@
             $(".total").text(total);
             return false;
         }
+    }
+
+    function borrarItem(index) {
+        var id = $(index).data('assigned-id');
+        $.ajax({
+            url: '/Carrito/Eliminar?indice='+id,
+            data: {
+                'id_item': id,
+            },
+            type: 'GET',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+            },
+            error: function (data) {
+            },
+        });
     }
 
     function sumarCantidad(index, precio) {
