@@ -54,11 +54,11 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark">-</button>
+                                                <button class="btn btn-sm btn-outline-dark" id="restar">-</button>
                                             </div>
-                                            <div class="col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad);</div>
+                                            <div class="col"  id="Cantidad">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad);</div>
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark">+</button>
+                                                <button class="btn btn-sm btn-outline-dark" id="agregar">+</button>
                                             </div>
                                         </div>
                                     </div>
@@ -103,3 +103,14 @@
         </div>
     </div>
 </div>
+
+@section scripts{ 
+    <script>
+        $("#restar").click(function () {
+            $("#Cantidad").text("resta");
+
+        $("#agregar").click(function () {
+            $("#Cantidad").text("agrega");
+});
+    </script>
+}
