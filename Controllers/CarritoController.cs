@@ -19,7 +19,7 @@ namespace Cocoteca.Controllers
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
-            id = 2;
+            id = 0;
             if(id == null)
                 return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
@@ -178,10 +178,10 @@ namespace Cocoteca.Controllers
             }
         }
 
-        public ActionResult Error(string error)
+        public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;
-            return View();
+            return  View();
         }
     }
 }
