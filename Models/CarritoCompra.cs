@@ -15,5 +15,10 @@ namespace Cocoteca.Models
             this.conceptoCompra = conceptoCompra;
             this.libro = libro;
         }
+
+        public CarritoCompra()
+        {
+
+        }
     }
 }
