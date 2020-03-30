@@ -19,6 +19,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 
+@{decimal subtotal = 0;}
+@{ decimal total = 0;}
 <div class="p-4 container-fluid">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -35,6 +37,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @{int a = 0; }
+
                         @foreach (var item in Model)
                         {
                             <tr style="background-color:#f3f3f3">
@@ -43,9 +47,15 @@
                                 </td>
 
                                 <td style=" vertical-align:middle">
+<<<<<<< HEAD
                                     <span>Titulo: </span>
                                     @Html.DisplayFor(modelItem => item.libro.Titulo)
                                     <div><span>Autor:</span> @Html.DisplayFor(modelItem => item.libro.Autor)</div>
+=======
+                                    @Html.DisplayFor(modelItem => item.libro.Titulo)
+                                    <br />
+                                    @Html.DisplayFor(modelItem => item.libro.Autor)
+>>>>>>> b40ae51a05b65dd7cecdec1d4dbf8eb17023e3ff
                                 </td>
 
                                 <td style="vertical-align:middle">
@@ -53,13 +63,14 @@
                                 </td>
                                 <td style="vertical-align:middle" class="text-center">
                                     <div class="container">
-                                        <div class="row">
+                                        <div class="info row ">
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark">-</button>
+                                                <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">-</button>
                                             </div>
                                             <div class="col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</div>
+                                            <label class="Cantidad col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark">+</button>
+                                                <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">+</button>
                                             </div>
                                         </div>
                                     </div>
@@ -67,11 +78,17 @@
                                 <td style="vertical-align:middle" class="text-right">
                                     @Html.DisplayFor(modelItem => item.libro.Precio)
                                 </td>
+                                @{decimal precio = item.libro.Precio * item.conceptoCompra.Cantidad;}
+                                @{subtotal += precio;}
+                                <td style="vertical-align:middle" class="precio text-right">@precio</td>
                                 <td style="vertical-align:middle;" class="text-right">
                                     <button class="btn btn-sm btn-outline-danger">Eliminar</button>
                                 </td>
                             </tr>
                         }
+
+                                        { a++; }
+                                    }
                         <tr style="background-color:#f3f3f3">
                             <td></td>
                             <td></td>
@@ -80,6 +97,9 @@
                             <td>Sub-Total</td>
                             <td class="text-right">$XXXXX</td>
                         </tr>
+                            <td class="subtotal text-right">@subtotal</td>
+                        </tr>
+                        @{ total = subtotal + 90;}
                         <tr style="background-color:#f3f3f3">
                             <td></td>
                             <td></td>
@@ -87,6 +107,7 @@
                             <td></td>
                             <td><strong>Total</strong></td>
                             <td class="text-right"><strong>$XXXXX</strong></td>
+                            <td class="total text-right"><strong>@total</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -104,3 +125,44 @@
         </div>
     </div>
 </div>
+
+<script>
+    function restarCantidad(index, precio) {
+        var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
+        if (cantidad > 0) {
+            cantidad--;
+            $(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
+            var nuevoPrecio = precio;
+            nuevoPrecio *= cantidad;
+            $(".precio:eq(" + index + ")").text(nuevoPrecio);
+
+            var subtotal = $(".subtotal").text();
+            subtotal -= precio;
+            $(".subtotal").text(subtotal);
+            var total = subtotal + 90;
+            $(".total").text(total);
+            return false;
+        }
+    }
+
+    function sumarCantidad(index, precio) {
+        var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
+        cantidad++;
+        $(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
+        var nuevoPrecio = precio;
+        nuevoPrecio *= cantidad;
+        $(".precio:eq(" + index + ")").text(nuevoPrecio);
+
+        var subtotal = parseInt($(".subtotal").text());
+        subtotal += precio;
+        $(".subtotal").text(subtotal);
+
+        var total = subtotal + 90;
+        $(".total").text(total);
+        return false;
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
