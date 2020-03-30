@@ -127,7 +127,6 @@ namespace Cocoteca.Controllers
             try
             {
                 // TODO: Add update logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -150,12 +149,24 @@ namespace Cocoteca.Controllers
             try
             {
                 // TODO: Add delete logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
+            }
+        }
+
+        public HttpResponseMessage Eliminar(int indice)
+        {
+            HttpClient cliente = _api.Initial();
+            try
+            {
+                return cliente.DeleteAsync("api/TraConceptoCompras/" + indice).Result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }

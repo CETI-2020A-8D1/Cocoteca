@@ -41,7 +41,7 @@
 
                         @foreach (var item in Model)
                         {
-                            <tr style="background-color:#f3f3f3">
+                            <tr class ="tablaitem" style="background-color:#f3f3f3">
                                 <td class="pl-4">
                                     <img src=@Html.DisplayFor(modelItem => item.libro.Imagen) width="80" height="100" />
                                 </td>
@@ -72,7 +72,7 @@
                                 @{subtotal += precio;}
                                 <td style="vertical-align:middle" class="precio text-right">@precio</td>
                                 <td style="vertical-align:middle;" class="text-right">
-                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                    <button class="btn btn-sm btn-outline-danger eliminar"> @Html.ActionLink("Eliminar", "Eliminar", new { indice = item.conceptoCompra.TraCompras }) </button>
                                 </td>
                             </tr>
 
@@ -147,6 +147,14 @@
         $(".total").text(total);
         return false;
     }
+
+    function eliminarLibro(index) {
+        $(".subtotal").text(parseInt($(".subtotal").text() - parseInt($(".precio:eq(" + index + ")").text())));
+        $(".total").text(parseInt($(".subtotal").text()));
+        $(".tablaitem:eq(" + index + ")").hide();
+        return false;
+    }
+
 </script>
 
 @section Scripts {
