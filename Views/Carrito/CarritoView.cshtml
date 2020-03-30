@@ -47,15 +47,9 @@
                                 </td>
 
                                 <td style=" vertical-align:middle">
-<<<<<<< HEAD
-                                    <span>Titulo: </span>
-                                    @Html.DisplayFor(modelItem => item.libro.Titulo)
-                                    <div><span>Autor:</span> @Html.DisplayFor(modelItem => item.libro.Autor)</div>
-=======
                                     @Html.DisplayFor(modelItem => item.libro.Titulo)
                                     <br />
                                     @Html.DisplayFor(modelItem => item.libro.Autor)
->>>>>>> b40ae51a05b65dd7cecdec1d4dbf8eb17023e3ff
                                 </td>
 
                                 <td style="vertical-align:middle">
@@ -67,16 +61,12 @@
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">-</button>
                                             </div>
-                                            <div class="col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</div>
                                             <label class="Cantidad col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">+</button>
                                             </div>
                                         </div>
                                     </div>
-                                </td>
-                                <td style="vertical-align:middle" class="text-right">
-                                    @Html.DisplayFor(modelItem => item.libro.Precio)
                                 </td>
                                 @{decimal precio = item.libro.Precio * item.conceptoCompra.Cantidad;}
                                 @{subtotal += precio;}
@@ -85,18 +75,15 @@
                                     <button class="btn btn-sm btn-outline-danger">Eliminar</button>
                                 </td>
                             </tr>
-                        }
 
-                                        { a++; }
-                                    }
+                            { a++; }
+                        }
                         <tr style="background-color:#f3f3f3">
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td>Sub-Total</td>
-                            <td class="text-right">$XXXXX</td>
-                        </tr>
                             <td class="subtotal text-right">@subtotal</td>
                         </tr>
                         @{ total = subtotal + 90;}
@@ -106,7 +93,6 @@
                             <td></td>
                             <td></td>
                             <td><strong>Total</strong></td>
-                            <td class="text-right"><strong>$XXXXX</strong></td>
                             <td class="total text-right"><strong>@total</strong></td>
                         </tr>
                     </tbody>
