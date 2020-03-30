@@ -75,9 +75,8 @@
                                     <button class="btn btn-sm btn-outline-danger">Eliminar</button>
                                 </td>
                             </tr>
-
                             { a++; }
-                        }
+                         }
                         <tr style="background-color:#f3f3f3">
                             <td></td>
                             <td></td>
@@ -113,7 +112,7 @@
 </div>
 
 <script>
-    function restarCantidad(index, precio) {
+    function restarCantidad(index) {
         var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
         if (cantidad > 0) {
             cantidad--;
