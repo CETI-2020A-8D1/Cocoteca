@@ -72,7 +72,7 @@
                                 @{subtotal += precio;}
                                 <td style="vertical-align:middle" class="precio text-right">@precio</td>
                                 <td style="vertical-align:middle;" class="text-right">
-                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                    <button class="btn btn-sm btn-outline-danger"> @Html.ActionLink("Eliminar", "Eliminar", new { indice = item.conceptoCompra.TraCompras }) </button>
                                 </td>
                             </tr>
                             { a++; }
@@ -149,6 +149,13 @@
 
     function actualizarCarrito() {
 
+    }
+
+    function eliminarLibro(index) {
+        $(".subtotal").text(parseInt($(".subtotal").text() - parseInt($(".precio:eq(" + index + ")").text())));
+        $(".total").text(parseInt($(".subtotal").text()));
+        $(".tablaitem:eq(" + index + ")").hide();
+        return false;
     }
 
 </script>
