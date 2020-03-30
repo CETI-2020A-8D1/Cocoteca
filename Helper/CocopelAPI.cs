@@ -11,7 +11,7 @@ namespace Cocoteca.Helper
         public HttpClient Initial()
         {
             var Client = new HttpClient();
-            Client.BaseAddress = new Uri("http://localhost:61067");
+            Client.BaseAddress = new Uri("http://localhost:61067/");
             return Client;
         }
     }
