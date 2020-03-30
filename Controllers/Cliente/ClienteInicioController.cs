@@ -28,7 +28,7 @@ namespace Cocoteca.Controllers
             }
             catch (Exception e)
             {
-                return Redirect("~/Error/Error");
+                return View();
             }
 
 
