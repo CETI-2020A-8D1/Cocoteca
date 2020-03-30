@@ -19,22 +19,51 @@ namespace Cocoteca.Controllers
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
-            id = 1;
+            id = 0;
+            if(id == null)
+                return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
             List<TraCompras> compras = new List<TraCompras>();
-            //TraCompras compra = new TraCompras();
             List<TraConceptoCompra> conceptoCompras = new List<TraConceptoCompra>();
             TraCompras carrito = new TraCompras();
             bool siHayCarrito = false;
 
             HttpClient cliente = _api.Initial();
-            HttpResponseMessage res = await cliente.GetAsync("api/TraCompras/" + id);
-            //Debug.WriteLine("1");
+            HttpResponseMessage res;
+
+            try
+            {
+                res = await cliente.GetAsync("api/MtoCatClientes");
+            }catch(Exception e)
+            {
+                return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+            }
+
             if (res.IsSuccessStatusCode)
             {
-              //  Debug.WriteLine("2");
                 string result = res.Content.ReadAsStringAsync().Result;
-                //compra = JsonConvert.DeserializeObject<TraCompras>(result);
+                List<MtoCatCliente> clientes = JsonConvert.DeserializeObject<List<MtoCatCliente>>(result);
+                bool clienteEncontrado = false;
+                foreach(MtoCatCliente c in clientes)
+                {
+                    if (c.Idcliente == id)
+                        clienteEncontrado = true;
+                }
+                if (!clienteEncontrado)
+                    return RedirectToAction("Error", new { error = "Error... \nUsuario Inexistente" });
+            }
+                
+
+            try
+            {
+                 res = await cliente.GetAsync("api/TraCompras/" + id);
+            }catch(Exception e)
+            {
+                return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+            }
+            if (res.IsSuccessStatusCode)
+            {
+                string result = res.Content.ReadAsStringAsync().Result;
                 compras = JsonConvert.DeserializeObject<List<TraCompras>>(result);
 
                 foreach(var compra in compras)
@@ -43,47 +72,37 @@ namespace Cocoteca.Controllers
                     {
                         carrito = compra;
                         siHayCarrito = true;
+                        break;
                     }
                 }
-               // Debug.WriteLine("3");
                 if (siHayCarrito)
                 {
-                 //   Debug.WriteLine("4");
                     res = await cliente.GetAsync("api/TraConceptoCompras/" + carrito.Idcompra);
                     result = res.Content.ReadAsStringAsync().Result;
                     conceptoCompras = JsonConvert.DeserializeObject<List<TraConceptoCompra>>(result);
 
-                    //Buscar libros
                     List<MtoCatLibros> libros = new List<MtoCatLibros>();
-                   // Debug.WriteLine("5");
                     foreach (TraConceptoCompra conceptoCompra in conceptoCompras)
                     {
                         res = await cliente.GetAsync("api/MtoCatLibros/" + conceptoCompra.Idlibro);
                         result = res.Content.ReadAsStringAsync().Result;
                         libros.Add(JsonConvert.DeserializeObject<MtoCatLibros>(result));
                     }
-                   // Debug.WriteLine("6");
                     for (int i = 0; i<conceptoCompras.Count;i++)
                     {
                         listaCarrito.Add(new CarritoCompra(conceptoCompras[i], libros[i]));
                     }
-                    //Debug.WriteLine("7");
-                    //Crear lista de listaCarrito con la lista de libros y la de concoeptoCompras
                 }
                 else
-                {
-                    //TODO mostrar mensaje que el carrito esta vacio
-                    //Debug.WriteLine("no hay carrro we");
-                }
+                    return RedirectToAction("Error", new { error = "Carrito vacio... \nAgrega algo en el!" });
+                
             }
-            //Debug.WriteLine("9");
+            else
+                return RedirectToAction("Error", new { error = "Error al consultar el carrito :(" });
+            
             return View(listaCarrito);
         }
 
-       /* public async Task<IActionResult> CarritoView()
-        {
-            return View();
-        }*/
         // GET: Carrito/Details/5
         public ActionResult Details(int id)
         {
@@ -157,6 +176,12 @@ namespace Cocoteca.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Error(string error)
+        {
+            ViewData["msg"] = error;
+            return View();
         }
     }
 }
