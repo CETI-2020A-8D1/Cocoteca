@@ -53,7 +53,6 @@ namespace Cocoteca.Controllers
                     return RedirectToAction("Error", new { error = "Error... \nUsuario Inexistente" });
             }
                 
-
             try
             {
                  res = await cliente.GetAsync("api/TraCompras/" + id);
@@ -75,6 +74,8 @@ namespace Cocoteca.Controllers
                         break;
                     }
                 }
+                ViewData["carritoId"] = carrito.Idcompra;
+                ViewData["clienteId"] = carrito.Idcliente;
                 if (siHayCarrito)
                 {
                     res = await cliente.GetAsync("api/TraConceptoCompras/" + carrito.Idcompra);
