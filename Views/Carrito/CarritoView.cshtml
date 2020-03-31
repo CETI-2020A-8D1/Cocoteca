@@ -115,6 +115,68 @@
 </div>
 
 <script>
+
+    function restarCantidad(index, precio) {
+        var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
+        if (cantidad > 0) {
+            cantidad--;
+          
+            $(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
+            var nuevoPrecio = precio;
+            nuevoPrecio *= cantidad;
+            $(".precio:eq(" + index + ")").text(nuevoPrecio);
+            var subtotal = $(".subtotal").text();
+            subtotal -= precio;
+            $(".subtotal").text(subtotal);
+            var total = subtotal + 90;
+            $(".total").text(total);
+
+            return false;
+        }
+    }
+
+    function borrarItem(index) {
+        var id = $(index).data('assigned-id');
+        $.ajax({
+            url: '/Carrito/Eliminar?indice='+id,
+            data: {
+                'id_item': id,
+            },
+            type: 'GET',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+            },
+            error: function (data) {
+            },
+        });
+    }
+
+    function sumarCantidad(index, precio) {
+        var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
+        cantidad++;
+        $(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
+        var nuevoPrecio = precio;
+        nuevoPrecio *= cantidad;
+        $(".precio:eq(" + index + ")").text(nuevoPrecio);
+
+        var subtotal = parseInt($(".subtotal").text());
+        subtotal += precio;
+        $(".subtotal").text(subtotal);
+
+        var total = subtotal + 90;
+        $(".total").text(total);
+  
+        return false;
+    }
+
+    function eliminarLibro(index) {
+        $(".subtotal").text(parseInt($(".subtotal").text() - parseInt($(".precio:eq(" + index + ")").text())));
+        $(".total").text(parseInt($(".subtotal").text()));
+        $(".tablaitem:eq(" + index + ")").hide();
+        return false;
+    }
+
 function restarCantidad(index, precio, id, compra, libro, cantidadl) {
 var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
 if (cantidad > 0) {
