@@ -29,6 +29,8 @@ namespace Cocoteca.Controllers
             if (id == null)
 =======
             
+            id = 2;
+            if(id == null)
 >>>>>>> 6174823d1fe3056386e0382c4a0e56c673a038e1
                 return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
