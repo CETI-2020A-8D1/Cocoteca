@@ -159,10 +159,39 @@ namespace Cocoteca.Controllers
                     return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
                 }
             }
-            return View();
+            return RedirectToAction("CarritoView");
         }
 
         //public async Task<IActionResult> agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
+        /*
+        public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
+        {
+            TraConceptoCompra conceptocompra = new TraConceptoCompra();
+            conceptocompra.TraCompras = idConcepto;
+            conceptocompra.Idcompra = compra;
+            conceptocompra.Idlibro = libro;
+            conceptocompra.Cantidad = cantidad;
+
+            for (int i = 0; i < comprasActualizar.Count; i++)
+            {
+                if (comprasActualizar[i].TraCompras == conceptocompra.TraCompras)
+                {
+                    comprasActualizar.Remove(comprasActualizar[i]);
+                }
+            }
+            if (sumar)
+            {
+                conceptocompra.Cantidad++;
+            }
+            else
+            {
+                conceptocompra.Cantidad--;
+            }
+            comprasActualizar.Add(conceptocompra);
+            //return View();
+        }
+        */
+
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
