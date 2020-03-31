@@ -103,7 +103,8 @@
 <div class="rounded mx-3 mt-3 p-3 col mb-2 container" style="background-color:#FFD1BD">
 <div class="row">
 <div class="col-sm-12  col-md-6">
-<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"], total = @total })</button>
+<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"] })</button>
+@{ /*<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"], total = @total })</button>*/}
 </div>
 <div class="col-sm-12 col-md-6 text-right">
 <button class="btn btn-lg btn-block btn-pagar text-uppercase">PROCEDER AL PAGO</button>
@@ -132,17 +133,17 @@ $(".total").text(total);
 ////////////////////////////////////////////////////////////////////////
 
     $.ajax({
-        url: '/Carrito/agregarLibrosCambiados?idConcepto=' + id + '&compra=' + compra + '&libro=' + libro + '&cantidad=' + cantidadl + '&sumar=' + false,
-    data: {
-        'id_item': id,
-    },
-    type: 'GET',
-    method: 'GET',
-    dataType: 'json',
-    success: function (data) {
-    },
-    error: function (data) {
-    },
+        url: '/Carrito/agregarLibrosCambiados?idConcepto=' + id + '&compra=' + compra + '&libro=' + libro + '&cantidad=' + cantidadl + '&sumar=' + false + '&totalView=' + parseInt($(".total").text()),
+data: {
+  'id_item': id,
+},
+type: 'GET',
+method: 'GET',
+dataType: 'json',
+success: function (data) {
+},
+error: function (data) {
+},
 });
 
 return false;
@@ -176,24 +177,24 @@ $(".precio:eq(" + index + ")").text(nuevoPrecio);
 
 var subtotal = parseInt($(".subtotal").text());
 subtotal += precio;
-    $(".subtotal").text(subtotal);
+$(".subtotal").text(subtotal);
     var total = subtotal + 90;
 $(".total").text(total);
 
 ////////////////////////////////////////////////////////////////////////
 
 $.ajax({
-    url: '/Carrito/agregarLibrosCambiados?idConcepto=' + id + '&compra=' + compra + '&libro=' + libro + '&cantidad=' + cantidadl + '&sumar=' + true,
-    data: {
-        'id_item': id,
-    },
-    type: 'GET',
-    method: 'GET',
-    dataType: 'json',
-    success: function (data) {
-    },
-    error: function (data) {
-    },
+    url: '/Carrito/agregarLibrosCambiados?idConcepto=' + id + '&compra=' + compra + '&libro=' + libro + '&cantidad=' + cantidadl + '&sumar=' + true + '&totalView=' + parseInt($(".total").text()),
+data: {
+  'id_item': id,
+},
+type: 'GET',
+method: 'GET',
+dataType: 'json',
+success: function (data) {
+},
+error: function (data) {
+},
 });
 
 return false;
