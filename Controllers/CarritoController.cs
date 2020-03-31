@@ -257,6 +257,18 @@ namespace Cocoteca.Controllers
             }
         }
 
+        public HttpResponseMessage Eliminar(int indice)
+        {
+            HttpClient cliente = _api.Initial();
+            try
+            {
+                return cliente.DeleteAsync("api/TraConceptoCompras/" + indice).Result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;
