@@ -16,7 +16,8 @@ namespace Cocoteca.Controllers
     public class CarritoController : Controller
     {
         CocopelAPI _api = new CocopelAPI();
-        List<TraConceptoCompra> comprasActualizar = new List<TraConceptoCompra>(); // Lista de compras que cambio el numero de libros
+        static List<TraConceptoCompra> comprasActualizar = new List<TraConceptoCompra>(); // Lista de compras que cambio el numero de libros
+        static int total;
 
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
@@ -107,7 +108,7 @@ namespace Cocoteca.Controllers
             return View(listaCarrito);
         }
 
-        public async Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente, int total)
+        public async Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente)
         {
             HttpClient cliente = _api.Initial();
             HttpResponseMessage res;
@@ -124,17 +125,17 @@ namespace Cocoteca.Controllers
             if (res.IsSuccessStatusCode)
             {
                 string result = res.Content.ReadAsStringAsync().Result;
-                TraCompras carrito = JsonConvert.DeserializeObject<TraCompras>(result);
-                carrito.PrecioTotal = total;
+                List<TraCompras> carrito = JsonConvert.DeserializeObject<List<TraCompras>>(result);
+                carrito[0].PrecioTotal = total;
 
                 try
                 {
                     //res = await cliente.PutAsync("api/TraCompras/"+idCarrito, carrito);
-                    var myContent = JsonConvert.SerializeObject(carrito);
+                    var myContent = JsonConvert.SerializeObject(carrito[0]);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                     var byteContent = new ByteArrayContent(buffer);
-                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraCompras/" + idCarrito); //aqui va la url mas el id
-                    var resultado = cliente.PostAsync("", byteContent).Result;
+                    //byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraCompras/" + idCarrito); //aqui va la url mas el id
+                    var resultado = cliente.PostAsync("api/TraCompras/" + idCarrito, byteContent).Result;
                 }
                 catch (Exception e)
                 {
@@ -150,18 +151,19 @@ namespace Cocoteca.Controllers
                     var myContent = JsonConvert.SerializeObject(concepto);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                     var byteContent = new ByteArrayContent(buffer);
-                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraConceptoCompras" + concepto.TraCompras); //aqui va la url mas el id
-                    var resultado = cliente.PostAsync("", byteContent).Result;
+                    //byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraConceptoCompras" + concepto.TraCompras); //aqui va la url mas el id
+                    var resultado = cliente.PostAsync("api / TraConceptoCompras" + concepto.TraCompras, byteContent).Result;
                 }
                 catch (Exception e)
                 {
                     return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
                 }
             }
-            return View();
+            return RedirectToAction("CarritoView");
         }
 
         //public async Task<IActionResult> agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
+        /*
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
@@ -186,6 +188,56 @@ namespace Cocoteca.Controllers
                 conceptocompra.Cantidad--;
             }
             comprasActualizar.Add(conceptocompra);
+            //return View();
+        }
+        */
+
+        public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
+        {
+            TraConceptoCompra conceptocompra = new TraConceptoCompra();
+            conceptocompra.TraCompras = idConcepto;
+            conceptocompra.Idcompra = compra;
+            conceptocompra.Idlibro = libro;
+            conceptocompra.Cantidad = cantidad;
+
+            bool repetido = false;
+            int aux = 0;
+            total = totalView;
+
+            for (int i = 0; i < comprasActualizar.Count; i++)
+            {
+                if (comprasActualizar[i].TraCompras == conceptocompra.TraCompras)
+                {
+                    aux = i;
+                    repetido = true;
+                    break;
+                }
+            }
+
+            if (repetido)
+            {
+                if (sumar)
+                {
+                    comprasActualizar[aux].Cantidad++;
+                }
+                else
+                {
+                    comprasActualizar[aux].Cantidad--;
+                }
+            }
+            else
+            {
+                if (sumar)
+                {
+                    conceptocompra.Cantidad++;
+                    comprasActualizar.Add(conceptocompra);
+                }
+                else
+                {
+                    conceptocompra.Cantidad--;
+                    comprasActualizar.Add(conceptocompra);
+                }
+            }
             //return View();
         }
 
