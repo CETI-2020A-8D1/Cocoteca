@@ -162,7 +162,8 @@ namespace Cocoteca.Controllers
             return View();
         }
 
-        public async Task<IActionResult> agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
+        //public async Task<IActionResult> agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
+        public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
             conceptocompra.TraCompras = idConcepto;
@@ -186,7 +187,7 @@ namespace Cocoteca.Controllers
                 conceptocompra.Cantidad--;
             }
             comprasActualizar.Add(conceptocompra);
-            return View();
+            //return View();
         }
 
         // GET: Carrito/Details/5
