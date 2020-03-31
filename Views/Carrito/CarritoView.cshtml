@@ -20,7 +20,8 @@
 </head>
 
 @{decimal subtotal = 0;}
-@{ decimal total = 0;}
+@{decimal total = 0;}
+
 <div class="p-4 container-fluid">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -41,6 +42,7 @@
 
                         @foreach (var item in Model)
                         {
+                            
                             <tr style="background-color:#f3f3f3">
                                 <td class="pl-4">
                                     <img src=@Html.DisplayFor(modelItem => item.libro.Imagen) width="80" height="100" />
@@ -59,11 +61,11 @@
                                     <div class="container">
                                         <div class="info row ">
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">-</button>
+                                                <button class="btn btn-sm btn-outline-dark restar" asp-action="agregarLibrosCambiados"  asp-route-conceptoLibro="@item.conceptoCompra" asp-route-sumar="false" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">-</button>
                                             </div>
                                             <label class="Cantidad col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">+</button>
+                                                <button class="btn btn-sm btn-outline-dark agregar" asp-action="agregarLibrosCambiados"  asp-route-conceptoLibro="@item.conceptoCompra" asp-route-sumar="true" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">+</button>
                                             </div>
                                         </div>
                                     </div>
@@ -102,7 +104,7 @@
         <div class="rounded mx-3 mt-3 p-3 col mb-2 container" style="background-color:#FFD1BD">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-lg btn-block btn-search">Continuar Comprando</button>
+                    <button class="btn btn-lg btn-block btn-search" asp-action="agregarLibrosCambiados"  asp-route-idCarrito="@ViewData["carritoId"];" asp-route-idCliente="ViewData["clienteId"];" asp-route-total="@total">Continuar Comprando</button>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
                     <button class="btn btn-lg btn-block btn-pagar text-uppercase">PROCEDER AL PAGO</button>
@@ -149,7 +151,8 @@
     }
 
     function actualizarCarrito() {
-
+        
+        return false;
     }
 
 </script>
