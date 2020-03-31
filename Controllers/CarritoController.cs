@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Cocoteca.Helper;
 using Cocoteca.Models;
@@ -22,9 +23,9 @@ namespace Cocoteca.Controllers
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
-            
-            id = 1;
-            if(id == null)
+
+            id = 2;
+            if (id == null)
                 return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
             List<TraCompras> compras = new List<TraCompras>();
@@ -38,7 +39,8 @@ namespace Cocoteca.Controllers
             try
             {
                 res = await cliente.GetAsync("api/MtoCatClientes");
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
             }
@@ -48,7 +50,7 @@ namespace Cocoteca.Controllers
                 string result = res.Content.ReadAsStringAsync().Result;
                 List<MtoCatCliente> clientes = JsonConvert.DeserializeObject<List<MtoCatCliente>>(result);
                 bool clienteEncontrado = false;
-                foreach(MtoCatCliente c in clientes)
+                foreach (MtoCatCliente c in clientes)
                 {
                     if (c.Idcliente == id)
                         clienteEncontrado = true;
@@ -56,11 +58,12 @@ namespace Cocoteca.Controllers
                 if (!clienteEncontrado)
                     return RedirectToAction("Error", new { error = "Error... \nUsuario Inexistente" });
             }
-                
+
             try
             {
-                 res = await cliente.GetAsync("api/TraCompras/" + id);
-            }catch(Exception e)
+                res = await cliente.GetAsync("api/TraCompras/" + id);
+            }
+            catch (Exception e)
             {
                 return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
             }
@@ -69,7 +72,7 @@ namespace Cocoteca.Controllers
                 string result = res.Content.ReadAsStringAsync().Result;
                 compras = JsonConvert.DeserializeObject<List<TraCompras>>(result);
 
-                foreach(var compra in compras)
+                foreach (var compra in compras)
                 {
                     if (!compra.Pagado)
                     {
@@ -93,18 +96,18 @@ namespace Cocoteca.Controllers
                         result = res.Content.ReadAsStringAsync().Result;
                         libros.Add(JsonConvert.DeserializeObject<MtoCatLibros>(result));
                     }
-                    for (int i = 0; i<conceptoCompras.Count;i++)
+                    for (int i = 0; i < conceptoCompras.Count; i++)
                     {
                         listaCarrito.Add(new CarritoCompra(conceptoCompras[i], libros[i]));
                     }
                 }
                 else
                     return RedirectToAction("Error", new { error = "Carrito vacio... \nAgrega algo en el!" });
-                
+
             }
             else
                 return RedirectToAction("Error", new { error = "Error al consultar el carrito :(" });
-            
+
             return View(listaCarrito);
         }
 
@@ -115,7 +118,7 @@ namespace Cocoteca.Controllers
 
             try
             {
-                res = await cliente.GetAsync("api/TraCompras/"+idCliente);
+                res = await cliente.GetAsync("api/TraCompras/" + idCliente);
             }
             catch (Exception e)
             {
@@ -124,36 +127,37 @@ namespace Cocoteca.Controllers
 
             if (res.IsSuccessStatusCode)
             {
-
                 string result = res.Content.ReadAsStringAsync().Result;
                 List<TraCompras> carrito = JsonConvert.DeserializeObject<List<TraCompras>>(result);
                 carrito[0].PrecioTotal = total;
 
                 try
                 {
-                    //res = await cliente.PutAsync("api/TraCompras/"+idCarrito, carrito);
                     var myContent = JsonConvert.SerializeObject(carrito[0]);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                     var byteContent = new ByteArrayContent(buffer);
-                    //byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraCompras/" + idCarrito); //aqui va la url mas el id
-                    var resultado = cliente.PostAsync("api/TraCompras/" + idCarrito, byteContent).Result;
+
+                    var resultado = await cliente.PutAsJsonAsync<TraCompras>("api/TraCompras/" + idCarrito, carrito[0]);
+                    if (!resultado.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Error", new { error = "No se puede actualizar la BD :(" });
+                    }
                 }
                 catch (Exception e)
                 {
-                    return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+                    return RedirectToAction("Error", new { error = "Byte content :(" });
                 }
             }
 
-            foreach(TraConceptoCompra concepto in comprasActualizar)
+            foreach (TraConceptoCompra concepto in comprasActualizar)
             {
                 try
                 {
-                    //res = await cliente.PutAsync("api/TraCompras/"+idCarrito, carrito);
-                    var myContent = JsonConvert.SerializeObject(concepto);
-                    var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-                    var byteContent = new ByteArrayContent(buffer);
-                    //byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraConceptoCompras" + concepto.TraCompras); //aqui va la url mas el id
-                    var resultado = cliente.PostAsync("api / TraConceptoCompras" + concepto.TraCompras, byteContent).Result;
+                    var resultado = await cliente.PutAsJsonAsync<TraConceptoCompra>("api/TraConceptoCompras/" + concepto.TraCompras, concepto);
+                    if (!resultado.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Error", new { error = "No se puede actualizar la BD  2:(" });
+                    }
                 }
                 catch (Exception e)
                 {
@@ -162,36 +166,6 @@ namespace Cocoteca.Controllers
             }
             return RedirectToAction("CarritoView");
         }
-
-        //public async Task<IActionResult> agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
-        /*
-        public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
-        {
-            TraConceptoCompra conceptocompra = new TraConceptoCompra();
-            conceptocompra.TraCompras = idConcepto;
-            conceptocompra.Idcompra = compra;
-            conceptocompra.Idlibro = libro;
-            conceptocompra.Cantidad = cantidad;
-
-            for (int i = 0; i < comprasActualizar.Count; i++)
-            {
-                if (comprasActualizar[i].TraCompras == conceptocompra.TraCompras)
-                {
-                    comprasActualizar.Remove(comprasActualizar[i]);
-                }
-            }
-            if (sumar)
-            {
-                conceptocompra.Cantidad++;
-            }
-            else
-            {
-                conceptocompra.Cantidad--;
-            }
-            comprasActualizar.Add(conceptocompra);
-            //return View();
-        }
-        */
 
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
         {
@@ -239,7 +213,6 @@ namespace Cocoteca.Controllers
                     comprasActualizar.Add(conceptocompra);
                 }
             }
-            //return View();
         }
 
         // GET: Carrito/Details/5
@@ -322,7 +295,7 @@ namespace Cocoteca.Controllers
             HttpClient cliente = _api.Initial();
             try
             {
-                _=cliente.DeleteAsync("api/TraConceptoCompras/" + indice);
+                _ = cliente.DeleteAsync("api/TraConceptoCompras/" + indice);
             }
             catch (Exception e)
             {
@@ -333,7 +306,7 @@ namespace Cocoteca.Controllers
         public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;
-            return  View();
+            return View();
         }
     }
 }
