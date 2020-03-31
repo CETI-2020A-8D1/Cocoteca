@@ -21,6 +21,7 @@ namespace Cocoteca.Controllers
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
+            
             id = 1;
             if(id == null)
                 return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
@@ -259,18 +260,22 @@ namespace Cocoteca.Controllers
             }
         }
 
-        public HttpResponseMessage Eliminar(int indice)
+        public ActionResult Eliminar(int indice, int cant)
         {
             HttpClient cliente = _api.Initial();
             try
             {
-                return cliente.DeleteAsync("api/TraConceptoCompras/" + indice).Result;
+                _ = cliente.DeleteAsync("api/TraConceptoCompras/" + indice).Result;
+
+                // return cliente.DeleteAsync("api/TraConceptoCompras/" + indice).Result;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
+            return RedirectToAction("CarritoView");
         }
+
         public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;

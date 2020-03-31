@@ -63,7 +63,7 @@
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { conceptoLibro = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>
                                             </div>
-                                            <label class="Cantidad col">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
+                                            <label class="Cantidad col" runat="server">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { conceptoLibro = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>
                                             </div>
@@ -74,7 +74,7 @@
                                 @{subtotal += precio;}
                                 <td style="vertical-align:middle" class="precio text-right">@precio</td>
                                 <td style="vertical-align:middle;" class="text-right">
-                                    <button class="btn btn-sm btn-outline-danger"> @Html.ActionLink("Eliminar", "Eliminar", new { indice = item.conceptoCompra.TraCompras }) </button>
+                                    <button class="btn btn-sm btn-outline-danger"> @Html.ActionLink("Eliminar", "Eliminar", new { indice = item.conceptoCompra.TraCompras, cant = item.conceptoCompra.Cantidad }) </button>
                                 </td>
                             </tr>
                             { a++; }
@@ -114,15 +114,15 @@
 </div>
 
 <script>
-    function restarCantidad(index) {
+    function restarCantidad(index, precio) {
         var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
         if (cantidad > 0) {
             cantidad--;
+          
             $(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
             var nuevoPrecio = precio;
             nuevoPrecio *= cantidad;
             $(".precio:eq(" + index + ")").text(nuevoPrecio);
-
             var subtotal = $(".subtotal").text();
             subtotal -= precio;
             $(".subtotal").text(subtotal);
