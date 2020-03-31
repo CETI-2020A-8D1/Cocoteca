@@ -165,6 +165,10 @@ namespace Cocoteca.Controllers
         public async Task<IActionResult> agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
+            conceptocompra.TraCompras = idConcepto;
+            conceptocompra.Idcompra = compra;
+            conceptocompra.Idlibro = libro;
+            conceptocompra.Cantidad = cantidad;
 
             for (int i = 0; i < comprasActualizar.Count; i++)
             {
