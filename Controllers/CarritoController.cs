@@ -161,24 +161,26 @@ namespace Cocoteca.Controllers
             return View();
         }
 
-        public async Task<IActionResult> agregarLibrosCambiados(TraConceptoCompra conceptoLibro, bool sumar)
+        public async Task<IActionResult> agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar)
         {
+            TraConceptoCompra conceptocompra = new TraConceptoCompra();
+
             for (int i = 0; i < comprasActualizar.Count; i++)
             {
-                if (comprasActualizar[i].TraCompras == conceptoLibro.TraCompras)
+                if (comprasActualizar[i].TraCompras == conceptocompra.TraCompras)
                 {
                     comprasActualizar.Remove(comprasActualizar[i]);
                 }
             }
             if (sumar)
             {
-                conceptoLibro.Cantidad++;
+                conceptocompra.Cantidad++;
             }
             else
             {
-                conceptoLibro.Cantidad--;
+                conceptocompra.Cantidad--;
             }
-            comprasActualizar.Add(conceptoLibro);
+            comprasActualizar.Add(conceptocompra);
             return View();
         }
 
