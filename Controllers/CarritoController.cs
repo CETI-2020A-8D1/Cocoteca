@@ -16,6 +16,7 @@ namespace Cocoteca.Controllers
     public class CarritoController : Controller
     {
         CocopelAPI _api = new CocopelAPI();
+        List<TraConceptoCompra> comprasActualizar = new List<TraConceptoCompra>(); // Lista de compras que cambio el numero de libros
 
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
@@ -105,6 +106,82 @@ namespace Cocoteca.Controllers
             return View(listaCarrito);
         }
 
+        public async Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente, int total)
+        {
+            HttpClient cliente = _api.Initial();
+            HttpResponseMessage res;
+
+            try
+            {
+                res = await cliente.GetAsync("api/TraCompras/"+idCliente);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+            }
+
+            if (res.IsSuccessStatusCode)
+            {
+
+                string result = res.Content.ReadAsStringAsync().Result;
+                TraCompras carrito = JsonConvert.DeserializeObject<TraCompras>(result);
+                carrito.PrecioTotal = total;
+
+                try
+                {
+                    //res = await cliente.PutAsync("api/TraCompras/"+idCarrito, carrito);
+                    var myContent = JsonConvert.SerializeObject(carrito);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraCompras/" + idCarrito); //aqui va la url mas el id
+                    var resultado = cliente.PostAsync("", byteContent).Result;
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+                }
+            }
+
+            foreach(TraConceptoCompra concepto in comprasActualizar)
+            {
+                try
+                {
+                    //res = await cliente.PutAsync("api/TraCompras/"+idCarrito, carrito);
+                    var myContent = JsonConvert.SerializeObject(concepto);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("api/TraConceptoCompras" + concepto.TraCompras); //aqui va la url mas el id
+                    var resultado = cliente.PostAsync("", byteContent).Result;
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+                }
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> agregarLibrosCambiados(TraConceptoCompra conceptoLibro, bool sumar)
+        {
+            for (int i = 0; i < comprasActualizar.Count; i++)
+            {
+                if (comprasActualizar[i].TraCompras == conceptoLibro.TraCompras)
+                {
+                    comprasActualizar.Remove(comprasActualizar[i]);
+                }
+            }
+            if (sumar)
+            {
+                conceptoLibro.Cantidad++;
+            }
+            else
+            {
+                conceptoLibro.Cantidad--;
+            }
+            comprasActualizar.Add(conceptoLibro);
+            return View();
+        }
+
         // GET: Carrito/Details/5
         public ActionResult Details(int id)
         {
@@ -180,6 +257,18 @@ namespace Cocoteca.Controllers
             }
         }
 
+        public HttpResponseMessage Eliminar(int indice)
+        {
+            HttpClient cliente = _api.Initial();
+            try
+            {
+                return cliente.DeleteAsync("api/TraConceptoCompras/" + indice).Result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;
