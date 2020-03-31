@@ -59,13 +59,63 @@
                                     <div class="container">
                                         <div class="info row ">
                                             <div class="col">
+                                                <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio), @Html.DisplayFor(modelItem => item.conceptoCompra.TraCompras), @Html.DisplayFor(modelItem => item.conceptoCompra.Idcompra), @Html.DisplayFor(modelItem => item.conceptoCompra.Idlibro), @Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad))">-</button>
+                                                @{  /*<button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>};*/}
                                             </div>
                                             <label class="Cantidad col" runat="server">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
+                                                <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio), @Html.DisplayFor(modelItem => item.conceptoCompra.TraCompras), @Html.DisplayFor(modelItem => item.conceptoCompra.Idcompra), @Html.DisplayFor(modelItem => item.conceptoCompra.Idlibro), @Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad))">+</button>
+                                                @{/*<button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>*/ }
+</div>
+</div>
+</div>
+</td>
+@{decimal precio = item.libro.Precio * item.conceptoCompra.Cantidad;}
+@{subtotal += precio;}
+<td style="vertical-align:middle" class="precio text-right">@precio</td>
+<td style="vertical-align:middle;" class="text-right">
+<button class="btn btn-sm btn-outline-danger eliminar" onclick="borrarItem(this) ; eliminarLibro(@a)" data-assigned-id="@item.conceptoCompra.TraCompras">Eliminar</button>
+</td>
+</tr>
+{ a++; }
+}
+<tr style="background-color:#f3f3f3">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Sub-Total</td>
+<td class="subtotal text-right">@subtotal</td>
+</tr>
+@{ total = subtotal + 90;}
+<tr style="background-color:#f3f3f3">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>Total</strong></td>
+<td class="total text-right"><strong>@total</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="rounded mx-3 mt-3 p-3 col mb-2 container" style="background-color:#FFD1BD">
+<div class="row">
+<div class="col-sm-12  col-md-6">
+<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"] })</button>
+@{ /*<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"], total = @total })</button>*/}
+</div>
+<div class="col-sm-12 col-md-6 text-right">
+<button class="btn btn-lg btn-block btn-pagar text-uppercase">PROCEDER AL PAGO</button>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <script>
-<<<<<<< HEAD
+
     function restarCantidad(index, precio) {
         var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
         if (cantidad > 0) {
@@ -126,10 +176,98 @@
         $(".tablaitem:eq(" + index + ")").hide();
         return false;
     }
-=======
 
+function restarCantidad(index, precio, id, compra, libro, cantidadl) {
+var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
+if (cantidad > 0) {
+cantidad--;
 
+$(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
+var nuevoPrecio = precio;
+nuevoPrecio *= cantidad;
+$(".precio:eq(" + index + ")").text(nuevoPrecio);
+var subtotal = $(".subtotal").text();
+subtotal -= precio;
+$(".subtotal").text(subtotal);
+    var total = subtotal + 90;
+$(".total").text(total);
 
+////////////////////////////////////////////////////////////////////////
+
+    $.ajax({
+        url: '/Carrito/agregarLibrosCambiados?idConcepto=' + id + '&compra=' + compra + '&libro=' + libro + '&cantidad=' + cantidadl + '&sumar=' + false + '&totalView=' + parseInt($(".total").text()),
+data: {
+  'id_item': id,
+},
+type: 'GET',
+method: 'GET',
+dataType: 'json',
+success: function (data) {
+},
+error: function (data) {
+},
+});
+
+return false;
+}
+}
+
+function borrarItem(index) {
+var id = $(index).data('assigned-id');
+$.ajax({
+url: '/Carrito/Eliminar?indice='+id,
+data: {
+'id_item': id,
+},
+type: 'GET',
+method: 'GET',
+dataType: 'json',
+success: function (data) {
+},
+error: function (data) {
+},
+});
+}
+
+function sumarCantidad(index, precio, id, compra, libro, cantidadl) {
+var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
+cantidad++;
+$(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
+var nuevoPrecio = precio;
+nuevoPrecio *= cantidad;
+$(".precio:eq(" + index + ")").text(nuevoPrecio);
+
+var subtotal = parseInt($(".subtotal").text());
+subtotal += precio;
+$(".subtotal").text(subtotal);
+    var total = subtotal + 90;
+$(".total").text(total);
+
+////////////////////////////////////////////////////////////////////////
+
+$.ajax({
+    url: '/Carrito/agregarLibrosCambiados?idConcepto=' + id + '&compra=' + compra + '&libro=' + libro + '&cantidad=' + cantidadl + '&sumar=' + true + '&totalView=' + parseInt($(".total").text()),
+data: {
+  'id_item': id,
+},
+type: 'GET',
+method: 'GET',
+dataType: 'json',
+success: function (data) {
+},
+error: function (data) {
+},
+});
+
+return false;
+}
+
+function eliminarLibro(index) {
+$(".subtotal").text(parseInt($(".subtotal").text() - parseInt($(".precio:eq(" + index + ")").text())));
+$(".total").text(parseInt($(".subtotal").text()));
+$(".tablaitem:eq(" + index + ")").hide();
+return false;
+}
 
 
 
@@ -137,4 +275,5 @@
 
 
 @section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
