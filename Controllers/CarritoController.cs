@@ -123,7 +123,6 @@ namespace Cocoteca.Controllers
 
             if (res.IsSuccessStatusCode)
             {
-
                 string result = res.Content.ReadAsStringAsync().Result;
                 TraCompras carrito = JsonConvert.DeserializeObject<TraCompras>(result);
                 carrito.PrecioTotal = total;
