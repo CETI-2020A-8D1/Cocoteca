@@ -23,9 +23,15 @@ namespace Cocoteca.Controllers
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
+<<<<<<< HEAD
+
+            id = 2;
+            if (id == null)
+=======
             
             id = 2;
             if(id == null)
+>>>>>>> 6174823d1fe3056386e0382c4a0e56c673a038e1
                 return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
             List<TraCompras> compras = new List<TraCompras>();
@@ -39,7 +45,8 @@ namespace Cocoteca.Controllers
             try
             {
                 res = await cliente.GetAsync("api/MtoCatClientes");
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
             }
@@ -49,7 +56,7 @@ namespace Cocoteca.Controllers
                 string result = res.Content.ReadAsStringAsync().Result;
                 List<MtoCatCliente> clientes = JsonConvert.DeserializeObject<List<MtoCatCliente>>(result);
                 bool clienteEncontrado = false;
-                foreach(MtoCatCliente c in clientes)
+                foreach (MtoCatCliente c in clientes)
                 {
                     if (c.Idcliente == id)
                         clienteEncontrado = true;
@@ -57,11 +64,12 @@ namespace Cocoteca.Controllers
                 if (!clienteEncontrado)
                     return RedirectToAction("Error", new { error = "Error... \nUsuario Inexistente" });
             }
-                
+
             try
             {
-                 res = await cliente.GetAsync("api/TraCompras/" + id);
-            }catch(Exception e)
+                res = await cliente.GetAsync("api/TraCompras/" + id);
+            }
+            catch (Exception e)
             {
                 return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
             }
@@ -70,7 +78,7 @@ namespace Cocoteca.Controllers
                 string result = res.Content.ReadAsStringAsync().Result;
                 compras = JsonConvert.DeserializeObject<List<TraCompras>>(result);
 
-                foreach(var compra in compras)
+                foreach (var compra in compras)
                 {
                     if (!compra.Pagado)
                     {
@@ -94,18 +102,18 @@ namespace Cocoteca.Controllers
                         result = res.Content.ReadAsStringAsync().Result;
                         libros.Add(JsonConvert.DeserializeObject<MtoCatLibros>(result));
                     }
-                    for (int i = 0; i<conceptoCompras.Count;i++)
+                    for (int i = 0; i < conceptoCompras.Count; i++)
                     {
                         listaCarrito.Add(new CarritoCompra(conceptoCompras[i], libros[i]));
                     }
                 }
                 else
                     return RedirectToAction("Error", new { error = "Carrito vacio... \nAgrega algo en el!" });
-                
+
             }
             else
                 return RedirectToAction("Error", new { error = "Error al consultar el carrito :(" });
-            
+
             return View(listaCarrito);
         }
 
@@ -116,7 +124,7 @@ namespace Cocoteca.Controllers
 
             try
             {
-                res = await cliente.GetAsync("api/TraCompras/"+idCliente);
+                res = await cliente.GetAsync("api/TraCompras/" + idCliente);
             }
             catch (Exception e)
             {
@@ -147,7 +155,7 @@ namespace Cocoteca.Controllers
                 }
             }
 
-            foreach(TraConceptoCompra concepto in comprasActualizar)
+            foreach (TraConceptoCompra concepto in comprasActualizar)
             {
                 try
                 {
@@ -293,7 +301,7 @@ namespace Cocoteca.Controllers
             HttpClient cliente = _api.Initial();
             try
             {
-                _=cliente.DeleteAsync("api/TraConceptoCompras/" + indice);
+                _ = cliente.DeleteAsync("api/TraConceptoCompras/" + indice);
             }
             catch (Exception e)
             {
@@ -304,7 +312,7 @@ namespace Cocoteca.Controllers
         public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;
-            return  View();
+            return View();
         }
       
     }
