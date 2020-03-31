@@ -59,11 +59,11 @@
                                     <div class="container">
                                         <div class="info row ">
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { conceptoLibro = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>
+                                                <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>
                                             </div>
                                             <label class="Cantidad col" runat="server">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
-                                                <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { conceptoLibro = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>
+                                                <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>
                                             </div>
                                         </div>
                                     </div>
