@@ -20,11 +20,16 @@ namespace Cocoteca.Controllers
         static List<TraConceptoCompra> comprasActualizar = new List<TraConceptoCompra>(); // Lista de compras que cambio el numero de libros
         static int total, idCarrito, idCliente;
 
-        // GET: Carrito
+        // GET: Carrito        
+        /// <summary>
+        ///  Busca el carrito del usuario y retorna la vista de carrito con sus datos
+        /// </summary>
+        /// <param name="id">el id del cliente.</param>
+        /// <returns></returns>
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
 
-            id = 1;
+      //      id = 1;
             if (id == null)
             return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
@@ -113,7 +118,10 @@ namespace Cocoteca.Controllers
             return View(listaCarrito);
         }
 
-        public  async void salirPagina()
+        /// <summary>
+        /// Salir de la pagina.
+        /// </summary>
+        public async void salirPagina()
         {
              actualizarCarrito(idCarrito, idCliente);
         }
