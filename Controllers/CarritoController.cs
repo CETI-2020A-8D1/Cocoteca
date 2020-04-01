@@ -18,7 +18,7 @@ namespace Cocoteca.Controllers
     {
         CocopelAPI _api = new CocopelAPI();
         static List<TraConceptoCompra> comprasActualizar = new List<TraConceptoCompra>(); // Lista de compras que cambio el numero de libros
-        static int total;
+        static int total, idCarrito, idCliente;
 
         // GET: Carrito
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
@@ -83,6 +83,8 @@ namespace Cocoteca.Controllers
                 }
                 ViewData["carritoId"] = carrito.Idcompra;
                 ViewData["clienteId"] = carrito.Idcliente;
+                idCarrito = carrito.Idcompra;
+                idCliente = carrito.Idcliente;
                 if (siHayCarrito)
                 {
                     res = await cliente.GetAsync("api/TraConceptoCompras/" + carrito.Idcompra);
@@ -109,6 +111,11 @@ namespace Cocoteca.Controllers
                 return RedirectToAction("Error", new { error = "Error al consultar el carrito :(" });
 
             return View(listaCarrito);
+        }
+
+        public void salirPagina()
+        {
+            actualizarCarrito(idCarrito, idCliente);
         }
 
         public async Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente)

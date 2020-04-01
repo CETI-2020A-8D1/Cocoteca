@@ -277,6 +277,19 @@ return false;
 <script language="javascript">
     window.onbeforeunload = function (evt) {
 
+        $.ajax({
+        url: '/Carrito/salirPagina',
+        data: {
+            'id_item': id,
+        },
+        type: 'GET',
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+        },
+        error: function (data) {
+        },
+
         var message = 'Are youo sure you want to close this window!!!';
         if (typeof evt == 'undefined') {//IE
             evt = window.event;
@@ -284,7 +297,8 @@ return false;
         if (evt) {
             evt.returnValue = message;
         }
-
+        
+        });
         return message;
     }
 </script>
