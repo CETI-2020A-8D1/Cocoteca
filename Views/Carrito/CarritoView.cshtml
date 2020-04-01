@@ -21,6 +21,8 @@
 
 @{decimal subtotal = 0;}
 @{decimal total = 0;}
+@{decimal precio = 0;}
+
 
 <div class="p-4 container-fluid">
     <div class="row justify-content-center">
@@ -60,23 +62,11 @@
                                         <div class="info row ">
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio), @Html.DisplayFor(modelItem => item.conceptoCompra.TraCompras), @Html.DisplayFor(modelItem => item.conceptoCompra.Idcompra), @Html.DisplayFor(modelItem => item.conceptoCompra.Idlibro), @Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad))">-</button>
-                                                @{  /*<button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>};*/}
+                                                @{ /<button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>};/}
                                             </div>
                                             <label class="Cantidad col" runat="server">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio), @Html.DisplayFor(modelItem => item.conceptoCompra.TraCompras), @Html.DisplayFor(modelItem => item.conceptoCompra.Idcompra), @Html.DisplayFor(modelItem => item.conceptoCompra.Idlibro), @Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad))">+</button>
-                                                @{/*<button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>*/ }
-</div>
-</div>
-</div>
-</td>
-@{decimal precio = item.libro.Precio * item.conceptoCompra.Cantidad;}
-@{subtotal += precio;}
-<td style="vertical-align:middle" class="precio text-right">@precio</td>
-<td style="vertical-align:middle;" class="text-right">
-<button class="btn btn-sm btn-outline-danger eliminar" onclick="borrarItem(this) ; eliminarLibro(@a)" data-assigned-id="@item.conceptoCompra.TraCompras">Eliminar</button>
-</td>
-</tr>
                                                 @{/<button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>/ }
                                             </div>
                                         </div>
@@ -114,7 +104,16 @@
         </div>
         <div class="rounded mx-3 mt-3 p-3 col mb-2 container" style="background-color:#FFD1BD">
             <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"] })</button>
+                    @{ /<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"], total = @total })</button>/}
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <button class="btn btn-lg btn-block btn-pagar text-uppercase">PROCEDER AL PAGO</button>
+                </div>
+            </div>
         </div>
+    </div>
 </div>
 
 <script>
@@ -123,6 +122,7 @@
         var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
         if (cantidad > 0) {
             cantidad--;
+
             $(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
             var nuevoPrecio = precio;
             nuevoPrecio *= cantidad;
@@ -140,6 +140,7 @@
     function borrarItem(index) {
         var id = $(index).data('assigned-id');
         $.ajax({
+            url: '/Carrito/Eliminar?indice=' + id,
             data: {
                 'id_item': id,
             },
@@ -178,14 +179,12 @@
         return false;
     }
 
-},
-});
     function restarCantidad(index, precio, id, compra, libro, cantidadl) {
         var cantidad = $(".info:eq(" + index + ")").find("label:eq(0)").text();
         if (cantidad > 0) {
             cantidad--;
 
-}
+            $(".info:eq(" + index + ")").find("label:eq(0)").text(cantidad);
             var nuevoPrecio = precio;
             nuevoPrecio *= cantidad;
             $(".precio:eq(" + index + ")").text(nuevoPrecio);
@@ -261,28 +260,26 @@
             error: function (data) {
             },
         });
+
+        return false;
     }
 
     function eliminarLibro(index) {
         $(".subtotal").text(parseInt($(".subtotal").text() - parseInt($(".precio:eq(" + index + ")").text())));
         $(".total").text(parseInt($(".subtotal").text()));
+        $(".tablaitem:eq(" + index + ")").hide();
+        return false;
+    }
 
-function eliminarLibro(index) {
-$(".subtotal").text(parseInt($(".subtotal").text() - parseInt($(".precio:eq(" + index + ")").text())));
-$(".total").text(parseInt($(".subtotal").text()));
-$(".tablaitem:eq(" + index + ")").hide();
-return false;
-}
 
-   
 
 
 </script>
 
+
 <script language="javascript">
     window.onbeforeunload = function (evt) {
         $.ajax({
-        error: function (data) {
             type: "PUT",
             url: "/Carrito/salirPagina",
             contentType: "application/json; charset=utf-8",
@@ -296,6 +293,18 @@ return false;
                 alert("YI");
             }
         });
+        var message = 'Estas seguro que quieres cerrar esta ventana?';
+        /*if (typeof evt == 'undefined') {//IE
+            evt = window.event;
+        }
+        if (evt) {
+            evt.returnValue = message;
+        }*/
+        //return message;
+    }
+</script>
+<!--<script language="javascript">
+    window.onbeforeunload = function (evt) {
 
        /* var message = 'Are youo sure you want to close this window!!!';
         if (typeof evt == 'undefined') {//IE
@@ -324,11 +333,26 @@ return false;
 
         /*
          * ,
+            error: function (jqXHR, textStatus, errorThrown) {
+               // alert("No se puede actualizar men")
                 window.location.href = ""
+            },
+            success: function (msg) {
+                if (msg.d == true) {
+                    //window.location.href = "Pages/Mobile/Basic/Index.aspx";
+                }
+                else {
+                    //show error
+                   // alert('login failed');
+                }
+            }
+         * /
+       // return message;
     }
 </script>
+    -->
 
 
 @section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

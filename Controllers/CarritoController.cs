@@ -16,15 +16,20 @@ namespace Cocoteca.Controllers
 {
     public class CarritoController : Controller
     {
-        CocopelAPI _api = new CocopelAPI();
+        static CocopelAPI _api = new CocopelAPI();
         static List<TraConceptoCompra> comprasActualizar = new List<TraConceptoCompra>(); // Lista de compras que cambio el numero de libros
         static int total, idCarrito, idCliente;
 
-        // GET: Carrito
+        // GET: Carrito        
+        /// <summary>
+        ///  Busca el carrito del usuario y retorna la vista de carrito con sus datos
+        /// </summary>
+        /// <param name="id">el id del cliente.</param>
+        /// <returns></returns>
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
 
-            id = 1;
+            //      id = 1;
             if (id == null)
                 return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
@@ -112,20 +117,21 @@ namespace Cocoteca.Controllers
 
             return View(listaCarrito);
         }
-        /*
-        Funcion de salir de la pagina
 
         /// <summary>
+        /// Salir de la pagina.
+        /// </summary>
         public async void salirPagina()
         {
             actualizarCarrito(idCarrito, idCliente);
         }
-         * Id del carrito del cliente actual
-         * Id del cliente actual
 
+
+        //public async  Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente)
         public async void actualizarCarrito(int idCarrito, int idCliente)
         {
             HttpClient cliente = _api.Initial();
+            HttpResponseMessage res = null;
 
             try
             {
@@ -133,6 +139,7 @@ namespace Cocoteca.Controllers
             }
             catch (Exception e)
             {
+                RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
             }
 
             if (res.IsSuccessStatusCode)
