@@ -16,7 +16,7 @@ namespace Cocoteca.Controllers
 {
     public class CarritoController : Controller
     {
-        CocopelAPI _api = new CocopelAPI();
+        static CocopelAPI _api = new CocopelAPI();
         static List<TraConceptoCompra> comprasActualizar = new List<TraConceptoCompra>(); // Lista de compras que cambio el numero de libros
         static int total, idCarrito, idCliente;
 
@@ -113,15 +113,17 @@ namespace Cocoteca.Controllers
             return View(listaCarrito);
         }
 
-        public void salirPagina()
+        public  async void salirPagina()
         {
-            actualizarCarrito(idCarrito, idCliente);
+             actualizarCarrito(idCarrito, idCliente);
         }
 
-        public async Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente)
+
+        //public async  Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente)
+        public async void actualizarCarrito(int idCarrito, int idCliente)
         {
             HttpClient cliente = _api.Initial();
-            HttpResponseMessage res;
+            HttpResponseMessage res = null;
 
             try
             {
@@ -129,7 +131,7 @@ namespace Cocoteca.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+                 RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
             }
 
             if (res.IsSuccessStatusCode)
@@ -147,12 +149,12 @@ namespace Cocoteca.Controllers
                     var resultado = await cliente.PutAsJsonAsync<TraCompras>("api/TraCompras/" + idCarrito, carrito[0]);
                     if (!resultado.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("Error", new { error = "No se puede actualizar la BD :(" });
+                         RedirectToAction("Error", new { error = "No se puede actualizar la BD :(" });
                     }
                 }
                 catch (Exception e)
                 {
-                    return RedirectToAction("Error", new { error = "Byte content :(" });
+                     RedirectToAction("Error", new { error = "Byte content :(" });
                 }
             }
 
@@ -163,15 +165,15 @@ namespace Cocoteca.Controllers
                     var resultado = await cliente.PutAsJsonAsync<TraConceptoCompra>("api/TraConceptoCompras/" + concepto.TraCompras, concepto);
                     if (!resultado.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("Error", new { error = "No se puede actualizar la BD  2:(" });
+                         RedirectToAction("Error", new { error = "No se puede actualizar la BD  2:(" });
                     }
                 }
                 catch (Exception e)
                 {
-                    return RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+                     RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
                 }
             }
-            return RedirectToAction("CarritoView");
+            // RedirectToAction("CarritoView");
         }
 
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
