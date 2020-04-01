@@ -112,12 +112,30 @@ namespace Cocoteca.Controllers
 
             return View(listaCarrito);
         }
-
+        /*
+        Funcion de salir de la pagina
+        
+        Esta funcion se llama cuando se sale de la pagina de carrito y se usa para llamar
+        la funcion de actualizar el carrito
+        */
         public void salirPagina()
         {
             actualizarCarrito(idCarrito, idCliente);
         }
-
+        /*
+         *Funcion actualizar carrito
+         * 
+         * Esta funcion actualiza los datos del carrito a la base de datos ya sean tanto la
+         * cantidad de libros de todo el carrito o el precio total del carrito
+         * 
+         * idCarrito
+         * Id del carrito del cliente actual
+         * Id del cliente actual
+         * 
+         * Return
+         * Vista elegida
+         * 
+         */
         public async Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente)
         {
             HttpClient cliente = _api.Initial();
@@ -173,6 +191,16 @@ namespace Cocoteca.Controllers
             }
             return RedirectToAction("CarritoView");
         }
+
+        /*
+         *Funcion guadar las compras cambiadas
+         * 
+         * Esta funcion recibe las compras (TraConceptoCompra) donde el cliente modifico el numero
+         * de libros y los guarda en un arreglo para su posterior actulizacion, realizada cunado el cliente sale del carrito.
+         * 
+         * Esta lista guarda las compras con los valores de cantidad correctos ya que por la funcionalidad de las Jiquery los
+         * cambios realizados en la pagina no se almacenan
+         */
 
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
         {
