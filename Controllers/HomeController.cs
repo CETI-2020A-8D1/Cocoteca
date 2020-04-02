@@ -5,16 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Api_Vista_Libro.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using CocontroladorAPI.Models;
+using Cocoteca.Models;
 
 namespace Api_Vista_Libro.Controllers
 {
     public class HomeController : Controller
     {
-        public string Editorial_, Categoria_, Pais_;
+         public string Editorial_, Categoria_, Pais_;
 
 
         private readonly ILogger<HomeController> _logger;
@@ -31,7 +31,7 @@ namespace Api_Vista_Libro.Controllers
             var json_Libros = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatLibros");
             var json_Editoriales = await httpClient.GetStringAsync("https://localhost:44341/api/CatEditorial");
             var json_Categorias = await httpClient.GetStringAsync("https://localhost:44341/api/CatCategorias");
-            var json_Paises = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatLibros");
+            var json_Paises = await httpClient.GetStringAsync("https://localhost:44341/api/CatPaises");
 
 
             var LibrosLista = JsonConvert.DeserializeObject<List<MtoCatLibros>>(json_Libros);
@@ -42,7 +42,7 @@ namespace Api_Vista_Libro.Controllers
             foreach (var Libro in LibrosLista)
             {
                     
-                ListaResultados.Insert(0,  Libro.Isbn);
+                ListaResultados.Insert(0,Libro.Isbn);
                 ListaResultados.Insert(1,Libro.Titulo);
                 ListaResultados.Insert(2,Libro.Autor);
                 ListaResultados.Insert(3,Libro.Sinopsis);
@@ -76,15 +76,10 @@ namespace Api_Vista_Libro.Controllers
                         ListaResultados.Insert(12,Pais.Nombre);
                     }
                 }
-
             }
         
-            return View(ListaResultados); 
-           
-            
+            return View(ListaResultados);             
         }
-
-
 
 
         public IActionResult Privacy()
