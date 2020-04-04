@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,43 +24,6 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-controller="ClienteInicio" asp-action="Index">Inicio<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categor&iacute;as
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-                            @foreach (Categoria cat in ViewBag.Categorias)
-                            {
-
-                                <a class="dropdown-item" asp-controller="ClienteInicio" asp-action="GridLibros"
-                           asp-route-id="@cat.idcategoria">@cat.nombre</a>
-
-                            }
-
-                        </div>
-                    </li>
-                </ul>
-
-                <form class="form-inline my-1 my-lg-1">
-                    <input class="form-control mr-sm-2 w-auto" type="search" placeholder="Ej. El principito..." aria-label="Search">
-                    <button class="btn btn-search my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-
-                <li class="nav-item">
-                    <div class="box-1">
-                        <div class="btn btn-one">
-                            <span><img src="~/usuario.png" style="width:30px; height:30px"> Inicia sesi&oacute;n</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="btn btn-light btn-circle" style="margin: 0px 10px 0px 30px;"><img class="carrito" src="~/carrito.png" alt="carrito" style="width:30px; height:30px"> </a></li>
-            </div>
         </nav>
     </header>
 
