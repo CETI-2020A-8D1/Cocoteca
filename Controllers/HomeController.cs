@@ -20,6 +20,17 @@ namespace Cocoteca.Controllers
 
         public IActionResult Index()
         {
+            try
+            {
+                ViewBag.Categorias = ObtenerDatosCliente.ListaCategorias();
+                
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+
+
             return View();
         }
 

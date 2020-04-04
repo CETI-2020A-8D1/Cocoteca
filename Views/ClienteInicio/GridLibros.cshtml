@@ -3,5 +3,42 @@
     ViewData["Title"] = "GridLibros";
 }
 
-<h1>GridLibros</h1>
+<main>
+    <section class="jumbotron bg-white text-center mb-0">
+        <h1 class="display-4">@ViewBag.Categoria.nombre</h1>
+    </section>
+
+    <div class="py-2 bg-light">
+        <div class="container py-4" style="background-color:#FFD1BD">
+            <div class="row py-4">
+                @foreach (MtoCatLibroItem libro in ViewBag.Libros)
+                {
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card mb-4">
+
+                            <img src="@libro.imagen" class="card-img-top" alt="" width="50px" height="400px">
+                            <div class="card-body">
+                                <h4 class="card-title"> @libro.titulo</h4>
+                                <h5 class="card-text"> @libro.autor</h5>
+                                <h5 class="card-text"> Precio: </h5>
+                                <h5 class="card-text"> @libro.precio cocoins</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-outline-secondary" style="background-color:#F2BF2C">Ver Libro</button>
+                                        <button class="btn btn-sm btn-outline-secondary" style="background-color:#FCA12D">Agregar a Carrito</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
