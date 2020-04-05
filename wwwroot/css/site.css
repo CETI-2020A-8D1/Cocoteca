@@ -139,16 +139,15 @@ div[class="box-1"] {
     font-family: 'Raleway', sans-serif;
 }
 
-.card {
-    width: 15rem;
-    height: 38rem;
+.carousel .card {
+    
     margin-left: 3em;
     
 }
 
-.card-img-top {
-    width: 15rem;
-    height: 18rem;
+.carousel .card-img-top {
+    
+    height: 20rem;
 }
 
 .carousel-indicators li {
