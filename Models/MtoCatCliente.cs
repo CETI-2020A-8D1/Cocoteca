@@ -12,6 +12,8 @@ namespace CocontroladorAPI.Models
 
         public int Idcliente { get; set; }
         public string Email { get; set; }
+        public bool Desactivado { get; set; }
+        public string Contraseña { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
 
