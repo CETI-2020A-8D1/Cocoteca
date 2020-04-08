@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29709.97
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocoteca", "Cocoteca.csproj", "{111022DA-498B-450F-AA7A-7370CC73079D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocoteca", "Cocoteca\Cocoteca.csproj", "{5E2D0666-0138-4CF9-AE1A-C90F4348C17C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{111022DA-498B-450F-AA7A-7370CC73079D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{111022DA-498B-450F-AA7A-7370CC73079D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{111022DA-498B-450F-AA7A-7370CC73079D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{111022DA-498B-450F-AA7A-7370CC73079D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E2D0666-0138-4CF9-AE1A-C90F4348C17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E2D0666-0138-4CF9-AE1A-C90F4348C17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E2D0666-0138-4CF9-AE1A-C90F4348C17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E2D0666-0138-4CF9-AE1A-C90F4348C17C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B0F71ABF-6039-4A22-9657-C75E7B3C963F}
+		SolutionGuid = {2283A599-A220-4351-AF7C-1D00EEC1E0F2}
 	EndGlobalSection
 EndGlobal
