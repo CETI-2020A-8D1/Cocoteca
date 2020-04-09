@@ -14,9 +14,9 @@ namespace CocontroladorAPI.Models
         public decimal? PrecioTotal { get; set; }
         public DateTime? FechaCompra { get; set; }
         public bool Pagado { get; set; }
-        public int Idcliente { get; set; }
+        public int Idusuario { get; set; }
 
-        public virtual MtoCatCliente IdclienteNavigation { get; set; }
+        public virtual MtoCatUsuarios IdusuarioNavigation { get; set; }
         public virtual ICollection<TraConceptoCompra> TraConceptoCompra { get; set; }
     }
 }

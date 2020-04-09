@@ -1,32 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Net.Http;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 using CocontroladorAPI.Models;
-using Cocoteca.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
-namespace Api_Vista_Libro.Controllers
+namespace Cocoteca.Controllers.Libro
 {
-    public class HomeController : Controller
+    public class Libro_VistaController : Controller
     {
-         
-
-
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Libro_VistaAsync()
         {
-            _logger = logger;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            
             var httpClient = new HttpClient();
             var json_Libros = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatLibros");
             var json_Editoriales = await httpClient.GetStringAsync("https://localhost:44341/api/Editorial");
@@ -41,17 +27,17 @@ namespace Api_Vista_Libro.Controllers
             List<string> ListaResultados = new List<string>();
             foreach (var Libro in LibrosLista)
             {
-                    
-                ListaResultados.Insert(0,Libro.Isbn);
-                ListaResultados.Insert(1,Libro.Titulo);
-                ListaResultados.Insert(2,Libro.Autor);
-                ListaResultados.Insert(3,Libro.Sinopsis);
-                ListaResultados.Insert(4,Convert.ToString(Libro.Paginas));
-                ListaResultados.Insert(5,Convert.ToString(Libro.Revision));
-                ListaResultados.Insert(6,Convert.ToString(Libro.Ano));
-                ListaResultados.Insert(7,Convert.ToString(Libro.Precio));
-                ListaResultados.Insert(8,Convert.ToString(Libro.Stock));
-                ListaResultados.Insert(9,Convert.ToString(Libro.Imagen));
+
+                ListaResultados.Insert(0, Libro.Isbn);
+                ListaResultados.Insert(1, Libro.Titulo);
+                ListaResultados.Insert(2, Libro.Autor);
+                ListaResultados.Insert(3, Libro.Sinopsis);
+                ListaResultados.Insert(4, Convert.ToString(Libro.Paginas));
+                ListaResultados.Insert(5, Convert.ToString(Libro.Revision));
+                ListaResultados.Insert(6, Convert.ToString(Libro.Ano));
+                ListaResultados.Insert(7, Convert.ToString(Libro.Precio));
+                ListaResultados.Insert(8, Convert.ToString(Libro.Stock));
+                ListaResultados.Insert(9, Convert.ToString(Libro.Imagen));
 
 
                 foreach (var Editorial in Editorial_Lista)
@@ -66,31 +52,19 @@ namespace Api_Vista_Libro.Controllers
                 {
                     if (Libro.Idcategoria == Categoria.Idcategoria)
                     {
-                        ListaResultados.Insert(11,Categoria.Nombre); 
+                        ListaResultados.Insert(11, Categoria.Nombre);
                     }
                 }
                 foreach (var Pais in Paises_Lista)
                 {
                     if (Libro.Idpais == Pais.Idpais)
                     {
-                        ListaResultados.Insert(12,Pais.Nombre);
+                        ListaResultados.Insert(12, Pais.Nombre);
                     }
                 }
             }
-        
-            return View(ListaResultados);             
-        }
 
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(ListaResultados);
         }
     }
 }
