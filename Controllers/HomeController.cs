@@ -26,8 +26,11 @@ namespace Api_Vista_Libro.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
-            var httpClient = new HttpClient();
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient httpClient = new HttpClient(clientHandler);
             var json_Libros = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatLibros");
             var json_Editoriales = await httpClient.GetStringAsync("https://localhost:44341/api/Editorial");
             var json_Categorias = await httpClient.GetStringAsync("https://localhost:44341/api/CatCategorias");
@@ -54,6 +57,8 @@ namespace Api_Vista_Libro.Controllers
                 ListaResultados.Insert(9,Convert.ToString(Libro.Imagen));
 
 
+                
+                
                 foreach (var Editorial in Editorial_Lista)
                 {
                     if (Libro.Ideditorial == Editorial.Ideditorial)
@@ -77,7 +82,7 @@ namespace Api_Vista_Libro.Controllers
                     }
                 }
             }
-        
+            //ListaResultados.Find(z=>z.Length==4).FirstOrDefault()
             return View(ListaResultados);             
         }
 

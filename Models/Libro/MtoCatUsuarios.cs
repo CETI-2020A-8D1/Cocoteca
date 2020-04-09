@@ -11,7 +11,8 @@ namespace CocontroladorAPI.Models
             TraCompras = new HashSet<TraCompras>();
         }
 
-        public int Idusuario { get; set; }
+        public int Idcliente { get; set; }
+        public string Email { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
 
