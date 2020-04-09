@@ -13,6 +13,8 @@ namespace Cocoteca.Controllers.Libro
     {
         public async Task<IActionResult> Libro_VistaAsync()
         {
+
+
             var httpClient = new HttpClient();
             var json_Libros = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatLibros");
             var json_Editoriales = await httpClient.GetStringAsync("https://localhost:44341/api/Editorial");
