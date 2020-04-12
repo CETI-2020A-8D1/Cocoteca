@@ -48,8 +48,8 @@ namespace Cocoteca.Controllers.Compras
                                 {
 
 
-                                    ListaResultados.Insert(1, Libro.Titulo);
-                                    ListaResultados.Insert(2, Libro.Autor);
+                                    ListaResultados.Insert(0, Libro.Titulo);
+                                    ListaResultados.Insert(1, Libro.Autor);
                                     
                                  
 
@@ -61,11 +61,10 @@ namespace Cocoteca.Controllers.Compras
 
                             }
 
-                            if (Compras.Idusuario == Usuario.Idusuario && Compras.Idcompra == Concepto.Idcompra)
+                            if ( Compras.Idcompra == Concepto.Idcompra)
                             {
-                                ListaResultados.Insert(3, Convert.ToString(Concepto.Cantidad));//articulos totales
-                                ListaResultados.Insert(4, Convert.ToString(Compras.PrecioTotal));//precio total
-                                ListaResultados.Insert(5, Convert.ToString(Compras.PrecioTotal));
+                                ListaResultados.Insert(2, Convert.ToString(Concepto.Cantidad));//articulos totales
+                                ListaResultados.Insert(3, Convert.ToString(Compras.PrecioTotal));//precio total
                                 if ((Compras.FechaCompra.Value.Day + 3) >= hoy.Day && Compras.Pagado == true)
 
                                 {
@@ -76,8 +75,8 @@ namespace Cocoteca.Controllers.Compras
                                 {
                                     estado = "Enviado";
                                 }
-                                ListaResultados.Insert(6, Convert.ToString(Compras.FechaCompra));//fecha
-                                ListaResultados.Insert(7, estado);// estado
+                                ListaResultados.Insert(4, Convert.ToString(Compras.FechaCompra));//fecha
+                                ListaResultados.Insert(5, estado);// estado
 
 
 

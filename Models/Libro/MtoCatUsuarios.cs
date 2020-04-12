@@ -18,5 +18,6 @@ namespace CocontroladorAPI.Models
 
         public virtual ICollection<CatDirecciones> CatDirecciones { get; set; }
         public virtual ICollection<TraCompras> TraCompras { get; set; }
+        public int Idusuario { get; internal set; }
     }
 }
