@@ -21,6 +21,8 @@
 
 @{decimal subtotal = 0;}
 @{decimal total = 0;}
+@{decimal precio = 0;}
+
 
 <div class="p-4 container-fluid">
     <div class="row justify-content-center">
@@ -60,17 +62,17 @@
                                         <div class="info row ">
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio), @Html.DisplayFor(modelItem => item.conceptoCompra.TraCompras), @Html.DisplayFor(modelItem => item.conceptoCompra.Idcompra), @Html.DisplayFor(modelItem => item.conceptoCompra.Idlibro), @Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad))">-</button>
-                                                @{ /*<button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>};*/}
+                                                @{ /<button class="btn btn-sm btn-outline-dark restar" onclick="restarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("-", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = false })</button>};/}
                                             </div>
                                             <label class="Cantidad col" runat="server">@Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad)</label>
                                             <div class="col">
                                                 <button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio), @Html.DisplayFor(modelItem => item.conceptoCompra.TraCompras), @Html.DisplayFor(modelItem => item.conceptoCompra.Idcompra), @Html.DisplayFor(modelItem => item.conceptoCompra.Idlibro), @Html.DisplayFor(modelItem => item.conceptoCompra.Cantidad))">+</button>
-                                                @{/*<button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>*/ }
+                                                @{/<button class="btn btn-sm btn-outline-dark agregar" onclick="sumarCantidad(@a, @Html.DisplayFor(modelItem => item.libro.Precio))">@Html.ActionLink("+", "agregarLibrosCambiados", new { idConcepto = item.conceptoCompra.TraCompras, compra = item.conceptoCompra.Idcompra, libro = item.conceptoCompra.Idlibro, cantidad = item.conceptoCompra.Cantidad, sumar = true })</button>/ }
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                @{decimal precio = item.libro.Precio * item.conceptoCompra.Cantidad;}
+                                @{precio = (item.libro.Precio * item.conceptoCompra.Cantidad);}
                                 @{subtotal += precio;}
                                 <td style="vertical-align:middle" class="precio text-right">@precio</td>
                                 <td style="vertical-align:middle;" class="text-right">
@@ -104,7 +106,7 @@
             <div class="row">
                 <div class="col-sm-12  col-md-6">
                     <button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"] })</button>
-                    @{ /*<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"], total = @total })</button>*/}
+                    @{ /<button class="btn btn-lg btn-block btn-search">@Html.ActionLink("Continuar Comprando", "actualizarCarrito", new { idCarrito = @ViewData["carritoId"], idCliente = @ViewData["clienteId"], total = @total })</button>/}
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
                     <button class="btn btn-lg btn-block btn-pagar text-uppercase">PROCEDER AL PAGO</button>

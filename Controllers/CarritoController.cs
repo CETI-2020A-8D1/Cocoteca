@@ -29,9 +29,9 @@ namespace Cocoteca.Controllers
         public async Task<IActionResult> CarritoView(int? id)   // id del cliente
         {
 
-      //      id = 1;
+            //      id = 1;
             if (id == null)
-            return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
+                return RedirectToAction("Error", new { error = "Error... \nUsuario nulo" });
             List<CarritoCompra> listaCarrito = new List<CarritoCompra>();
             List<TraCompras> compras = new List<TraCompras>();
             List<TraConceptoCompra> conceptoCompras = new List<TraConceptoCompra>();
@@ -118,16 +118,22 @@ namespace Cocoteca.Controllers
             return View(listaCarrito);
         }
 
+        // GET: salirPagina
         /// <summary>
-        /// Salir de la pagina.
+        /// Esta funcion se llama cuando se sale de la pagina de carrito y se usa para llamar la funcion de actualizar el carrito
         /// </summary>
         public async void salirPagina()
         {
-             actualizarCarrito(idCarrito, idCliente);
+            actualizarCarrito(idCarrito, idCliente);
         }
 
-
-        //public async  Task<IActionResult> actualizarCarrito(int idCarrito, int idCliente)
+        // GET: Funcion actualizar carrito
+        /// <summary>
+        ///  Esta funcion actualiza los datos del carrito a la base de datos ya sean tanto lacantidad de libros de todo el carrito o el precio total del carrito
+        /// </summary>
+        /// <param name="idCarrito">Id del carrito del cliente actual</param>
+        /// <param name="idCliente">Id del carrito del cliente actual</param>
+        /// <returns>Vista elegida</returns>
         public async void actualizarCarrito(int idCarrito, int idCliente)
         {
             HttpClient cliente = _api.Initial();
@@ -139,7 +145,7 @@ namespace Cocoteca.Controllers
             }
             catch (Exception e)
             {
-                 RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+                RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
             }
 
             if (res.IsSuccessStatusCode)
@@ -157,12 +163,12 @@ namespace Cocoteca.Controllers
                     var resultado = await cliente.PutAsJsonAsync<TraCompras>("api/TraCompras/" + idCarrito, carrito[0]);
                     if (!resultado.IsSuccessStatusCode)
                     {
-                         RedirectToAction("Error", new { error = "No se puede actualizar la BD :(" });
+                        RedirectToAction("Error", new { error = "No se puede actualizar la BD :(" });
                     }
                 }
                 catch (Exception e)
                 {
-                     RedirectToAction("Error", new { error = "Byte content :(" });
+                    RedirectToAction("Error", new { error = "Byte content :(" });
                 }
             }
 
@@ -173,18 +179,32 @@ namespace Cocoteca.Controllers
                     var resultado = await cliente.PutAsJsonAsync<TraConceptoCompra>("api/TraConceptoCompras/" + concepto.TraCompras, concepto);
                     if (!resultado.IsSuccessStatusCode)
                     {
-                         RedirectToAction("Error", new { error = "No se puede actualizar la BD  2:(" });
+                        RedirectToAction("Error", new { error = "No se puede actualizar la BD  2:(" });
                     }
                 }
                 catch (Exception e)
                 {
-                     RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
+                    RedirectToAction("Error", new { error = "No se puede conectar con el servidor :(" });
                 }
             }
             // RedirectToAction("CarritoView");
         }
 
+<<<<<<< HEAD
         
+=======
+        // GET: Funcion guadar las compras cambiadas
+        /// <summary>
+        ///  Esta funcion recibe las compras (TraConceptoCompra) donde el cliente modifico el numero de libros y los guarda en un arreglo para su posterior actulizacion, realizada cunado el cliente sale del carrito
+        ///  Esta lista guarda las compras con los valores de cantidad correctos ya que por la funcionalidad de las Jiquery los cambios realizados en la pagina no se almacenan
+        /// </summary>
+        /// <param name="idConcepto">Id del TraConceptoCompra</param>
+        /// <param name="compra">Id de la compra</param>
+        /// <param name="libro">Id del libro</param>
+        /// <param name="cantidad">Cantidad de libros de la compra</param>
+        /// <param name="sumar">True: la cantidad aunmento, False: la cantidad disminuyo</param>
+        /// <param name="totalView">Precio totao</param>
+>>>>>>> 49b4cfd47ad39d546724d3679f695d310b79385b
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
@@ -326,8 +346,8 @@ namespace Cocoteca.Controllers
             ViewData["msg"] = error;
             return View();
         }
-      
+
     }
 
-  
+
 }
