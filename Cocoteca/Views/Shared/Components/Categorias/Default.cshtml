@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Cocoteca.Models.Cliente.Equipo1;
+
+@if (ViewBag.Categorias.Count > 0)
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categor&iacute;as
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+            @foreach (Categoria cat in ViewBag.Categorias)
+            {
+
+                <a class="dropdown-item" asp-controller="ClienteInicio" asp-action="GridLibros"
+                   asp-route-id="@cat.idcategoria">@cat.nombre</a>
+
+            }
+
+        </div>
+    </li>
+}
