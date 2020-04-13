@@ -29,63 +29,72 @@ namespace Cocoteca.Controllers.Compras
             var MtoCatUsuarios = JsonConvert.DeserializeObject<List<MtoCatUsuarios>>(json_usuario);
 
             List<string> ListaResultados = new List<string>();
-
-
-            foreach (var Usuario in MtoCatUsuarios)
+            for (int i = 0; i < json_TraCompras.Length / 5 ; i++)
             {
 
-                foreach (var Compras in TraCompras)
+                foreach (var Usuario in MtoCatUsuarios)
                 {
-                    foreach (var Concepto in TraConceptoCompra)
+
+                    foreach (var Compras in TraCompras)
                     {
-                        if (Concepto.Idcompra == Compras.Idcompra)
-
+                   
+                        foreach (var Concepto in TraConceptoCompra)
                         {
-                            ListaResultados.Insert(0, Convert.ToString(Compras.Idcompra));//folio
-                            foreach (var Libro in LibrosLista)
-                            {
-                                if (Concepto.Idlibro == Libro.Idlibro)
+                            if ( Concepto.Idcompra.Equals( Compras.Idcompra) && Compras.Idcompra.Equals(i)) { 
+                            
+
+                                ListaResultados.Insert(0, Convert.ToString(Compras.Idcompra));//folio
+                                foreach (var Libro in LibrosLista)
                                 {
+                                    if (Concepto.Idlibro == Libro.Idlibro)
+                                    {
 
 
-                                    ListaResultados.Insert(0, Libro.Titulo);
-                                    ListaResultados.Insert(1, Libro.Autor);
-                                    
-                                 
+                                        ListaResultados.Insert(1, Libro.Titulo);
+                                        ListaResultados.Insert(2, Libro.Autor);
+                                        ListaResultados.Insert(3, Convert.ToString(Libro.Imagen));
 
+
+
+
+
+
+                                    }
+
+                                }
+
+                                if (Compras.Idcompra == Concepto.Idcompra)
+                                {
+                                    ListaResultados.Insert(4, Convert.ToString(Concepto.Cantidad));//articulos totales
+                                    ListaResultados.Insert(5, Convert.ToString(Compras.PrecioTotal));//precio total
+                                    if ((Compras.FechaCompra.Value.Day + 3) >= hoy.Day && Compras.Pagado == true)
+
+                                    {
+                                        estado = "Entregado";
+
+                                    }
+                                    else if (Compras.Pagado == true)
+                                    {
+                                        estado = "Enviado";
+                                       
+                                    }
+                                    else
+                                    {
+                                        estado = "Procesando";
+                                    }
+                                    ListaResultados.Insert( 6, Convert.ToString(Compras.FechaCompra));//fecha
+                                    ListaResultados.Insert( 7, estado);// estado
 
 
 
 
                                 }
-
-                            }
-
-                            if ( Compras.Idcompra == Concepto.Idcompra)
-                            {
-                                ListaResultados.Insert(2, Convert.ToString(Concepto.Cantidad));//articulos totales
-                                ListaResultados.Insert(3, Convert.ToString(Compras.PrecioTotal));//precio total
-                                if ((Compras.FechaCompra.Value.Day + 3) >= hoy.Day && Compras.Pagado == true)
-
-                                {
-                                    estado = "Entregado";
-
-                                }
-                                else if (Compras.Pagado == true)
-                                {
-                                    estado = "Enviado";
-                                }
-                                ListaResultados.Insert(4, Convert.ToString(Compras.FechaCompra));//fecha
-                                ListaResultados.Insert(5, estado);// estado
-
-
-
-
                             }
                         }
                     }
                 }
             }
+           
             return View(ListaResultados);
         }
     }

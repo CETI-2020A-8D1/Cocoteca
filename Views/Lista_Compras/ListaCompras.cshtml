@@ -87,37 +87,69 @@
                             </thead>
                             <tbody>
                             <th scope="row" class="border-0">
-
-                                <div class="list-group">
-                                    <button type="button" class="list-group-item list-group-item-action active" disabled style="background-color:#ff9060	">
-                                        Pedido No. 6661
-                                    </button>
-                                    <a href="CadaLibro_Pedido.html" class="list-group-item list-group-item-action">
-                                        <li class="list-group-item">
-                                            <!-- Contenido-->
-                                            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                                                <img src="https://libreriashidalgo.com/portadas/9786074576399.jpg" height="180px" width="120px">
-                                                <div class="ml-3 d-inline-block align-top">
-                                                    <div class="media-body order-2 order-lg-1">
-                                                        <h5 class="mt-0 font-weight-bold mb-2">Kamasutra</h5>
-                                                        <p class="font-italic text-muted mb-0 small">
-                                                            @foreach (var Libroslista in Model)
+                                @for (int i = 0; i <4; i++)
+                                {
+                                        <div class="list-group">
+                                            <button type="button" class="list-group-item list-group-item-action active" disabled style="background-color:#ff9060	">
+                                                @for (int j = i+(i*7); j <= i + (i * 7); j++)
+                                                {
+                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j))
                                                     {
-                                                            @Libroslista
+                                                        @Libroslista
                                                     }
-                                                        </p>
-                                                        <p class="font-italic text-muted mb-0 small">Vendido por: Cocoteca </p>
-                                                        <p class="font-italic text-muted mb-0 small">Fecha de la compra: 10/11/2014</p>
-                                                        <br>
-                                                        <h6 class="font-weight-bold my-2">Precio Total: $1,600</h6>
-                                                        <br>
+                                                }
+
+
+                                            </button>
+                                        <a href="CadaLibro_Pedido.html" class="list-group-item list-group-item-action">
+                                            <li class="list-group-item">
+                                                <!-- Contenido-->
+
+
+
+                                                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                                    <img src=" " height="180px" width="120px">
+                                                    <div class="ml-3 d-inline-block align-top">
+                                                        <div class="media-body order-2 order-lg-1">
+                                                            <h5 class="mt-0 font-weight-bold mb-2">
+
+                                                              
+                                                            </h5>
+                                                            <p class="font-italic text-muted mb-0 small">
+
+                                                            </p>
+                                                            <p class="font-italic text-muted mb-0 small">Vendido por: Cocoteca </p>
+                                                            <p class="font-italic text-muted mb-0 small">
+                                                                Fecha de la compra:
+                                                                @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 6))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </p>
+                                                            <br>
+                                                            <h6 class="font-weight-bold my-2">
+                                                                Precio Total:
+                                                                @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j+5))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </h6>
+                                                            <br>
+                                                         
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div> <!-- fin del pedido -->
-                                        </li>
-                                    </a>
-                                </div>
-                                <br>
+                                                </div> <!-- fin del pedido -->
+                                            </li>
+                                        </a>
+                                    </div>
+                                    <br>
+                                }
                                 <!-- Agregar los demas pedidos -->
                                 <div class="list-group">
                                     <button type="button" class="list-group-item list-group-item-action active" disabled style="background-color:#ff9060	">
