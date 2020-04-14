@@ -191,7 +191,6 @@ namespace Cocoteca.Controllers
         }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         
 =======
         // GET: Funcion guadar las compras cambiadas
@@ -206,8 +205,6 @@ namespace Cocoteca.Controllers
         /// <param name="sumar">True: la cantidad aunmento, False: la cantidad disminuyo</param>
         /// <param name="totalView">Precio totao</param>
 >>>>>>> 49b4cfd47ad39d546724d3679f695d310b79385b
-=======
->>>>>>> parent of 1c4348b... n
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
