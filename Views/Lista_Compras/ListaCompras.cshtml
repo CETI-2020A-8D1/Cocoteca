@@ -99,63 +99,103 @@
                                 @for (int i = 0; i < @Longitud / 8; i++)
                                 {
 
-                                    <div class="list-group">
-                                        <button type="button" class="list-group-item list-group-item-action active" disabled style="background-color:#ff9060	">
-                                            @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                                <div class="list-group">
+                                    <button type="button" class="list-group-item list-group-item-action active" disabled style="background-color:#ff9060	">
+                                        @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                                        {
+                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j))
                                             {
-                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j ))
+                                                @Libroslista
+                                            }
+                                        }
+
+
+                                    </button>
+                                    @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                                    {
+                                        int primero = 0;
+
+                                        @foreach (var Libroslista in Model)
+                                        {
+                                            if (Libroslista == Model[j])
+                                            {
+                                                if (primero==0)
                                                 {
-                                                    @Libroslista
+                                                    <a class="dropdown-item" asp-controller="Lista_ComprasController" asp-action="CadaLibro_Pedido"
+                                                       asp-route-id="@Libroslista"><li class="list-group-item">
+    <!-- Contenido-->
+
+
+
+    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+        <img src= @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                    {
+                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 3))
+                        {
+                            @Libroslista
+                        }
+                    } height="180px" width="120px">
+        <div class="ml-3 d-inline-block align-top">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">
+                    @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                    {
+                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 1))
+                        {
+                            @Libroslista
+                        }
+                    }
+                </h5>
+                <p class="font-italic text-muted mb-0 small">
+                    @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                    {
+                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 2))
+                        {
+                            @Libroslista
+                        }
+                    }
+                </p>
+                <p class="font-italic text-muted mb-0 small">Vendido por: Cocoteca </p>
+                <p class="font-italic text-muted mb-0 small">
+                    Fecha de la compra:
+                    @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                    {
+                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 6))
+                        {
+                            @Libroslista
+                        }
+                    }
+                </p>
+                <br>
+                <h6 class="font-weight-bold my-2">
+                    Precio Total:
+                    @for (int j = i + (i * 7); j <= i + (i * 7); j++)
+                    {
+                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 5))
+                        {
+                            @Libroslista
+                        }
+                    }
+                </h6>
+                <br>
+
+            </div>
+        </div>
+    </div> <!-- fin del pedido -->
+</li></a>
+                                                    primero = 1;
                                                 }
+
                                             }
 
 
-                                        </button>
-                                        <a href="CadaLibro_Pedido.html" class="list-group-item list-group-item-action">
-                                            <li class="list-group-item">
-                                                <!-- Contenido-->
+                                        }
 
-
-
-                                                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                                                    <img src=" " height="180px" width="120px">
-                                                    <div class="ml-3 d-inline-block align-top">
-                                                        <div class="media-body order-2 order-lg-1">
-                                                            <h5 class="mt-0 font-weight-bold mb-2">
-                                                            </h5>
-                                                            <p class="font-italic text-muted mb-0 small">
-
-                                                            </p>
-                                                            <p class="font-italic text-muted mb-0 small">Vendido por: Cocoteca </p>
-                                                            <p class="font-italic text-muted mb-0 small">
-                                                                Fecha de la compra:
-                                                                @for (int j = i + (i * 7); j <= i + (i * 7); j++)
-                                                                {
-                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 6))
-                                                                    {
-                                                                        @Libroslista
-                                                                    }
-                                                                }
-                                                            </p>
-                                                            <br>
-                                                            <h6 class="font-weight-bold my-2">
-                                                                Precio Total:
-                                                                @for (int j = i + (i * 7); j <= i + (i * 7); j++)
-                                                                {
-                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 5))
-                                                                    {
-                                                                        @Libroslista
-                                                                    }
-                                                                }
-                                                            </h6>
-                                                            <br>
-
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- fin del pedido -->
-                                            </li>
-                                        </a>
-                                    </div>
+                                    }
+                                    
+                                        
+                                    
+                                </div>
                                     <br>
                                 }
                                 A

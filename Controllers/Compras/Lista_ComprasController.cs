@@ -29,7 +29,7 @@ namespace Cocoteca.Controllers.Compras
             var MtoCatUsuarios = JsonConvert.DeserializeObject<List<MtoCatUsuarios>>(json_usuario);
 
             List<string> ListaResultados = new List<string>();
-            for (int i = 0; i < json_TraCompras.Length / 5 ; i++)
+            for (int i = 1003; i <  1005 ; i++)
             {
 
                 foreach (var Usuario in MtoCatUsuarios)
