@@ -93,8 +93,9 @@ namespace Cocoteca.Controllers.Compras
                         }
                     }
                 }
+              
             }
-           
+            
             return View(ListaResultados);
         }
     }
