@@ -10,7 +10,7 @@ namespace Cocoteca.Helper
     {
         public static string Initial()
         {
-            return "https://localhost:44341/";
+            return "http://localhost:61067/";
         }
     }
 

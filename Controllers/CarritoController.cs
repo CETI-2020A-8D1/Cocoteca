@@ -192,8 +192,12 @@ namespace Cocoteca.Controllers
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
+=======
+
+>>>>>>> 50e1c0fa36355b1b49ffcf1dd96dfbd0bfd94514
         // GET: Funcion guadar las compras cambiadas
         /// <summary>
         ///  Esta funcion recibe las compras (TraConceptoCompra) donde el cliente modifico el numero de libros y los guarda en un arreglo para su posterior actulizacion, realizada cunado el cliente sale del carrito
@@ -205,9 +209,12 @@ namespace Cocoteca.Controllers
         /// <param name="cantidad">Cantidad de libros de la compra</param>
         /// <param name="sumar">True: la cantidad aunmento, False: la cantidad disminuyo</param>
         /// <param name="totalView">Precio totao</param>
+<<<<<<< HEAD
 >>>>>>> 49b4cfd47ad39d546724d3679f695d310b79385b
 =======
 >>>>>>> parent of 1c4348b... n
+=======
+>>>>>>> 50e1c0fa36355b1b49ffcf1dd96dfbd0bfd94514
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
