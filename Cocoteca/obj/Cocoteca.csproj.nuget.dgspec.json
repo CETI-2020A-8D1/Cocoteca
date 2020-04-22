@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
+    "C:\\Users\\gerardo\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
+    "C:\\Users\\gerardo\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "projectUniqueName": "C:\\Users\\gerardo\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
         "projectName": "Cocoteca",
-        "projectPath": "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
-        "packagesPath": "C:\\Users\\Judith\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\obj\\",
+        "projectPath": "C:\\Users\\gerardo\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "packagesPath": "C:\\Users\\gerardo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gerardo\\Documents\\GitHub\\Cocoteca\\Cocoteca\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Judith\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\gerardo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

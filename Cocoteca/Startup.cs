@@ -35,6 +35,7 @@ namespace Cocoteca
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
