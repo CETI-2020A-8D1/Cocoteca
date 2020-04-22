@@ -94,7 +94,7 @@ namespace Cocoteca
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ClienteInicio}/{action=Index}/{id?}");
+                    pattern: "{controller=Libros}/{action=Create}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

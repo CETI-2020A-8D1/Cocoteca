@@ -28,9 +28,10 @@ namespace Cocoteca.Controllers
             ViewBag.Paises = Paises;
             return View();
         }
-        public async Task<IActionResult> Create([Bind("ISBN,Titulo,Autor,Sinopsis,Descontinuado,Paginas,Revision,Ano,Precio,Stock,IDEditorial,IDPais,IDCategoria,Imagen")]  employee)
-        {
 
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("ISBN,Titulo,Autor,Sinopsis,Descontinuado,Paginas,Revision,Ano,Precio,Stock,IDEditorial,IDPais,IDCategoria,Imagen")]  MtoCatLibros libros)
+        {
             if (ModelState.IsValid)
             {
                 
