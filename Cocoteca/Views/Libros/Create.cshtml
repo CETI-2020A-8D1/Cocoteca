@@ -1,0 +1,193 @@
+﻿@model Cocoteca.Models.MtoCatLibros
+
+@{
+    ViewData["Title"] = "Alta";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alta de libro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel=StyleSheet href="css/custom.css" type="text/css" media=screen>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- B A R R A    D E   N A V E G A C I O N     A Q U I  -->
+
+
+    <div class="p-4 container-fluid" style="background-color:#f3f3f3">
+
+        <div class="row justify-content-center">
+            <div class="col-9">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class=" m-4 p-4" style=" background-color:#FFD1BD; font-family: 'Raleway', sans-serif;">
+                        <br><h1 class="mb-3" style="text-align: center; color: #1f1f1f"> REGISTRO DE LIBROS</h1><br>
+
+
+                        <div class="input-group mb-3 ">
+                            <input asp-for="Isbn" type="text" class="form-control" placeholder="ISBN..." aria-label="ISBN" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Titulo" type="text" class="form-control" placeholder="Título..." aria-label="TITULO" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Autor" type="text" class="form-control" placeholder="Autor..." aria-label="AUTOR" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #e3e3e3">Sinopsis</span>
+                            </div>
+                            <textarea asp-for="Sinopsis" class="form-control" aria-label="SINOPSIS"></textarea>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="exampleFormControlSelect1">Descontinuado</label>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline1">Si</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">No</label>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Paginas" type="text" class="form-control" placeholder="Número de Páginas" aria-label="PAGINAS" aria-describedby="basic-addon1">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="numeroRevision">Revisión</label>
+                            <select class="form-control" id="numeroRevision">
+                                <option selected disabled value="">Seleccione una Revisión...</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Ano" type="text" class="form-control" placeholder="Año..." aria-label="ANO" aria-describedby="basic-addon1">
+                        </div>
+
+
+
+                        <label for="basic-url">Precio</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #e3e3e3">$</span>
+                            </div>
+                            <input asp-for="Precio" type="text" class="form-control" aria-label="PRECIO">
+                            <div class="input-group-append">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #e3e3e3">.00</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Stock" type="text" class="form-control" placeholder="Cantidad en Stock..." aria-label="STOCK" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroRevision">Editorial</label>
+                            <select class="form-control" id="EDITORIAL">
+                                <option selected disabled value="">Seleccione una Editorial...</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroRevision">País</label>
+                            <select class="form-control" id="PAIS">
+                                <option selected disabled value="">Seleccione un País...</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroRevision">Categoría</label>
+                            <select class="form-control" id="CATEGORIA">
+                                <option selected disabled value="">Seleccione una Categoría...</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Imagen" type="text" class="form-control" placeholder="Link de Imagen..." aria-label="IMAGEN" aria-describedby="basic-addon1">
+                        </div>
+
+                        <button type="button" class="btn btn-lg btn-block btn-search" style="background-color: #EE8D11" data-toggle="modal" data-target="#altaModal">Guardar Libro y Continuar</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="altaModal" tabindex="-1" role="dialog" aria-labelledby="altaModalLabel" aria-hidden="true" style="background-color: #e4784a">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #f3f3f3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="altaModalLabel">Seguro que deseas continuar?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Revisa que todos los campos ingresados sean correctos y estén escritos correctamente.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-search" style="background-color: #EE8D11">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
