@@ -156,6 +156,7 @@ namespace Cocoteca.Controllers
 
                 try
                 {
+                    
                     var myContent = JsonConvert.SerializeObject(carrito[0]);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                     var byteContent = new ByteArrayContent(buffer);

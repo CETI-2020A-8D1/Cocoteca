@@ -58,16 +58,16 @@
                             <label for="exampleFormControlSelect1">Descontinuado</label>
                         </div>
 
-                        <div class="form-group">
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadioInline1">Si</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadioInline2">No</label>
-                            </div>
+
+                        <div id="RadioButtonGroup" class="form-group">
+                            <label asp-for="Descontinuado" class="radio-inline">
+                                <input asp-for="Descontinuado" value="true" type="radio">Si
+                            </label>
+                            <label asp-for="Descontinuado" class="radio-inline">
+                                <input asp-for="Descontinuado" value="false" type="radio">No
+                            </label>
                         </div>
+
 
                         <div class="input-group mb-3">
                             <input asp-for="Paginas" type="text" class="form-control" placeholder="Número de Páginas" aria-label="PAGINAS" aria-describedby="basic-addon1">
@@ -76,20 +76,19 @@
 
                         <div class="form-group">
                             <label for="numeroRevision">Revisión</label>
-                            <select class="form-control" id="numeroRevision">
+                            <select asp-for="Revision" class="form-control" id="numeroRevision">
                                 <option selected disabled value="">Seleccione una Revisión...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
                             </select>
-
                         </div>
 
                         <div class="input-group mb-3">
@@ -115,31 +114,22 @@
 
                         <div class="form-group">
                             <label for="numeroRevision">Editorial</label>
-                            <select class="form-control" id="EDITORIAL">
+                            <select asp-for="Ideditorial" class="form-control" asp-items="ViewBag.Editoriales" id="EDITORIAL">
                                 <option selected disabled value="">Seleccione una Editorial...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="numeroRevision">País</label>
-                            <select class="form-control" id="PAIS">
+                            <select asp-for="Idpais" class="form-control" asp-items="ViewBag.Paises" id="PAIS">
                                 <option selected disabled value="">Seleccione un País...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="numeroRevision">Categoría</label>
-                            <select class="form-control" id="CATEGORIA">
+                            <select asp-for="Idcategoria" class="form-control" asp-items="ViewBag.Categorias" id="CATEGORIA">
                                 <option selected disabled value="">Seleccione una Categoría...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
                             </select>
                         </div>
 
@@ -150,44 +140,35 @@
                         <button type="button" class="btn btn-lg btn-block btn-search" style="background-color: #EE8D11" data-toggle="modal" data-target="#altaModal">Guardar Libro y Continuar</button>
 
                     </div>
+
+
+
+                    <div class="modal fade" id="altaModal" tabindex="-1" role="dialog" aria-labelledby="altaModalLabel" aria-hidden="true" style="background-color: #e4784a">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" style="background-color: #f3f3f3">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="altaModalLabel">Seguro que deseas continuar?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Revisa que todos los campos ingresados sean correctos y estén escritos correctamente.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" value="Create" class="btn btn-search" style="background-color: #EE8D11">Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="altaModal" tabindex="-1" role="dialog" aria-labelledby="altaModalLabel" aria-hidden="true" style="background-color: #e4784a">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="background-color: #f3f3f3">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="altaModalLabel">Seguro que deseas continuar?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Revisa que todos los campos ingresados sean correctos y estén escritos correctamente.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-search" style="background-color: #EE8D11">Guardar Cambios</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
