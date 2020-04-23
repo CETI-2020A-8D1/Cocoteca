@@ -89,26 +89,7 @@
                                     string barra = null;
 
                                 }
-                                @foreach (var librazo in ((IEnumerable<string>)Model).ElementAt(17)) {
 
-                                    
-                                    if (Convert.ToString(librazo) == "Enviado")
-                                    {
-                                        barra="c3";
-                                    }
-                                    if (Convert.ToString(librazo) == "Procesando")
-                                    {
-                                        barra = "c1";
-
-                                    }
-                                    if (Convert.ToString(librazo) == "Entregado")
-                                    {
-                                        barra = "c3";
-
-                                    }
-
-
-                                }
                             <th scope="row" class="border-0">
                                 <div class="row shop-tracking-status">
                                     <div class="col-md-12">
@@ -155,7 +136,15 @@
                                         <li class="list-group-item">
                                             <div class="p-2">
                                                 <div class="d-inline-block">
-
+                                                    <img src=
+                                                          @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                            {
+                                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 9))
+                                                                {
+                                                                    @Libroslista
+                                                                }
+                                                            }
+                                                         height="180px" width="120px">
                                                 </div>
                                                 <div class="ml-3 d-inline-block align-top">
                                                     <div class="d-inline-block">
