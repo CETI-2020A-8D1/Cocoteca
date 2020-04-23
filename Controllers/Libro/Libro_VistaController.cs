@@ -1,21 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CocontroladorAPI.Models;
+using Cocoteca.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Cocoteca.Controllers.Libro
 {
     public class Libro_VistaController : Controller
     {
-        public async Task<IActionResult> Libro_VistaAsync()
+
+
+
+        private readonly ILogger<Libro_VistaController> _logger;
+
+        public Libro_VistaController(ILogger<Libro_VistaController> logger)
         {
+            _logger = logger;
+        }
 
+        public async Task<IActionResult> Libro_Vista()
+        {
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-            var httpClient = new HttpClient();
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient httpClient = new HttpClient(clientHandler);
             var json_Libros = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatLibros");
             var json_Editoriales = await httpClient.GetStringAsync("https://localhost:44341/api/Editorial");
             var json_Categorias = await httpClient.GetStringAsync("https://localhost:44341/api/CatCategorias");
@@ -42,6 +57,8 @@ namespace Cocoteca.Controllers.Libro
                 ListaResultados.Insert(9, Convert.ToString(Libro.Imagen));
 
 
+
+
                 foreach (var Editorial in Editorial_Lista)
                 {
                     if (Libro.Ideditorial == Editorial.Ideditorial)
@@ -65,8 +82,20 @@ namespace Cocoteca.Controllers.Libro
                     }
                 }
             }
-
+            //ListaResultados.Find(z=>z.Length==4).FirstOrDefault()
             return View(ListaResultados);
+        }
+
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

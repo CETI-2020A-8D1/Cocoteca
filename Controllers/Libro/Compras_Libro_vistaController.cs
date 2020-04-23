@@ -99,9 +99,9 @@ namespace Cocoteca.Controllers.Libro
                                 ListaResultados.Insert(14, Convert.ToString(Compras.PrecioTotal));
 
                                 ListaResultados.Insert(15, Convert.ToString(Compras.PrecioTotal));
-                        if ((Compras.FechaCompra.Value.Day + 3) >= hoy.Day && Compras.Pagado == true)
+                        if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3 <= hoy.DayOfYear)
 
-                        {
+                                {
                             estado = "Entregado";
 
                         }

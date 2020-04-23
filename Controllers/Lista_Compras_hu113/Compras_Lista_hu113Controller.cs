@@ -7,12 +7,13 @@ using CocontroladorAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace Cocoteca.Controllers.Compras
+namespace Cocoteca.Controllers.Lista_Compras_hu113
 {
-    public class Lista_ComprasController : Controller
+    public class Compras_Lista_hu113Controller : Controller
     {
-        public async Task<IActionResult> ListaComprasAsync()
+        public async Task<IActionResult> ListaCompras_Async()
         {
+            int contador=0; 
             DateTime hoy = DateTime.Today;
             String estado = null;
             var httpClient = new HttpClient();
@@ -29,7 +30,7 @@ namespace Cocoteca.Controllers.Compras
             var MtoCatUsuarios = JsonConvert.DeserializeObject<List<MtoCatUsuarios>>(json_usuario);
 
             List<string> ListaResultados = new List<string>();
-            for (int i = 0; i < 1000 ; i++)
+            for (int i = 0; i < 1000; i++)
             {
 
                 foreach (var Usuario in MtoCatUsuarios)
@@ -37,53 +38,36 @@ namespace Cocoteca.Controllers.Compras
 
                     foreach (var Compras in TraCompras)
                     {
-                   
+
                         foreach (var Concepto in TraConceptoCompra)
                         {
-                            if ( Concepto.Idcompra.Equals( Compras.Idcompra) && Compras.Idcompra.Equals(i)) { 
-                            
+                            if (Concepto.Idcompra.Equals(Compras.Idcompra) && Compras.Idcompra.Equals(i) && Concepto.Idcompra!=contador)
+                            {
+                                contador = Concepto.Idcompra;
 
                                 ListaResultados.Insert(0, Convert.ToString(Compras.Idcompra));//folio
-                                foreach (var Libro in LibrosLista)
-                                {
-                                    if (Concepto.Idlibro == Libro.Idlibro)
-                                    {
-
-
-                                        ListaResultados.Insert(1, Libro.Titulo);
-                                        ListaResultados.Insert(2, Libro.Autor);
-                                        ListaResultados.Insert(3, Convert.ToString(Libro.Imagen));
-
-
-
-
-
-
-                                    }
-
-                                }
+                               
 
                                 if (Compras.Idcompra == Concepto.Idcompra)
                                 {
-                                    ListaResultados.Insert(4, Convert.ToString(Concepto.Cantidad));//articulos totales
-                                    ListaResultados.Insert(5, Convert.ToString(Compras.PrecioTotal));//precio total
-                                    if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3 <= hoy.DayOfYear)
+                                    if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3<= hoy.DayOfYear)
 
                                     {
                                         estado = "Entregado";
 
                                     }
-                                    else if (Compras.Pagado == true)
+
+                                    else if (Compras.Pagado == true )
                                     {
                                         estado = "Enviado";
-                                       
+
                                     }
                                     else
                                     {
                                         estado = "Procesando";
                                     }
-                                    ListaResultados.Insert( 6, Convert.ToString(Compras.FechaCompra));//fecha
-                                    ListaResultados.Insert( 7, estado);// estado
+                                    ListaResultados.Insert(1, Convert.ToString(Compras.FechaCompra));//fecha
+                                    ListaResultados.Insert(2, estado);// estado
 
 
 
@@ -93,10 +77,10 @@ namespace Cocoteca.Controllers.Compras
                         }
                     }
                 }
-              
+
             }
-            
+
             return View(ListaResultados);
         }
     }
-}
+    }

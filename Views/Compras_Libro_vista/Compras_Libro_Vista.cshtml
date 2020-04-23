@@ -9,10 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>La Cocoteca</title>
         <link rel="icon" href="imagenes/coco.png" type="image/icon type">
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel=StyleSheet href="css/custom.css" type="text/css" media=screen>
-        <link rel=StyleSheet href="css/libroindividual.css" type="text/css" media=screen>
+        <link rel=StyleSheet href="css/lista.css" type="text/css" media=screen>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -77,130 +76,143 @@
                 <div class="row">
                     <div class="col-lg-12 p-5 rounded shadow-sm mb-5 " style="background-color:#FFD1BD">
 
-                        <!-- Shopping cart table -->
+                        <!-- Espacio por Libro -->
                         <div class="table-responsive">
                             <table class="table" style="background-color:#FFFFFF">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="border-0 bg-light px-0">
                                             <div class="p-2 px-3 text-uppercase">
-                                                @foreach (var Libroslista in Model)
-                                                {
-                                                    @Libroslista
-                                                    <u> <b> </b></u>
-
-                                                }
+                                                Informacion del pedido																																																															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                Costo total: $1,600
                                             </div>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <th scope="row" class="border-0">
-                                    <div class="p-2">
-                                        <div class="d-inline-block">
-                                            <img src="  @foreach (var Libroslista in Model)
-                                                {
-                                                    @Libroslista
-                                                }" height="400px" width="320px">
-                                        </div>
-                                        <div class="ml-3 d-inline-block align-top">
-                                            <div class="d-inline-block">
-                                                <h2>
-                                                    @foreach (var Libroslista in Model)
-                                                    {
-                                                        @Libroslista
-                                                    }
-                                                </h2>
-                                                <h5>
-                                                    <footer class="blockquote-footer">
-                                                    </footer>
-                                                </h5><br>
-                                                <p>
-                                                    <font>
-                                                        <u> <b>ISBN:</b></u>
-                                                        @foreach (var Libroslista in Model)
-                                                        {
-                                                            @Libroslista
-                                                        }
-                                                    </font>
-                                                </p>
-                                                <p>
-                                                    <font>
-                                                        <u> <b>Editorial:</b></u>
-                                                        @foreach (var Libroslista in Model)
-                                                        {
-                                                            @Libroslista
-                                                        }
+                                    <div class="row shop-tracking-status">
+                                        <div class="col-md-12">
+                                            <div class="well">
+                                                <div class="order-status">
 
-                                                    </font>
-                                                </p>
-                                                <p>
-                                                    <font>
-                                                        <u> <b>Paginas:</b></u>
-                                                        @foreach (var Libroslista in Model)
-                                                        {
-                                                            @Libroslista
-                                                        }
-                                                    </font>
-                                                </p>
-                                                <p>
-                                                    <font>
-                                                        <u> <b>Año de Impresion:</b></u>
-                                                        @foreach (var Libroslista in Model)
-                                                        {
-                                                            @Libroslista
-                                                        }
-                                                    </font>
-                                                </p>
-                                                <p>
-                                                    <font>
-                                                        <u> <b>No. Edicion:</b></u>
-                                                        @foreach (var Libroslista in Model)
-                                                        {
-                                                            @Libroslista
-                                                        }
-                                                    </font>
-                                                </p>
-                                                <p>
-                                                    <font>
-                                                        <u> <b>Pais:</b></u> @foreach (var Libroslista in Model)
-                                                        {
-                                                            @Libroslista
-                                                        }
-                                                    </font>
-                                                </p>
-                                                <br><br>
-                                            </div>
-                                            <div class="ml-8 d-inline-block align-top">
-                                                <br><br>
-                                                <div class="card card-dos mb-5 mb-lg-0" style="width: 18rem; height:16rem;">
-
-                                                    <div class="card-body">
-
-                                                        <h5 class="card-title text-muted text-uppercase text-center">En Stock</h5>
-
-                                                        <h5 class="card-price text-center">$1,300</h5>
-                                                        <hr>
-                                                        <div class="box-1">
-                                                            <div class="btn btn-dos ">
-                                                                <span><img src="imagenes/compra.png" width="30px" height="30px"> Añadir</span>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
+                                                    <div class="order-status-timeline">
+                                                       <!-- La barra de progreso se llena cambiando c0 por (c1,c2,c3,c4) cada numero siendo un paso completado -->
+                                                        <div class="order-status-timeline-completion c3"></div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="card" style="width: 35rem;">
-                                                <div class="card-body">
-                                                    <p><font><u> <b>Sinopsis:</b></u></font></p>
-                                                    @foreach (var Libroslista in Model)
-                                                    {
-                                                        @Libroslista
-                                                    }
+
+                                                    <div class="image-order-status image-order-status-new active img-circle">
+                                                        <span class="status">Aceptado</span>
+                                                        <div class="icon"></div>
+                                                    </div>
+                                                    <div class="image-order-status image-order-status-active active img-circle">
+                                                        <span class="status">En progreso</span>
+                                                        <div class="icon"></div>
+                                                    </div>
+                                                    <div class="image-order-status image-order-status-intransit active img-circle">
+                                                        <span class="status">Enviado</span>
+                                                        <div class="icon"></div>
+                                                    </div>
+                                                    <div class="image-order-status image-order-status-delivered active img-circle">
+                                                        <span class="status">Entregado</span>
+                                                        <div class="icon"></div>
+                                                    </div>
+                                                    <div class="image-order-status image-order-status-completed active img-circle">
+                                                        <span class="status">Completado</span>
+                                                        <div class="icon"></div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <br>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="p-2">
+                                                <div class="d-inline-block">
+                                                    <img src="https://libreriashidalgo.com/portadas/9786074576399.jpg" height="400px" width="320px">
+                                                </div>
+                                                <div class="ml-3 d-inline-block align-top">
+                                                    <div class="d-inline-block">
+                                                        <h2>Kamasutra</h2>
+                                                        <h5><footer class="blockquote-footer">Dr. Sexologo Experto</footer></h5><br>
+                                                        <p><font><u> <b>ISBN:</b></u> 6969696969</font></p>
+                                                        <p><font><u> <b>Editorial:</b></u> Paque Kojas</font></p>
+                                                        <p><font><u> <b>Genero:</b></u> Amor Verdadero</font></p>
+                                                        <p><font><u> <b>Paginas:</b></u> 69</font></p>
+                                                        <p><font><u> <b>Año de Impresion:</b></u> 2006</font></p>
+                                                        <p><font><u> <b>Pais:</b></u> Honduras</font></p>
+                                                        <p><font><u> <b>No. Edicion:</b></u> 77</font></p>
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="ml-8 d-inline-block align-top">
+                                                        <br><br>
+                                                        <div class="card card-dos mb-5 mb-lg-0" style="width: 18rem; height:16rem;">
+
+                                                            <div class="card-body">
+
+
+                                                                <h5 class="card-price text-center">Folio: 6661</h5>
+                                                                <hr>
+
+                                                                <p class="font-italic text-muted mb-0 medium">Vendido por: Cocoteca </p>
+                                                                <p class="font-italic text-muted mb-0 medium">Fecha del pedido: 10/11/2014 </p>
+                                                                <p class="font-italic text-muted mb-0 medium">Cantidad: 2 </p>
+                                                                <p class="font-italic text-muted mb-0 medium">Costo Individual: $500 </p>
+                                                                <hr>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <br>
+                                        <!-- Mas items iran dentro de "<li class="list-group-item">" -->
+                                        <li class="list-group-item">
+                                            <div class="p-2">
+                                                <div class="d-inline-block">
+                                                    <img src="https://libreriashidalgo.com/portadas/9786073151221.jpg" height="400px" width="320px">
+                                                </div>
+                                                <div class="ml-3 d-inline-block align-top">
+                                                    <div class="d-inline-block">
+                                                        <h2>Kiss me</h2>
+                                                        <h5><footer class="blockquote-footer">Kiill Biul</footer></h5><br>
+                                                        <p><font><u> <b>ISBN:</b></u> 1010101010</font></p>
+                                                        <p><font><u> <b>Editorial:</b></u> Futturo</font></p>
+                                                        <p><font><u> <b>Genero:</b></u> Amor Verdadero</font></p>
+                                                        <p><font><u> <b>Paginas:</b></u> 255</font></p>
+                                                        <p><font><u> <b>Año de Impresion:</b></u> 2010</font></p>
+                                                        <p><font><u> <b>Pais:</b></u> USA</font></p>
+                                                        <p><font><u> <b>No. Edicion:</b></u> 61</font></p>
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="ml-8 d-inline-block align-top">
+                                                        <br><br>
+                                                        <div class="card card-dos mb-5 mb-lg-0" style="width: 18rem; height:16rem;">
+
+                                                            <div class="card-body">
+                                                                <h5 class="card-price text-center">Folio: 6661</h5>
+                                                                <hr>
+
+                                                                <p class="font-italic text-muted mb-0 medium">Vendido por: Cocoteca </p>
+                                                                <p class="font-italic text-muted mb-0 medium">Fecha del pedido: 10/11/2014 </p>
+                                                                <p class="font-italic text-muted mb-0 medium">Cantidad: 1 </p>
+                                                                <p class="font-italic text-muted mb-0 medium">Costo Individual: $300 </p>
+                                                                <hr>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+
+
+
+                                        <!-- Te pasaste crack-->
+                                    </ul>
+
 
                                 </th>
 
@@ -219,5 +231,6 @@
 
     </body>
 </html>
+
 
 </div>

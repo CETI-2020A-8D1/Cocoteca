@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>La Cocoteca</title>
+    <link rel="icon" href="imagenes/coco.png" type="image/icon type">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel=StyleSheet href="css/custom.css" type="text/css" media=screen>
+    <link rel=StyleSheet href="css/lista.css" type="text/css" media=screen>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #ff9060; font-family: 'Raleway', sans-serif;">
+        <a class="navbar-brand" href="#">
+            <img src="imagenes/imagotipo.png" alt="Cocoteca" width="200px" height="30px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categor&iacute;as
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Categoria 1</a>
+                        <a class="dropdown-item" href="#">Categoria 2</a>
+                        <a class="dropdown-item" href="#">Categoria 3</a>
+                    </div>
+                </li>
+            </ul>
+
+            <form class="form-inline my-1 my-lg-1">
+                <input class="form-control mr-sm-2 w-auto" type="search" placeholder="Ej. El principito..." aria-label="Search">
+                <button class="btn btn-search my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+
+            <li class="nav-item">
+                <div class="box-1">
+                    <div class="btn btn-one">
+                        <span><img src="imagenes/usuario.png" width="30px" height="30px"> Inicia sesi&oacute;n</span>
+                    </div>
+                </div>
+            </li>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="carrito" src="imagenes/carrito.png" alt="carrito" width="30px" height="30px">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Ir al carrito</a>
+                        <a class="dropdown-item" href="#">Lista de pedidos</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="pb-5">
+        <div class="container container-dos">
+            <div class="row">
+                <div class="col-lg-12 p-5 rounded shadow-sm mb-5 " style="background-color:#FFD1BD">
+
+                    <!-- Espacio por Libro -->
+                    <div class="table-responsive">
+                        <table class="table" style="background-color:#FFFFFF">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="border-0 bg-light px-0">
+                                        <div class="p-2 px-3 text-uppercase">
+                                        
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    string barra = null;
+
+                                }
+                                @foreach (var librazo in ((IEnumerable<string>)Model).ElementAt(17)) {
+
+                                    
+                                    if (Convert.ToString(librazo) == "Enviado")
+                                    {
+                                        barra="c3";
+                                    }
+                                    if (Convert.ToString(librazo) == "Procesando")
+                                    {
+                                        barra = "c1";
+
+                                    }
+                                    if (Convert.ToString(librazo) == "Entregado")
+                                    {
+                                        barra = "c3";
+
+                                    }
+
+
+                                }
+                            <th scope="row" class="border-0">
+                                <div class="row shop-tracking-status">
+                                    <div class="col-md-12">
+                                        <div class="well">
+                                            <div class="order-status">
+
+                                                <div class="order-status-timeline">
+                                                    <!-- La barra de progreso se llena cambiando c0 por (c1,c2,c3,c4) cada numero siendo un paso completado -->
+                                                    <div class="order-status-timeline-completion @barra"></div>
+                                                </div>
+
+                                                <div class="image-order-status image-order-status-new active img-circle">
+                                                    <span class="status">Aceptado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-active active img-circle">
+                                                    <span class="status">En progreso</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-intransit active img-circle">
+                                                    <span class="status">Enviado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-delivered active img-circle">
+                                                    <span class="status">Entregado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-completed active img-circle">
+                                                    <span class="status">Completado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                @{ int Longitud = Model.Count;
+                                }
+
+                                @for (int i = 0; i < @Longitud / 13; i++)
+                                {
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="p-2">
+                                                <div class="d-inline-block">
+
+                                                </div>
+                                                <div class="ml-3 d-inline-block align-top">
+                                                    <div class="d-inline-block">
+                                                        <h2>
+                                                            @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                            {
+                                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 1))
+                                                                {
+                                                                    @Libroslista
+                                                                }
+                                                            }
+                                                        </h2>
+                                                        <h5>
+                                                            <footer class="blockquote-footer">
+                                                                @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 2))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </footer>
+                                                        </h5><br>
+                                                        <p>
+                                                            <font>
+                                                                <u> <b>ISBN:</b></u> @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 0))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </font>
+                                                        </p>
+                                                        <p>
+                                                            <font>
+                                                                <u> <b>Editorial:</b></u> @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 11))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </font>
+                                                        </p>
+                                                        <p>
+                                                            <font>
+                                                                <u> <b>Genero:</b></u> @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 12))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </font>
+                                                        </p>
+                                                        <p>
+                                                            <font>
+                                                                <u> <b>Paginas:</b></u> @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 4))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </font>
+                                                        </p>
+                                                        <p>
+                                                            <font>
+                                                                <u> <b>Año de Impresion:</b></u> @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 5))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </font>
+                                                        </p>
+                                                        <p>
+                                                            <font>
+                                                                <u> <b>Pais:</b></u> @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 13))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </font>
+                                                        </p>
+
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="ml-8 d-inline-block align-top">
+                                                        <br><br>
+                                                        <div class="card card-dos mb-5 mb-lg-0" style="width: 18rem; height:16rem;">
+
+                                                            <div class="card-body">
+
+
+                                                                <h5 class="card-price text-center">
+                                                           
+                                                                </h5>
+                                                                <hr>
+
+                                                                <p class="font-italic text-muted mb-0 medium">Vendido por: Cocoteca </p>
+                                                                <p class="font-italic text-muted mb-0 medium">
+                                                                </p>
+                                                                <p class="font-italic text-muted mb-0 medium">
+                                                                    Cantidad: @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                    {
+                                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 10))
+                                                                        {
+                                                                            @Libroslista
+                                                                        }
+                                                                    }
+                                                                </p>
+                                                                <p class="font-italic text-muted mb-0 medium">
+                                                                    Costo Individual: @for (int j = i + (i * 13); j <= i + (i * 13); j++)
+                                                                    {
+                                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 7))
+                                                                        {
+                                                                            @Libroslista
+                                                                        }
+                                                                    }
+                                                                </p>
+                                                                <hr>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+
+
+
+
+
+                                        <!-- Te pasaste crack-->
+                                    </ul>
+                                }
+
+                            </th>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
