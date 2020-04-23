@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
+    "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
+    "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "projectUniqueName": "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
         "projectName": "Cocoteca",
-        "projectPath": "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "projectPath": "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
         "packagesPath": "C:\\Users\\Judith\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Judith\\source\\repos\\Cocoteca\\Cocoteca\\obj\\",
+        "outputPath": "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -41,6 +41,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Json.Net": {
+              "target": "Package",
+              "version": "[1.0.18, )"
+            },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.3, )"

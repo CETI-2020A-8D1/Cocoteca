@@ -1,6 +1,7 @@
 ﻿using Cocoteca.Helper;
 using Cocoteca.Models;
 using Cocoteca.Models.Cliente.Equipo1;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -97,5 +98,167 @@ namespace Cocoteca
                 throw e;
             }
         }
+
+        public static IEnumerable<SelectListItem> MunicipiosEnEstado()
+        {
+            List<SelectListItem> municipios = new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Value = null,
+                    Text = " "
+                }
+            };
+            return municipios;
+        }
+
+        public static List<Municipio> MunicipiosEnEstado (int id)
+        {
+            List<Municipio> municipios;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/MunicipiosEstado/{id}");
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    municipios = JsonConvert.DeserializeObject<List<Municipio>>(json);
+                }
+                return municipios;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static List<Estado> Estados()
+        {
+            List<Estado> estados = new List<Estado>();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/CatEstados/");
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    estados = JsonConvert.DeserializeObject<List<Estado>>(json);
+                }
+                return estados;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Direccion Direccion(string id)
+        {
+            Direccion dir = new Direccion();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/DatosCliente/Direccion/{id}");
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    dir = JsonConvert.DeserializeObject<Direccion>(json);
+                }
+                return dir;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static bool DireccionExiste(string id)
+        {
+            bool dir = false;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/DatosCliente/DireccionExiste/{id}");
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    dir = JsonConvert.DeserializeObject<bool>(json);
+                }
+                return dir;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Estado Estado(int id)
+        {
+            Estado estados = new Estado();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/DatosCliente/Estado/{id}");
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    estados = JsonConvert.DeserializeObject<Estado>(json);
+                }
+                return estados;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Municipio Municipio(int id)
+        {
+            Municipio municipio = new Municipio();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/CatMunicipios/{id}");
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    municipio = JsonConvert.DeserializeObject<Municipio>(json);
+                }
+                return municipio;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Usuario Usuario(string id)
+        {
+            Usuario usuario = new Usuario();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/DatosCliente/Usuario/{id}");
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    usuario = JsonConvert.DeserializeObject<Usuario>(json);
+                }
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
+
 }

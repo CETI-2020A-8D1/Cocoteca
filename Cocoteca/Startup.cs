@@ -12,6 +12,10 @@ using Cocoteca.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text;
+using Microsoft.AspNetCore.WebUtilities;
+using Cocoteca.Helper;
+using Cocoteca.Models.Cliente.Equipo1;
 
 namespace Cocoteca
 {
@@ -30,10 +34,29 @@ namespace Cocoteca
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequiereRolAlmacenista",
+                     policy => policy.RequireRole("Almacenista", "Admin", "Super Admin"));
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequiereRolCliente",
+                     policy => policy.RequireRole("Almacenista", "Admin", "Super Admin"));
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequiereRolAdmin",
+                     policy => policy.RequireRole("Admin", "Super Admin"));
+            });
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -42,13 +65,13 @@ namespace Cocoteca
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 4;
+                options.Password.RequiredLength = 2;
                 options.Password.RequiredUniqueChars = 0;
 
                 // Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.AllowedForNewUsers = false;
 
                 // User settings.
                 options.User.AllowedUserNameCharacters =
@@ -69,7 +92,7 @@ namespace Cocoteca
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -97,6 +120,69 @@ namespace Cocoteca
                     pattern: "{controller=ClienteInicio}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateRoles(serviceProvider).Wait();
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            //initializing custom roles 
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            string[] roleNames = {"Super Admin", "Admin", "Almacenista", "Cliente" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    //create the roles and seed them to the database: Question 1
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            //Here you could create a super user who will maintain the web app
+            var poweruser = new IdentityUser
+            {
+                UserName = Configuration["SAdm:UserName"],
+                Email = Configuration["SAdm:UserEmail"],
+            };
+            //Ensure you have these values in your appsettings.json file
+            string userPWD = Configuration["SAdm:UserPassword"];
+            var _user = await UserManager.FindByEmailAsync(Configuration["SAdm:AdminUserEmail"]);
+
+            if (_user == null)
+            {
+                var createPowerUser = await UserManager.CreateAsync(poweruser, userPWD);
+                if (createPowerUser.Succeeded)
+                {
+                    poweruser = await UserManager.FindByEmailAsync(Configuration["SAdm:AdminUserEmail"]);
+                    var resul = await EnviarDatosCliente.CrearUsuario(
+                    new Usuario()
+                    {
+                        IDidentity = _user.Id,
+                        Nombre = Configuration["SAdm:Nombre"],
+                        Apellido = Configuration["SAdm:Apellido"]
+                    });
+
+                    if (resul.IsSuccessStatusCode) 
+                    { 
+                        //here we tie the new user to the role
+                        await UserManager.SetLockoutEnabledAsync(poweruser, false);
+                        await UserManager.AddToRoleAsync(poweruser, "Super Admin");
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(poweruser);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+                        await UserManager.ConfirmEmailAsync(poweruser, code);
+                    }
+                    else
+                    {
+                        await UserManager.DeleteAsync(poweruser);
+                    }
+                    
+                }
+            }
         }
     }
 }
