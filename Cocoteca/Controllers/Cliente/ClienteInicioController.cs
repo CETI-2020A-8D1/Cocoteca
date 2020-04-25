@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Cocoteca.Helper;
+using Cocoteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Cocoteca.Controllers.Cliente
 {
     public class ClienteInicioController : Controller
     {
+        static CocopelAPI _api = new CocopelAPI();
         private readonly ILogger<ClienteInicioController> _logger;
 
         public ClienteInicioController(ILogger<ClienteInicioController> logger)
@@ -42,9 +47,73 @@ namespace Cocoteca.Controllers.Cliente
             {
                 return Redirect("~/Error/Error");
             }
-
             return View();
         }
 
+        public async Task<IActionResult> GenerarCarritoAsync(int id)
+        {
+            HttpClient cliente = _api.Initial();
+            try
+            {
+                List<Cocoteca.Models.TraCompras> comprasCliente = null;
+                HttpResponseMessage datos = null;
+                HttpResponseMessage traconceptocompra = null;
+
+                datos = await cliente.GetAsync("api/TraCompras/1");
+                if (datos.IsSuccessStatusCode)
+                {
+                    string resultado1 = datos.Content.ReadAsStringAsync().Result;
+                    comprasCliente = JsonConvert.DeserializeObject<List<Cocoteca.Models.TraCompras>>(resultado1);
+
+                    foreach (var compra in comprasCliente)
+                    {
+                        if (!compra.Pagado)
+                        {
+                            int idParaTraCompra = compra.Idcompra;
+                            TraConceptoCompra añadirLibro = new TraConceptoCompra();
+                            añadirLibro.TraCompras = 0;
+                            añadirLibro.Idcompra = idParaTraCompra;
+                            añadirLibro.Idlibro = id;
+                            añadirLibro.Cantidad = 1;
+                            traconceptocompra = await cliente.PostAsJsonAsync("api/TraConceptoCompras", añadirLibro);
+                            //"api/TraConceptoCompras""
+                        }
+                    }
+                }
+                /*
+                HttpResponseMessage res = null;
+                HttpResponseMessage datos = null;
+                Cocoteca.Models.MtoCatCliente clienteActual = null;
+                List<Cocoteca.Models.TraCompras> comprasCliente = null;
+
+                res = await cliente.GetAsync("api/MtoCatClientes/1");//Aqui hacemos un get de mtocatcliente para acceder a sus datos
+                if (res.IsSuccessStatusCode)
+                {
+                    string resultado = res.Content.ReadAsStringAsync().Result;
+                    clienteActual = JsonConvert.DeserializeObject<Cocoteca.Models.MtoCatCliente>(resultado);
+                    datos = await cliente.GetAsync("api/TraCompras/1");
+                    if (datos.IsSuccessStatusCode)
+                    {
+                        string resultado1 = res.Content.ReadAsStringAsync().Result;
+                        comprasCliente = JsonConvert.DeserializeObject<List<Cocoteca.Models.TraCompras>>(resultado1);
+                    }
+                    foreach(var compra in comprasCliente)
+                    {
+                        if(!compra.Pagado)
+                        {
+                            _ = await cliente.PutAsJsonAsync("api/TraCompras/" + compra, compra);
+                        }
+                    }
+                }  
+                string result = res.Content.ReadAsStringAsync().Result;
+                HttpResponseMessage datos = await cliente.GetAsync("api/TraCompras/" + id);
+                */
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return View();
+        }
     }
 }
