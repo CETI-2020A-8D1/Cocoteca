@@ -13,7 +13,7 @@ namespace Cocoteca.Controllers.Lista_Compras_hu113
     {
         public async Task<IActionResult> ListaCompras_Async()
         {
-            int contador=0; 
+            int contador = 0;
             DateTime hoy = DateTime.Today;
             String estado = null;
             var httpClient = new HttpClient();
@@ -30,7 +30,7 @@ namespace Cocoteca.Controllers.Lista_Compras_hu113
             var MtoCatUsuarios = JsonConvert.DeserializeObject<List<MtoCatUsuarios>>(json_usuario);
 
             List<string> ListaResultados = new List<string>();
-            for (int i = 1000; i < 1005; i++)
+            for (int i = 0; i < 20; i++)
             {
 
                 foreach (var Usuario in MtoCatUsuarios)
@@ -41,23 +41,23 @@ namespace Cocoteca.Controllers.Lista_Compras_hu113
 
                         foreach (var Concepto in TraConceptoCompra)
                         {
-                            if (Concepto.Idcompra.Equals(Compras.Idcompra) && Compras.Idcompra.Equals(i) && Concepto.Idcompra!=contador)
+                            if (Concepto.Idcompra.Equals(Compras.Idcompra) && Compras.Idcompra.Equals(i) && Concepto.Idcompra != contador)
                             {
                                 contador = Concepto.Idcompra;
 
                                 ListaResultados.Insert(0, Convert.ToString(Compras.Idcompra));//folio
-                               
+
 
                                 if (Compras.Idcompra == Concepto.Idcompra)
                                 {
-                                    if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3<= hoy.DayOfYear)
+                                    if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3 <= hoy.DayOfYear)
 
                                     {
                                         estado = "Entregado";
 
                                     }
 
-                                    else if (Compras.Pagado == true )
+                                    else if (Compras.Pagado == true)
                                     {
                                         estado = "Enviado";
 
@@ -69,7 +69,16 @@ namespace Cocoteca.Controllers.Lista_Compras_hu113
                                     ListaResultados.Insert(1, Convert.ToString(Compras.FechaCompra));//fecha
                                     ListaResultados.Insert(2, estado);// estado
 
+                                    foreach (var Libro in LibrosLista)
+                                    {
+                                        if (Concepto.Idlibro == Libro.Idlibro)
+                                        {
+                                            ListaResultados.Insert(3, Libro.Imagen);
+                                        }
 
+                                    }
+                                    ListaResultados.Insert(4, Convert.ToString(Compras.PrecioTotal));
+                                    ListaResultados.Insert(5, Convert.ToString(Concepto.Cantidad));
 
 
                                 }
@@ -83,4 +92,4 @@ namespace Cocoteca.Controllers.Lista_Compras_hu113
             return View(ListaResultados);
         }
     }
-    }
+}

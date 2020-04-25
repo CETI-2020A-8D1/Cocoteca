@@ -1,17 +1,15 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>La Cocoteca</title>
-    <link rel="icon" href="imagenes/coco.png" type="image/icon type">
+    <link rel="icon" href="~/imagenes/coco.png" type="image/icon type">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel=StyleSheet href="css/custom.css" type="text/css" media=screen>
-    <link rel=StyleSheet href="css/lista.css" type="text/css" media=screen>
+    <link rel=StyleSheet href="~/css/custom.css" type="text/css" media=screen>
+    <link rel=StyleSheet href="~/css/libroindividual.css" type="text/css" media=screen>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 
@@ -19,7 +17,7 @@
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #ff9060; font-family: 'Raleway', sans-serif;">
         <a class="navbar-brand" href="#">
-            <img src="imagenes/imagotipo.png" alt="Cocoteca" width="200px" height="30px">
+            <img src="~/imagenes/imagotipo.png" alt="Cocoteca" width="200px" height="30px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -49,14 +47,14 @@
             <li class="nav-item">
                 <div class="box-1">
                     <div class="btn btn-one">
-                        <span><img src="imagenes/usuario.png" width="30px" height="30px"> Inicia sesi&oacute;n</span>
+                        <span><img src="~/imagenes/usuario.png" width="30px" height="30px"> Inicia sesi&oacute;n</span>
                     </div>
                 </div>
             </li>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="carrito" src="imagenes/carrito.png" alt="carrito" width="30px" height="30px">
+                        <img class="carrito" src="~/imagenes/carrito.png" alt="carrito" width="30px" height="30px">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">Ir al carrito</a>
@@ -94,13 +92,13 @@
 
 
 
-                                @for (int i = 0; i < @Longitud / 3; i++)
+                                @for (int i = 0; i < @Longitud / 6; i++)
                                 {
 
                                     <div class="list-group">
                                         <button type="button" class="list-group-item list-group-item-action active" disabled style="background-color:#ff9060	">
-                                            No. Pedido: 
-                                            @for (int j = i + (i * 2); j <= i + (i * 2); j++)
+                                            No. Pedido:
+                                            @for (int j = i + (i * 5); j <= i + (i * 5); j++)
                                             {
                                                 @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j))
                                                 {
@@ -110,7 +108,7 @@
 
 
                                         </button>
-                                        @for (int a = i + (i * 2); a <= i + (i * 2); a++)
+                                        @for (int a = i + (i * 5); a <= i + (i * 5); a++)
                                         {
                                             int primero = 0;
 
@@ -125,33 +123,55 @@
                                                             <li class="list-group-item">
                                                                 <!-- Contenido-->
 
-
-
                                                                 <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                                                                    
+
+                                                                    <div class="d-inline-block">
+                                                                        <img src=@for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                                {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 3))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                                }
+                                                                             height="180px" width="120px">
+                                                                    </div>
                                                                     <div class="ml-3 d-inline-block align-top">
                                                                         <div class="media-body order-2 order-lg-1">
-                                                                            <h5 class="mt-0 font-weight-bold mb-2">
-                                                                              
-                                                                            </h5>
-                                                                            <p class="font-italic text-muted mb-0 small">
-                                                                              
-                                                                            </p>
+
                                                                             <p class="font-italic text-muted mb-0 small">Vendido por: Cocoteca </p>
                                                                             <p class="font-italic text-muted mb-0 small">
                                                                                 Fecha de la compra:
-                                                                                @for (int j = i + (i * 2); j <= i + (i * 2); j++)
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
                                                                                 {
-                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j+1))
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 1))
                                                                                     {
                                                                                         @Libroslista
                                                                                     }
                                                                                 }
                                                                             </p>
-                                                                            <br>
+                                                                            <p class="font-italic text-muted mb-0 small">
+                                                                                No. Articulos:
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                                {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 5))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                                }
+                                                                            </p>
+                                                                            <p class="font-italic text-muted mb-0 medium">
+                                                                                Costo Total: $
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                                {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 4))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                                }
+                                                                            </p>
                                                                             <h6 class="font-weight-bold my-2">
-                                                                                Estado : 
-                                                                                @for (int j = i + (i * 2); j <= i + (i * 2); j++)
+                                                                                Estado :
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
                                                                                 {
                                                                                     @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 2))
                                                                                     {
@@ -182,10 +202,8 @@
                                     </div>
                                     <br>
                                 }
-                                A
                                 <!-- Agregar los demas pedidos -->
-                                
-                                <br>
+
                             </th>
 
                             </tbody>

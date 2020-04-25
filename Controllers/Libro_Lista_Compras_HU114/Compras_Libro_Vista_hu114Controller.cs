@@ -98,15 +98,14 @@ namespace Cocoteca.Controllers.Libro_Lista_Compras_HU114
                                     }
                                 }
 
-                                if (Compras.Idusuario == Usuario.Idusuario && Compras.Idcompra == Concepto.Idcompra && Concepto.Idcompra == id)
-                                {
+                           
                                     ListaResultados.Insert(14, Convert.ToString(Compras.PrecioTotal));
 
                                     ListaResultados.Insert(15, Convert.ToString(Compras.PrecioTotal));
                                     if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3 <= hoy.DayOfYear)
 
                                     {
-                                        estado = "Entregado";
+                                        estado = "Realizado";
 
                                     }
                                     else if (Compras.Pagado == true)
@@ -124,7 +123,7 @@ namespace Cocoteca.Controllers.Libro_Lista_Compras_HU114
 
 
 
-                                }
+                                
 
                             }
                         }
