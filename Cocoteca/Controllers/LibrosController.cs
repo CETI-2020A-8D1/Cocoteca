@@ -35,7 +35,7 @@ namespace Cocoteca.Controllers
                 paises = JsonConvert.DeserializeObject<List<CatPaises>>(result);
             }
 
-            res = await cliente.GetAsync("api/CatEditorial");
+            res = await cliente.GetAsync("api/Editorial");
             if (res.IsSuccessStatusCode)
             {
                 string result = res.Content.ReadAsStringAsync().Result;
@@ -66,13 +66,7 @@ namespace Cocoteca.Controllers
             HttpResponseMessage res;
             if (ModelState.IsValid)
             {
-
-                var myContent = JsonConvert.SerializeObject(libro);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-                var byteContent = new ByteArrayContent(buffer);
-
                 var resultado = await cliente.PostAsJsonAsync<MtoCatLibros>("api/MtoCatLibros", libro);
-
             }
             return View();
         }
