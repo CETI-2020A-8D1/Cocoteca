@@ -66,7 +66,13 @@ namespace Cocoteca.Controllers
             HttpResponseMessage res;
             if (ModelState.IsValid)
             {
-                var resultado = await cliente.PostAsJsonAsync<MtoCatLibros>("api/MtoCatLibros",libro);
+
+                var myContent = JsonConvert.SerializeObject(libro);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+
+                var resultado = await cliente.PostAsJsonAsync<MtoCatLibros>("api/MtoCatLibros", libro);
+
             }
             return View();
         }
