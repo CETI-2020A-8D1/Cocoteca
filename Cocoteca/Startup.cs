@@ -49,7 +49,7 @@ namespace Cocoteca
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequiereRolCliente",
-                     policy => policy.RequireRole("Almacenista", "Admin", "Super Admin"));
+                     policy => policy.RequireRole("Cliente", "Admin", "Super Admin"));
             });
 
             services.AddAuthorization(options =>
@@ -161,7 +161,7 @@ namespace Cocoteca
                     var resul = await EnviarDatosCliente.CrearUsuario(
                     new Usuario()
                     {
-                        IDidentity = _user.Id,
+                        IDidentity = poweruser.Id,
                         Nombre = Configuration["SAdm:Nombre"],
                         Apellido = Configuration["SAdm:Apellido"]
                     });
