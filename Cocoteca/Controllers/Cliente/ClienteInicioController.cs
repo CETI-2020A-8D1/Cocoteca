@@ -50,70 +50,101 @@ namespace Cocoteca.Controllers.Cliente
             return View();
         }
 
-        public async Task<IActionResult> GenerarCarritoAsync(int id)
+        public async Task<IActionResult> GenerarCarritoAsync(int id, int ?idusuario)
         {
             HttpClient cliente = _api.Initial();
-            try
+            bool yaTieneCarrito = false;
+            if (idusuario!=null)
             {
-                List<Cocoteca.Models.TraCompras> comprasCliente = null;
-                HttpResponseMessage datos = null;
-                HttpResponseMessage traconceptocompra = null;
-
-                datos = await cliente.GetAsync("api/TraCompras/1");
-                if (datos.IsSuccessStatusCode)
+                try
                 {
-                    string resultado1 = datos.Content.ReadAsStringAsync().Result;
-                    comprasCliente = JsonConvert.DeserializeObject<List<Cocoteca.Models.TraCompras>>(resultado1);
+                    List<TraCompras> comprasCliente = null;
+                    MtoCatLibros libroSeleccionado = null;
+                    HttpResponseMessage datos = null;
+                    HttpResponseMessage traconceptocompra = null;
+                    HttpResponseMessage tracompra = null;
+                    HttpResponseMessage libro = null;
 
-                    foreach (var compra in comprasCliente)
-                    {
-                        if (!compra.Pagado)
-                        {
-                            int idParaTraCompra = compra.Idcompra;
-                            TraConceptoCompra añadirLibro = new TraConceptoCompra();
-                            añadirLibro.TraCompras = 0;
-                            añadirLibro.Idcompra = idParaTraCompra;
-                            añadirLibro.Idlibro = id;
-                            añadirLibro.Cantidad = 1;
-                            traconceptocompra = await cliente.PostAsJsonAsync("api/TraConceptoCompras", añadirLibro);
-                            //"api/TraConceptoCompras""
-                        }
-                    }
-                }
-                /*
-                HttpResponseMessage res = null;
-                HttpResponseMessage datos = null;
-                Cocoteca.Models.MtoCatCliente clienteActual = null;
-                List<Cocoteca.Models.TraCompras> comprasCliente = null;
-
-                res = await cliente.GetAsync("api/MtoCatClientes/1");//Aqui hacemos un get de mtocatcliente para acceder a sus datos
-                if (res.IsSuccessStatusCode)
-                {
-                    string resultado = res.Content.ReadAsStringAsync().Result;
-                    clienteActual = JsonConvert.DeserializeObject<Cocoteca.Models.MtoCatCliente>(resultado);
-                    datos = await cliente.GetAsync("api/TraCompras/1");
+                    datos = await cliente.GetAsync("api/TraCompras");
                     if (datos.IsSuccessStatusCode)
                     {
-                        string resultado1 = res.Content.ReadAsStringAsync().Result;
-                        comprasCliente = JsonConvert.DeserializeObject<List<Cocoteca.Models.TraCompras>>(resultado1);
-                    }
-                    foreach(var compra in comprasCliente)
-                    {
-                        if(!compra.Pagado)
+                        string resultado1 = datos.Content.ReadAsStringAsync().Result;
+                        comprasCliente = JsonConvert.DeserializeObject<List<TraCompras>>(resultado1);
+                        //comprasCliente = JsonConvert.DeserializeObject<List<Cocoteca.Models.TraCompras>>(resultado1);
+
+                        foreach (var compra in comprasCliente)
                         {
-                            _ = await cliente.PutAsJsonAsync("api/TraCompras/" + compra, compra);
+                            if(compra.Idusuario == idusuario) {
+                                if (!compra.Pagado)
+                                {
+                                    int idParaTraCompra = compra.Idcompra;
+                                    TraConceptoCompra añadirLibro = new TraConceptoCompra();
+                                    añadirLibro.Idcompra = idParaTraCompra;
+                                    añadirLibro.Idlibro = id;
+                                    añadirLibro.Cantidad = 1;
+                                    traconceptocompra = await cliente.PostAsJsonAsync("api/TraConceptoCompra/", añadirLibro);
+                                    //"api/TraConceptoCompras""
+                                    yaTieneCarrito = true;
+                                }
+                            }
+                        }
+                        if (!yaTieneCarrito)
+                        {
+                            TraCompras nuevoCarrito = new TraCompras();
+                            nuevoCarrito.Idusuario = (int)idusuario;
+                            nuevoCarrito.Pagado = false;
+                            nuevoCarrito.FechaCompra = DateTime.Now;
+                            libro = await cliente.GetAsync("api/MtoCatLibros/" + id);
+                            decimal costolibro = 0;
+                            if (libro.IsSuccessStatusCode)
+                            {
+                                string libro1 = libro.Content.ReadAsStringAsync().Result;
+                                libroSeleccionado = JsonConvert.DeserializeObject<MtoCatLibros>(libro1);
+                                costolibro = libroSeleccionado.Precio;
+                                nuevoCarrito.PrecioTotal = costolibro;
+                                tracompra = await cliente.PostAsJsonAsync("api/TraCompras/", nuevoCarrito);
+                                if (tracompra.IsSuccessStatusCode)
+                                {
+                                    datos = await cliente.GetAsync("api/TraCompras");
+                                    if (datos.IsSuccessStatusCode)
+                                    {
+                                        string verificar = datos.Content.ReadAsStringAsync().Result;
+                                        comprasCliente = JsonConvert.DeserializeObject<List<TraCompras>>(verificar);
+                                        foreach (var compra in comprasCliente)
+                                        {
+                                            if (compra.Idusuario == idusuario)
+                                            {
+                                                if (!compra.Pagado)
+                                                {
+                                                    int idParaTraCompra = compra.Idcompra;
+                                                    TraConceptoCompra añadirLibro = new TraConceptoCompra();
+                                                    añadirLibro.Idcompra = idParaTraCompra;
+                                                    añadirLibro.Idlibro = id;
+                                                    añadirLibro.Cantidad = 1;
+                                                    traconceptocompra = await cliente.PostAsJsonAsync("api/TraConceptoCompra/", añadirLibro);
+                                                    //"api/TraConceptoCompras""
+                                                    yaTieneCarrito = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
-                }  
-                string result = res.Content.ReadAsStringAsync().Result;
-                HttpResponseMessage datos = await cliente.GetAsync("api/TraCompras/" + id);
-                */
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+                return RedirectToAction("Index");
             }
-            catch (Exception e)
+            else
             {
-                throw new Exception(e.Message);
+                return Redirect("~/Error/Error");
             }
-            return View();
+            
         }
     }
 }

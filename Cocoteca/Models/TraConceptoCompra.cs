@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cocoteca.Models
 {
@@ -16,3 +14,4 @@ namespace Cocoteca.Models
         public virtual MtoCatLibros IdlibroNavigation { get; set; }
     }
 }
+
