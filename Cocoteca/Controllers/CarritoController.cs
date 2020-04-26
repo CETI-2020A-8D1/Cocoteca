@@ -87,9 +87,9 @@ namespace Cocoteca.Controllers
                     }
                 }
                 ViewData["carritoId"] = carrito.Idcompra;
-                ViewData["clienteId"] = carrito.Idcliente;
+                ViewData["clienteId"] = carrito.Idusuario;
                 idCarrito = carrito.Idcompra;
-                idCliente = carrito.Idcliente;
+                idCliente = carrito.Idusuario;
                 if (siHayCarrito)
                 {
                     res = await cliente.GetAsync("api/TraConceptoCompras/" + carrito.Idcompra);

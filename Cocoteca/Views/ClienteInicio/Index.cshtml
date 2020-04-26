@@ -61,7 +61,7 @@
                                             <h5 class="card-text">$ @cat.mtoCatLibros[i].precio cocoins</h5>
                                             <h5 class="card-text">ID: @cat.mtoCatLibros[i].idlibro</h5>
                                             <a class="btn btn-comprar" href="#">Comprar</a>
-                                            <a class="btn btn-comprar" href="#">Añadir al carrito</a>
+                                            <button class="btn btn-comprar"><a asp-controller="ClienteInicio" asp-action="GenerarCarrito" asp-route-id="@cat.mtoCatLibros[i].idlibro" asp-route-idusuario="1">Agregar a Carrito</a></button>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                             <h5 class="card-text">$ @cat.mtoCatLibros[i].precio cocoins </h5>
                                             <h5 class="card-text">ID: @cat.mtoCatLibros[i].idlibro</h5>
                                             <a class="btn btn-comprar" href="#">Comprar</a>
-                                            <a class="btn btn-comprar" href="#">Añadir al carrito</a>
+                                            <button class="btn btn-comprar"><a asp-controller="ClienteInicio" asp-action="GenerarCarrito" asp-route-id="@cat.mtoCatLibros[i].idlibro" asp-route-idusuario="1">Agregar a Carrito</a></button>
                                         </div>
                                     </div>
                                 </div>
