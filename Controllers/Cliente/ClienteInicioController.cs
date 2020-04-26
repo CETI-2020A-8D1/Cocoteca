@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Cocoteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Cocoteca.Models;
 
 namespace Cocoteca.Controllers
 {
-    public class HomeController : Controller
+    public class ClienteInicioController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ClienteInicioController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ClienteInicioController(ILogger<ClienteInicioController> logger)
         {
             _logger = logger;
         }
@@ -23,19 +24,30 @@ namespace Cocoteca.Controllers
             try
             {
                 ViewBag.Categorias = ObtenerDatosCliente.ListaCategorias();
-                
+                ViewBag.Carrusel = ObtenerDatosCliente.Inicio();
             }
             catch (Exception e)
             {
-                return View();
+                return Redirect("~/Error/Error");
             }
 
 
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult GridLibros(int id)
         {
+            try
+            {
+                ViewBag.Categorias = ObtenerDatosCliente.ListaCategorias();
+                ViewBag.Libros = ObtenerDatosCliente.ListaLibros(id);
+                ViewBag.Categoria = ObtenerDatosCliente.Categoria(id);
+            }
+            catch (Exception e)
+            {
+                return Redirect("~/Error/Error");
+            }
+            
             return View();
         }
 
@@ -44,5 +56,6 @@ namespace Cocoteca.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
