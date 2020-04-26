@@ -1,24 +1,15 @@
-﻿
-@{
-    ViewData["Title"] = "Inicio";
+﻿@{
+    ViewData["Title"] = "Carrito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using Cocoteca.Models.Cliente.Equipo1;
+@model Cocoteca.Models.Busqueda
 <main>
 
     @{ int contador = 1;}
-    @foreach (Inicio cat in ViewBag.Carrusel)
+    @foreach (var bus in Model.libros)
     {
 
         <div class="container my-4">
-            <h4 class="col-md-4">
-                @cat.nombre
-                <span>
-                    <h6>
-                        <a asp-controller="ClienteInicio" asp-action="GridLibros"
-                           asp-route-id="@cat.idcategoria">  Ver más...</a>
-                    </h6>
-                </span>
-            </h4>
             <!--Carousel Wrapper-->
             <div id="carousel-@contador" class="carousel slide" data-ride="carousel">
 
@@ -49,17 +40,19 @@
                         <div class="row">
                             @for (int i = 0; i < 3; i++)
                             {
-
+                                @if (Model.libros.Count - 1 < i)
+                                {
+                                    break;
+                                }
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <img class="card-img-top" src="@cat.mtoCatLibros[i].imagen"
-                                             alt="@cat.mtoCatLibros[i].titulo">
+                                        <img class="card-img-top" src="@bus.Imagen"
+                                             alt="@bus.Titulo">
                                         <div class="card-body">
-                                            <h4 class="card-title">@cat.mtoCatLibros[i].titulo</h4>
-                                            <h5 class="card-text">@cat.mtoCatLibros[i].autor</h5>
+                                            <h4 class="card-title">@bus.Titulo</h4>
+                                            <h5 class="card-text">@bus.Autor</h5>
                                             <h5 class="card-text">Precio: </h5>
-                                            <h5 class="card-text">$ @cat.mtoCatLibros[i].precio cocoins</h5>
-                                            <h5 class="card-text">ID: @cat.mtoCatLibros[i].idlibro</h5>
+                                            <h5 class="card-text">$ @bus.Precio cocoins</h5>
                                             <a class="btn btn-comprar" href="#">Comprar</a>
                                             <a class="btn btn-comprar" href="#">Añadir al carrito</a>
                                         </div>
@@ -75,16 +68,19 @@
                         <div class="row">
                             @for (int i = 3; i < 5; i++)
                             {
+                                @if (Model.libros.Count - 1 < i)
+                                {
+                                    break;
+                                }
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <img class="card-img-top" src="@cat.mtoCatLibros[i].imagen"
-                                             alt="@cat.mtoCatLibros[i].titulo">
+                                        <img class="card-img-top" src="@bus.Imagen"
+                                             alt="@bus.Titulo">
                                         <div class="card-body">
-                                            <h4 class="card-title">@cat.mtoCatLibros[i].titulo</h4>
-                                            <h5 class="card-text">@cat.mtoCatLibros[i].autor</h5>
+                                            <h4 class="card-title">@bus.Titulo</h4>
+                                            <h5 class="card-text">@bus.Autor</h5>
                                             <h5 class="card-text">Precio: </h5>
-                                            <h5 class="card-text">$ @cat.mtoCatLibros[i].precio cocoins </h5>
-                                            <h5 class="card-text">ID: @cat.mtoCatLibros[i].idlibro</h5>
+                                            <h5 class="card-text">$ @bus.Precio cocoins </h5>
                                             <a class="btn btn-comprar" href="#">Comprar</a>
                                             <a class="btn btn-comprar" href="#">Añadir al carrito</a>
                                         </div>
