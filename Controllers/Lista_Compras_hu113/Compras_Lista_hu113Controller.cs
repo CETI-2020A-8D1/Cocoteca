@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CocontroladorAPI.Models;
@@ -11,45 +10,46 @@ namespace Cocoteca.Controllers.Lista_Compras_hu113
 {
     public class Compras_Lista_hu113Controller : Controller
     {
-        public async Task<IActionResult> ListaCompras_Async()
+        public async Task<IActionResult> ListaCompras_Async(int id)
         {
             int contador = 0;
             DateTime hoy = DateTime.Today;
-            String estado = null;
             var httpClient = new HttpClient();
             var json_Libros = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatLibros");
             var json_TraCompras = await httpClient.GetStringAsync("https://localhost:44341/api/TraCompras");
             var json_TraConceptoCompra = await httpClient.GetStringAsync("https://localhost:44341/api/TraConceptoCompra");
-            var json_usuario = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatUsuarios");
-
+            var json_Usuario = await httpClient.GetStringAsync("https://localhost:44341/api/MtoCatUsuarios");
 
 
             var LibrosLista = JsonConvert.DeserializeObject<List<MtoCatLibros>>(json_Libros);
             var TraCompras = JsonConvert.DeserializeObject<List<TraCompras>>(json_TraCompras);
             var TraConceptoCompra = JsonConvert.DeserializeObject<List<TraConceptoCompra>>(json_TraConceptoCompra);
-            var MtoCatUsuarios = JsonConvert.DeserializeObject<List<MtoCatUsuarios>>(json_usuario);
+            var UsuariosLista = JsonConvert.DeserializeObject<List<MtoCatUsuarios>>(json_Usuario);
 
             List<string> ListaResultados = new List<string>();
-            for (int i = 0; i < 20; i++)
-            {
-
-                foreach (var Usuario in MtoCatUsuarios)
+                for (int i = 0; i < 30; i++)
                 {
-
+                foreach (var usuario in UsuariosLista)
+                {
                     foreach (var Compras in TraCompras)
                     {
 
+                   
+
                         foreach (var Concepto in TraConceptoCompra)
                         {
-                            if (Concepto.Idcompra.Equals(Compras.Idcompra) && Compras.Idcompra.Equals(i) && Concepto.Idcompra != contador)
-                            {
-                                contador = Concepto.Idcompra;
+                            
 
-                                ListaResultados.Insert(0, Convert.ToString(Compras.Idcompra));//folio
-
-
-                                if (Compras.Idcompra == Concepto.Idcompra)
+                                if (Concepto.Idcompra==Compras.Idcompra && Compras.Idcompra==i 
+                                && Concepto.Idcompra != contador && Compras.Idusuario == id)
                                 {
+                                    contador = Concepto.Idcompra;
+
+                                    ListaResultados.Insert(0, Convert.ToString(Compras.Idcompra));//folio
+                           
+
+
+                                    string estado;
                                     if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3 <= hoy.DayOfYear)
 
                                     {
@@ -80,13 +80,13 @@ namespace Cocoteca.Controllers.Lista_Compras_hu113
                                     ListaResultados.Insert(4, Convert.ToString(Compras.PrecioTotal));
                                     ListaResultados.Insert(5, Convert.ToString(Concepto.Cantidad));
 
-
-                                }
                             }
+                            
+
                         }
                     }
-                }
 
+                }
             }
 
             return View(ListaResultados);

@@ -87,6 +87,10 @@
 
 
                                 @{ int Longitud = Model.Count;
+                                    String urlError= "https://de10.com.mx/sites/default/files/styles/galeria_photo_760x508/public/2020/03/17/memes_coronavirus_mexico.jpg?itok=JATwW9QJ";
+
+
+
                                 }
 
 
@@ -126,14 +130,26 @@
                                                                 <div class="media align-items-lg-center flex-column flex-lg-row p-3">
 
                                                                     <div class="d-inline-block">
-                                                                        <img src=@for (int j = i + (i * 5); j <= i + (i * 5); j++)
-                                                                                {
+                                                                        <img src=
+                                                                             @{ 
+                                                                                 if (Longitud == 0)
+                                                                                 {
+                                                                                     @urlError;
+                                                                                 }
+                                                                                 else
+                                                                                 {
+
+
+                                                                             @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                             {
                                                                                     @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 3))
                                                                                     {
                                                                                         @Libroslista
                                                                                     }
-                                                                                }
-                                                                             height="180px" width="120px">
+                                                                             }
+                                                                                     }
+                                                                                 }
+                                                                                 height="180px" width="120px">
                                                                     </div>
                                                                     <div class="ml-3 d-inline-block align-top">
                                                                         <div class="media-body order-2 order-lg-1">

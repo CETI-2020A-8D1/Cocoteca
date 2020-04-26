@@ -46,9 +46,8 @@ namespace Cocoteca.Controllers.Libro_Lista_Compras_HU114
                 foreach (var Compras in TraCompras)
                 {
                     foreach (var Concepto in TraConceptoCompra)
-                {
-                    foreach (var Usuario in MtoCatUsuarios)
-                {
+                    {
+            
                   
                     
                         
@@ -101,7 +100,6 @@ namespace Cocoteca.Controllers.Libro_Lista_Compras_HU114
                            
                                     ListaResultados.Insert(14, Convert.ToString(Compras.PrecioTotal));
 
-                                    ListaResultados.Insert(15, Convert.ToString(Compras.PrecioTotal));
                                     if (Compras.Pagado == true && Compras.FechaCompra.Value.DayOfYear + 3 <= hoy.DayOfYear)
 
                                     {
@@ -116,16 +114,15 @@ namespace Cocoteca.Controllers.Libro_Lista_Compras_HU114
                                     {
                                         estado = "Procesando";
                                     }
-                                    ListaResultados.Insert(16, Convert.ToString(Compras.FechaCompra));
-                                    ListaResultados.Insert(17, estado);
-                                    ListaResultados.Insert(18, Convert.ToString(Compras.Idcompra));//folio
+                                    ListaResultados.Insert(15, Convert.ToString(Compras.FechaCompra));
+                                    ListaResultados.Insert(16, estado);
 
 
 
 
                                 
 
-                            }
+                            
                         }
                     }
                 }
