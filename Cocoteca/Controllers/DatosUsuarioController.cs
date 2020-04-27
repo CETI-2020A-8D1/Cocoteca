@@ -26,7 +26,7 @@ namespace Cocoteca.Controllers
         }
         public IActionResult Details(int id)
         {
-            id = 1;
+            //id = 1;
             try
             {
                 ViewBag.Users = ObtenerDatosUsuarios.Usuario(id);

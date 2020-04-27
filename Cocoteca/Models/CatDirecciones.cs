@@ -20,7 +20,7 @@ namespace Cocoteca.Models
 
         public override string ToString() 
         {
-            return calle + noInterior + " interior " + noInterior + "\n" + "Codigo postal " + codigoPostal;
+            return calle + " " + noExterior + " interior " + noInterior + "\n" + " Codigo postal " + codigoPostal;
         }
     }
 }
