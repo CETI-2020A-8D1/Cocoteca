@@ -10,7 +10,7 @@ namespace Cocoteca.Controllers
 {
     public class DatosUsuarioController : Controller
     {
-        public IActionResult ListaUsuarios()
+        public IActionResult Index()
         {
             try
             {

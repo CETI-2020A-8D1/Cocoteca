@@ -395,5 +395,5 @@ C:\Users\gerardo\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Coco
 C:\Users\gerardo\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.pdb
 C:\Users\gerardo\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.genruntimeconfig.cache
 C:\Users\gerardo\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Home\View.cshtml.g.cs
-C:\Users\gerardo\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\DatosUsuario\ListaUsuarios.cshtml.g.cs
 C:\Users\gerardo\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\DatosUsuario\Details.cshtml.g.cs
+C:\Users\gerardo\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\DatosUsuario\Index.cshtml.g.cs
