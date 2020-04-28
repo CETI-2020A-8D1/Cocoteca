@@ -40,31 +40,5 @@ namespace Cocoteca.Helper
                 throw e;
             }
         }
-
-        /// <summary>
-        /// Metodo que busca y retorna un usuario por su id Identity
-        /// </summary>
-        /// <param name="id">Id Identity que debe tener el usuario a retornar</param>
-        /// <returns>Usuario que tenga ese id Identity</returns>
-        public static Usuario UsuariosIdentity(string id)
-        {
-            Usuario usuario;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/MtoCatUsuarios/Identity/{id}");
-            try
-            {
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    var json = reader.ReadToEnd();
-                    usuario = JsonConvert.DeserializeObject<Usuario>(json);
-                }
-                return usuario;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
     }
 }
