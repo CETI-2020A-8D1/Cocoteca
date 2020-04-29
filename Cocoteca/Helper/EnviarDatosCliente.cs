@@ -11,18 +11,15 @@ namespace Cocoteca.Helper
     {
         private static readonly HttpClient client = new HttpClient();
 
-        private static bool correr { get; set; } = true;
-
         static async Task RunAsync()
         {
-            if (correr)
+            if (client.BaseAddress == null)
             {
                 // Update port # in the following line.
                 client.BaseAddress = new Uri(CocontroladorAPI.Initial());
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
-                correr = false;
             }
         }
 

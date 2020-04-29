@@ -21,7 +21,7 @@ namespace Cocoteca.Controllers
         {
             try
             {
-                ViewBag.Categorias = ObtenerDatosCliente.ListaCategorias();
+                ViewBag.Categorias = ObtenerDatosCliente.ListaCategorias().Result;
             }
             catch (Exception e)
             {

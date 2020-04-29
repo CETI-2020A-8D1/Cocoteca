@@ -35,7 +35,7 @@ namespace Cocoteca.Controllers.Cliente
         {
             try
             {
-                ViewBag.Carrusel = ObtenerDatosCliente.Inicio();
+                ViewBag.Carrusel = ObtenerDatosCliente.Inicio().Result;
             }
             catch (Exception e)
             {
@@ -59,8 +59,8 @@ namespace Cocoteca.Controllers.Cliente
         {
             try
             {
-                ViewBag.Libros = ObtenerDatosCliente.ListaLibros(id);
-                ViewBag.Categoria = ObtenerDatosCliente.Categoria(id);
+                ViewBag.Libros = ObtenerDatosCliente.ListaLibros(id).Result;
+                ViewBag.Categoria = ObtenerDatosCliente.Categoria(id).Result;
             }
             catch (Exception e)
             {

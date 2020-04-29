@@ -25,19 +25,19 @@ namespace Cocoteca.Areas.Identity.Pages.Account
     [Authorize(Policy = "RequiereRolAdmin")]
     public class RegisterFromAdminModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManger;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterFromAdminModel(
+            RoleManager<IdentityRole> roleManager,
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
+            _roleManger = roleManager;
             _userManager = userManager;
-            _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -108,7 +108,6 @@ namespace Cocoteca.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             await LoadAsync();
         }
 
@@ -135,7 +134,11 @@ namespace Cocoteca.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (!await _roleManger.RoleExistsAsync(UsuarioSeleccionado) || UsuarioSeleccionado.Equals("Super Admin"))
+            {
+                StatusMessage = "Hubo un error. El usuario no se ha creado";
+                return RedirectToPage();
+            }
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
@@ -147,10 +150,10 @@ namespace Cocoteca.Areas.Identity.Pages.Account
                     var _user = await _userManager.FindByEmailAsync(Input.Email);
                     var userData = new Usuario { IDidentity = _user.Id, Nombre = Input.Nombre, Apellido = Input.Apellido };
                     var resultD = await EnviarDatosCliente.CrearUsuario(userData);
-                    await _userManager.AddToRoleAsync(_user, UsuarioSeleccionado);
 
                     if (resultD.IsSuccessStatusCode)
                     {
+                            await _userManager.AddToRoleAsync(_user, UsuarioSeleccionado);
                         _logger.LogInformation("User created a new account with password.");
 
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

@@ -50,7 +50,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
         {
             try
             {
-                var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user));
+                var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user)).Result;
 
                 Input = new InputModel
                 {
@@ -104,14 +104,14 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
                 }
                 try
                 {
-                    var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user));
+                    var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user)).Result;
                 } catch (Exception e)
                 {
                     return NotFound($"No se puede dar con el usuario con el ID '{_userManager.GetUserId(User)}'.");
                 }
                     if (!await datosIgualAsync(user))
                     {
-                        var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user));
+                        var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user)).Result;
                         var respuesta = await EnviarDatosCliente.ActualizarUsuario(
                             new Usuario()
                             {
@@ -139,7 +139,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
 
         private async Task<bool> datosIgualAsync(IdentityUser user)
         {
-            var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user));
+            var datos = ObtenerDatosCliente.Usuario(await _userManager.GetUserIdAsync(user)).Result;
             if (datos.IDidentity == await _userManager.GetUserIdAsync(user)
                 && datos.Nombre.Equals(Input.Nombre)
                 && datos.Apellido.Equals(Input.Apellido)

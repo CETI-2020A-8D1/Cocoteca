@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "ListadoUsuarios";
+    ViewData["Title"] = "Lista de Usuarios" + ViewData["Rol"];
 }
 @using Cocoteca.Models.Cliente.Equipo1;
 @using Microsoft.AspNetCore.Identity
 <main>
     <section class="jumbotron bg-white text-center mb-0">
-        <h1 class="display-4">Usuarios</h1>
+        <h1 class="display-4">Usuarios @ViewData["Rol"]</h1>
     </section>
 
     <div class="py-2 bg-light">

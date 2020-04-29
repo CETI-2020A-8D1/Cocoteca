@@ -400,9 +400,6 @@ C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\bin\Debug\netcoreapp3.1\Syste
 C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
 C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\bin\Debug\netcoreapp3.1\Json.Net.dll
-C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.csproj.CoreCompileInputs.cache
-C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Direccion.cshtml.g.cs
 C:\Users\DELL\source\repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.csprojAssemblyReference.cache
 C:\Users\DELL\source\repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.RazorAssemblyInfo.cache
@@ -617,3 +614,14 @@ C:\Users\DELL\source\repos\Cocoteca\Cocoteca\bin\Debug\netcoreapp3.1\Microsoft.E
 C:\Users\DELL\source\repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Equipo_Tripas\Lista_Compras.cshtml.g.cs
 C:\Users\DELL\source\repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Equipo_Tripas\Lista_Libros_Detallada.cshtml.g.cs
 C:\Users\DELL\source\repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Equipo_Tripas\Libro_Vista.cshtml.g.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\RegisterFromAdmin.cshtml.g.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ListaUsuarios.cshtml.g.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Equipo_Tripas\Libro_Vista.cshtml.g.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Equipo_Tripas\Lista_Compras.cshtml.g.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Equipo_Tripas\Lista_Libros_Detallada.cshtml.g.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\Tarjeta\Tarjeta.cshtml.g.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.csproj.CoreCompileInputs.cache
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Judith\Documents\GitHub\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.MvcApplicationPartsAssemblyInfo.cache

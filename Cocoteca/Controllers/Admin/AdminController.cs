@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using Cocoteca.Helper;
 using Cocoteca.Models.Cliente.Equipo1;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cocoteca.Controllers.Admin
 {
@@ -43,7 +44,8 @@ namespace Cocoteca.Controllers.Admin
         /// Metodo para recibir la informacion de todos los usuarios que estan en la base de datos
         /// </summary>
         /// <returns>La accion resultante al obtener esos usuarios</returns>
-        public IActionResult ListaUsuarios()
+        [Route("Admin/ListaUsuarios")]
+        public async Task<IActionResult> ListaUsuariosAsync()
         {
             try
             {
@@ -51,19 +53,61 @@ namespace Cocoteca.Controllers.Admin
                 List<AuxUsuario> AuxUsuarios = new List<AuxUsuario>();
                 foreach (Usuario usuario in usuarios)
                 {
-                    IdentityUser user = _userManager.Users.Where(id => id.Id == usuario.IDidentity).First();
-                    if (_userManager.IsInRoleAsync(user, "Cliente").Result)
+                    IdentityUser user =await _userManager.Users.Where(id => id.Id == usuario.IDidentity).FirstOrDefaultAsync();
+                    if(user != null)
                     {
-                        AuxUsuarios.Add(new AuxUsuario("Cliente", user.Email, usuario.Nombre, usuario.Apellido));
-                    } else if (_userManager.IsInRoleAsync(user, "Almacenista").Result)
-                    {
-                        AuxUsuarios.Add(new AuxUsuario("Almacenista", user.Email, usuario.Nombre, usuario.Apellido));
-                    } else if (_userManager.IsInRoleAsync(user, "Admin").Result)
-                    {
-                        AuxUsuarios.Add(new AuxUsuario("Admin", user.Email, usuario.Nombre, usuario.Apellido));
+                        if (_userManager.IsInRoleAsync(user, "Cliente").Result)
+                        {
+                            AuxUsuarios.Add(new AuxUsuario("Cliente", user.Email, usuario.Nombre, usuario.Apellido));
+                        }
+                        else if (_userManager.IsInRoleAsync(user, "Almacenista").Result)
+                        {
+                            AuxUsuarios.Add(new AuxUsuario("Almacenista", user.Email, usuario.Nombre, usuario.Apellido));
+                        }
+                        else if (_userManager.IsInRoleAsync(user, "Admin").Result)
+                        {
+                            AuxUsuarios.Add(new AuxUsuario("Admin", user.Email, usuario.Nombre, usuario.Apellido));
+                        }
+                        else if (_userManager.IsInRoleAsync(user, "Super Admin").Result)
+                        {
+                            AuxUsuarios.Add(new AuxUsuario("Super Admin", user.Email, usuario.Nombre, usuario.Apellido));
+                        }
                     }
                 }
                 ViewBag.Usuarios = AuxUsuarios;
+            }
+            catch (Exception e)
+            {
+                return Redirect("~/Error/Error");
+            }
+
+            return View();
+        }
+
+        [Route("Admin/ListaUsuarios/{rol}")]
+        public async Task<IActionResult> ListaUsuariosAsync(string rol)
+        {
+            try
+            {
+                if(await _roleManger.RoleExistsAsync(rol)) { 
+                List<Usuario> usuarios = ObtenerDatosAdmin.Usuarios();
+                List<AuxUsuario> AuxUsuarios = new List<AuxUsuario>();
+                foreach (Usuario usuario in usuarios)
+                {
+                    IdentityUser user = _userManager.Users.Where(id => id.Id == usuario.IDidentity).FirstOrDefault();
+                    if (user != null)
+                    {
+                        if (_userManager.IsInRoleAsync(user, rol).Result)
+                        {
+                            AuxUsuarios.Add(new AuxUsuario(rol, user.Email, usuario.Nombre, usuario.Apellido));
+                        }
+                    }
+                }
+                    ViewData["Rol"] = rol;
+                    ViewBag.Usuarios = AuxUsuarios;
+                }
+                else
+                    return Redirect("~/Error/Error");
             }
             catch (Exception e)
             {

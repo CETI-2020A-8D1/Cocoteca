@@ -80,9 +80,9 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
         {
             try
             {
-                var datos = ObtenerDatosCliente.Direccion(await _userManager.GetUserIdAsync(user));
-                var edo = ObtenerDatosCliente.Estado(datos.idmunicipio);
-                var mun = ObtenerDatosCliente.Municipio(datos.idmunicipio);
+                var datos = ObtenerDatosCliente.Direccion(await _userManager.GetUserIdAsync(user)).Result;
+                var edo = ObtenerDatosCliente.Estado(datos.idmunicipio).Result;
+                var mun = ObtenerDatosCliente.Municipio(datos.idmunicipio).Result;
 
                 Input = new InputModel
                 {
@@ -94,13 +94,13 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
                 };
                 IdEstadoSeleccionado = edo.Idestado;
                 IdMunicipioSeleccionado = datos.idmunicipio;
-                Estados = new SelectList(ObtenerDatosCliente.Estados(), nameof(Estado.Idestado), nameof(Estado.Nombre));
-                Municipios = new SelectList(ObtenerDatosCliente.MunicipiosEnEstado(edo.Idestado), nameof(Municipio.Idmunicipio), nameof(Municipio.Nombre));
+                Estados = new SelectList(ObtenerDatosCliente.Estados().Result, nameof(Estado.Idestado), nameof(Estado.Nombre));
+                Municipios = new SelectList(ObtenerDatosCliente.MunicipiosEnEstado(edo.Idestado).Result, nameof(Municipio.Idmunicipio), nameof(Municipio.Nombre));
             }
             catch (Exception e)
             {
                 Input = new InputModel();
-                Estados = new SelectList(ObtenerDatosCliente.Estados(), nameof(Estado.Idestado), nameof(Estado.Nombre), null);
+                Estados = new SelectList(ObtenerDatosCliente.Estados().Result, nameof(Estado.Idestado), nameof(Estado.Nombre), null);
                 SelectListItem vacio = new SelectListItem() { Value = "", Text = "" };
                 List<SelectListItem> vacios = new List<SelectListItem>();
                 vacios.Add(vacio);
@@ -125,7 +125,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
         public JsonResult OnGetMunicipios()
         {
             List<Municipio> municipios;
-            municipios = ObtenerDatosCliente.MunicipiosEnEstado(IdEstadoSeleccionado);
+            municipios = ObtenerDatosCliente.MunicipiosEnEstado(IdEstadoSeleccionado).Result;
             return new JsonResult(municipios);
         }
 
@@ -147,13 +147,13 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
                 }
 
 
-                if (!ObtenerDatosCliente.DireccionExiste(user.Id))
+                if (!ObtenerDatosCliente.DireccionExiste(user.Id).Result)
                 {
                     var respuesta = await EnviarDatosCliente.CrearDireccion(new Direccion()
                     {
                         calle = Input.Calle,
                         codigoPostal = Input.CodigoPostal,
-                        idusuario = ObtenerDatosCliente.Usuario(user.Id).Idusuario,
+                        idusuario = ObtenerDatosCliente.Usuario(user.Id).Result.Idusuario,
                         idmunicipio = IdMunicipioSeleccionado,
                         noExterior = Input.NoExt,
                         noInterior = Input.NoInt
@@ -168,13 +168,13 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
                 {
                     if (!await dirIgualAsync(user))
                     {
-                        var datos = ObtenerDatosCliente.Direccion(await _userManager.GetUserIdAsync(user));
+                        var datos = ObtenerDatosCliente.Direccion(await _userManager.GetUserIdAsync(user)).Result;
                         var respuesta = await EnviarDatosCliente.ActualizarDireccion(
                             new Direccion()
                             {
                                 calle = Input.Calle,
                                 codigoPostal = Input.CodigoPostal,
-                                idusuario = ObtenerDatosCliente.Usuario(user.Id).Idusuario,
+                                idusuario = ObtenerDatosCliente.Usuario(user.Id).Result.Idusuario,
                                 idmunicipio = IdMunicipioSeleccionado,
                                 noExterior = Input.NoExt,
                                 noInterior = Input.NoInt,
@@ -200,7 +200,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
 
         private async Task<bool> dirIgualAsync(IdentityUser user)
         {
-            var datos = ObtenerDatosCliente.Direccion(await _userManager.GetUserIdAsync(user));
+            var datos = ObtenerDatosCliente.Direccion(await _userManager.GetUserIdAsync(user)).Result;
             if (datos.codigoPostal == Input.CodigoPostal
                 && datos.calle.Equals(Input.Calle)
                 && datos.noExterior == Input.NoExt
