@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "ListadoUsuarios";
+}
+@using Cocoteca.Models.Cliente.Equipo1;
+@using Microsoft.AspNetCore.Identity
+<main>
+    <section class="jumbotron bg-white text-center mb-0">
+        <h1 class="display-4">Usuarios</h1>
+    </section>
+
+    <div class="py-2 bg-light">
+        <div class="container py-4" style="background-color:#FFD1BD">
+            @if (ViewBag.Usuarios.Count > 0)
+            {
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (AuxUsuario usuario in ViewBag.Usuarios)
+                        { 
+                            <tr>
+                                <td>@usuario.Rol</td>
+                                <td>@usuario.Email</td>
+                                <td>@usuario.Nombre</td>
+                                <td>@usuario.Apellido</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No hay Usuarios</p>
+            }
+        </div>
+    </div>
+</main>
