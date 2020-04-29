@@ -1,12 +1,8 @@
 ﻿using Cocoteca.Models.Cliente.Equipo1;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cocoteca.Helper
@@ -15,7 +11,7 @@ namespace Cocoteca.Helper
     {
         private static readonly HttpClient client = new HttpClient();
 
-        private static bool correr { get; set;} = true;
+        private static bool correr { get; set; } = true;
 
         static async Task RunAsync()
         {
@@ -29,7 +25,7 @@ namespace Cocoteca.Helper
                 correr = false;
             }
         }
-        
+
         public static async Task<HttpResponseMessage> CrearUsuario(Usuario usuario)
         {
             await RunAsync();

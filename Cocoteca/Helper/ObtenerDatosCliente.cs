@@ -1,14 +1,11 @@
-﻿using Cocoteca.Helper;
-using Cocoteca.Models;
-using Cocoteca.Models.Cliente.Equipo1;
+﻿using Cocoteca.Models.Cliente.Equipo1;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
+using Cocoteca.Helper;
 
 namespace Cocoteca
 {
@@ -112,7 +109,7 @@ namespace Cocoteca
             return municipios;
         }
 
-        public static List<Municipio> MunicipiosEnEstado (int id)
+        public static List<Municipio> MunicipiosEnEstado(int id)
         {
             List<Municipio> municipios;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/MunicipiosEstado/{id}");
