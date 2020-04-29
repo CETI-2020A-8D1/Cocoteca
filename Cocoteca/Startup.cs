@@ -34,12 +34,16 @@ namespace Cocoteca
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            // Identity se añaden usuarios, roles y se le inidica con que contexto se guía.
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+
+            // Políticas que permiten identificar que roles pueden acceder a que controladores.
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequiereRolAlmacenista",
@@ -58,6 +62,8 @@ namespace Cocoteca
                      policy => policy.RequireRole("Admin", "Super Admin"));
             });
 
+
+            // Configura el funcionamiento de identity en la aplicación.
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -117,6 +123,7 @@ namespace Cocoteca
             {
                 endpoints.MapControllerRoute(
                     name: "default",
+                    //Se inicia la aplicación en la acción Index del controlador ClienteInicio
                     pattern: "{controller=ClienteInicio}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
@@ -124,6 +131,15 @@ namespace Cocoteca
             CreateRoles(serviceProvider).Wait();
         }
 
+        /// <summary>
+        /// Crea los roles en la base de datos de identity si es que no existen, y crea al usuario
+        /// Super Admin, si este no fue creado anteriormente, con los datos que obtiene de appsettings.json
+        /// en SAdm, lo asigna como usuario tanto en la BD de identity como en la BD de cocoteca,
+        /// si algo llega a fallar en el registro, se elimina de ambas, de no ser así se le asigna el rol
+        /// de Super Admin.
+        /// </summary>
+        /// <param name="serviceProvider">Define un mecanismo para obtener un proveedor de sopote a otros objetos</param>
+        /// <returns>Una operación asíncrona</returns>
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             //initializing custom roles 

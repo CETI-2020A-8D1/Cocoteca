@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Cocoteca.Models.Cliente.Equipo1
 {
+    /// <summary>
+    /// Modelo que recibe o envía a API Cocoteca de municipio.
+    /// </summary>
     public class Municipio
     {
         public int Idmunicipio { get; set; }

@@ -6,7 +6,10 @@
         <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Perfil</a></li>
         <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Correo</a></li>
         <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Contraseña</a></li>
-        <li class="nav-item"><a class="nav-link @ManageNavPages.DireccionNavClass(ViewContext)" id="direccion" asp-page="./Direccion">Dirección</a></li>
+        @if (User.IsInRole("Cliente") || User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+        {
+            <li class="nav-item"><a class="nav-link @ManageNavPages.DireccionNavClass(ViewContext)" id="direccion" asp-page="./Direccion">Dirección</a></li>
+        }
         @if (hasExternalLogins)
         {
             <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
