@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Cocoteca.Models.Cliente.Equipo1
 {
+    /// <summary>
+    /// Modelo que recibe o envía a API Cocoteca de dirección.
+    /// </summary>
     public class Direccion
     {
         public int iddireccion { get; set; }

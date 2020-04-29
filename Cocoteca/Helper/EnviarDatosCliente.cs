@@ -38,6 +38,18 @@ namespace Cocoteca.Helper
             return response;
         }
 
+        public static async Task<HttpResponseMessage> ActualizarUsuario(Usuario usuario)
+        {
+            await RunAsync();
+            var miContenido = JsonConvert.SerializeObject(usuario);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(miContenido);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = client.PutAsync($"api/MtoCatUsuarios/{usuario.Idusuario}", byteContent).Result;
+            // return URI of the created resource.
+            return response;
+        }
+
         public static async Task<HttpResponseMessage> CrearDireccion(Direccion direccion)
         {
             await RunAsync();

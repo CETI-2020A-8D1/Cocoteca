@@ -13,9 +13,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using Cocoteca.Models.Cliente.Equipo1;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Cocoteca.Helper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cocoteca.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Policy = "RequiereRolCliente")]
     public partial class DireccionModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -42,7 +44,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
-            [DataType(DataType.PostalCode)]
+            [DataType(DataType.CreditCard)]
             [Display(Name = "Codigo Postal")]
             public int CodigoPostal { get; set; }
 
