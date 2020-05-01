@@ -36,30 +36,30 @@
                 <button class="btn btn-search my-2 my-sm-0" type="submit">Ir a almacen</button>
             }
         </ul>
-            
-        
 
-    }
+
+
+     }
 
 }
 else
 {
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Registrate</a>
-        </li>
-    </ul>
+<ul class="navbar-nav">
     <li class="nav-item">
-        <a asp-area="Identity" asp-page="/Account/Login">
-            <div class="box-1">
-                <div class="btn btn-one">
-                    <span><img src="~/usuario.png" style="width:30px; height:30px">Inicia sesi&oacute;n</span>
-                </div>
-            </div>
-        </a>
+        <a class="btn btn-comprar" asp-area="Identity" asp-page="/Account/Register">Registrate</a>
     </li>
-    @*<li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>*@
+</ul>
+<li class="nav-item">
+    <a asp-area="Identity" asp-page="/Account/Login">
+        <div class="box-1">
+            <div class="btn btn-one">
+                <span><img src="~/usuario.png" style="width:30px; height:30px">Inicia sesi&oacute;n</span>
+            </div>
+        </div>
+    </a>
+</li>
+@*<li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>*@
 }
 
