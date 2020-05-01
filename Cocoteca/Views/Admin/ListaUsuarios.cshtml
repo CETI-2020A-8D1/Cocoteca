@@ -4,16 +4,42 @@
 @using Cocoteca.Models.Cliente.Equipo1;
 @using Microsoft.AspNetCore.Identity
 <main>
+    
+        
+        
+    
     <section class="jumbotron bg-white text-center mb-0">
+
+        
         <h1 class="display-4">Usuarios @ViewData["Rol"]</h1>
+
+        
     </section>
 
-    <div class="py-2 bg-light">
-        <div class="container py-4" style="background-color:#FFD1BD">
+    <div class="py-2">
+        
+        <div class="container py-4">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" style="background-color: #FF9060;" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filtrar por rol
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListaUsuarios" asp-route-rol="Super Admin">Super Admin</a>
+                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListaUsuarios" asp-route-rol="Admin">Admin</a>
+                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListaUsuarios" asp-route-rol="Almacenista">Almacenistas</a>
+                    <a class="dropdown-item" asp-controller="Admin" asp-action="ListaUsuarios" asp-route-rol="Cliente">Clientes</a>
+                </div>
+
+                <a class="btn btn-comprar float-right" asp-area="Identity" asp-page="/Account/RegisterFromAdmin">Registro de Usuarios</a>
+            </div>
+            
+               
+            
+            <br />
             @if (ViewBag.Usuarios.Count > 0)
             {
                 <table class="table">
-                    <thead class="thead-dark">
+                    <thead style="background-color: #FF9060;">
                         <tr>
                             <th scope="col">Rol</th>
                             <th scope="col">Correo</th>
@@ -23,7 +49,7 @@
                     </thead>
                     <tbody>
                         @foreach (AuxUsuario usuario in ViewBag.Usuarios)
-                        { 
+                        {
                             <tr>
                                 <td>@usuario.Rol</td>
                                 <td>@usuario.Email</td>

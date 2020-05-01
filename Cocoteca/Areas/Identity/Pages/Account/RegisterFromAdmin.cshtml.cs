@@ -66,7 +66,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account
         /// <summary>
         /// Propiedad que contiene el tipo de usuario en forma de string
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "El campo Tipo Usuario es requerido")]
         [BindProperty]
         [Display(Name = "Tipo Usuario")]
         public string UsuarioSeleccionado { get; set; }
@@ -154,7 +154,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account
                     if (resultD.IsSuccessStatusCode)
                     {
                             await _userManager.AddToRoleAsync(_user, UsuarioSeleccionado);
-                        _logger.LogInformation("User created a new account with password.");
+                        _logger.LogInformation("Se ha creado un nueva cuenta con contraseña.");
 
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
