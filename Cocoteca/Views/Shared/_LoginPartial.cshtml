@@ -4,30 +4,55 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <ul class="navbar-nav">
-        <li class="nav-item" style="padding-left: 0px; padding-right: 0px;">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="margin-left: 0px; margin-right:0px; font-size:14px">¡Hola @User.Identity.Name!</a>
-        </li>
-        <li class="nav-item" style="padding-left: 0px; padding-right: 0px;">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "ClienteInicio", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark" style="padding-left: 0px; padding-right: 0px;">Logout</button>
-            </form>
-        </li>
+    if (User.IsInRole("Almacenista"))
+    {
 
-    </ul>
-    <li class="nav-item"><a class="btn btn-light btn-circle" style="margin: 0px 10px 0px 10px;"><img class="carrito" src="~/carrito.png" alt="carrito" style="width:30px; height:30px"> </a></li>
+    }
+    else
+    {
+        <ul class="navbar-nav">
+            <li class="nav-item" style="padding-left: 0px; padding-right: 0px;">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="margin-left: 0px; margin-right:0px; font-size:14px">¡Hola @User.Identity.Name!</a>
+            </li>
+            <li class="nav-item" style="padding-left: 0px; padding-right: 0px;">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "ClienteInicio", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link btn btn-link text-dark" style="padding-left: 0px; padding-right: 0px;">Logout</button>
+                </form>
+            </li>
+
+        </ul>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="carrito" src="~/carrito.png" alt="carrito" style="width:30px; height:30px">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Ir al carrito</a>
+                    <a class="dropdown-item" asp-controller="Equipo_Tripas" asp-action="Lista_Compras">Lista de pedidos</a>
+                </div>
+            </li>
+            @if (User.IsInRole("Admin"))
+            {
+                <button class="btn btn-search my-2 my-sm-0" type="submit">Ir a almacen</button>
+            }
+        </ul>
+            
+        
+
+    }
+
 }
 else
 {
     <ul class="navbar-nav">
-        <li class="nav-item" >
+        <li class="nav-item">
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Registrate</a>
         </li>
     </ul>
     <li class="nav-item">
         <a asp-area="Identity" asp-page="/Account/Login">
             <div class="box-1">
-                <div class="btn btn-one" >
+                <div class="btn btn-one">
                     <span><img src="~/usuario.png" style="width:30px; height:30px">Inicia sesi&oacute;n</span>
                 </div>
             </div>

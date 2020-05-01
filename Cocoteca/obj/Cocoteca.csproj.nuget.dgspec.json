@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
+    "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
+    "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "projectUniqueName": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
         "projectName": "Cocoteca",
-        "projectPath": "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
-        "packagesPath": "C:\\Users\\Judith\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Judith\\Documents\\GitHub\\Cocoteca\\Cocoteca\\obj\\",
+        "projectPath": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "packagesPath": "C:\\Users\\abrah\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Judith\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\abrah\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
