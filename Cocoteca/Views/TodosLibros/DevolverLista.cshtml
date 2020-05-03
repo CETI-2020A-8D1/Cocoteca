@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "DevolverLista";    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Todos Los Libros</h1>
+<h2>Total de Libros: @ViewBag.Libros.Count</h2>
+Filtrar por Categoría: 
+<form>
+    @foreach (var y in ViewBag.Categorias)
+    {
+        <button name="boton" value="@y.Idcategoria" asp-action="check">@y.Nombre</button>
+    }
+</form>
+<br />
+@foreach (var libro in ViewBag.Libros)
+{
+    <body>
+        <a asp-controller="TodosLibros" asp-action="DevolverLista">@libro.Titulo --- ID de Categoría: @libro.Idcategoria</a>        
+        <br />
+    </body>
+}
+
+
+

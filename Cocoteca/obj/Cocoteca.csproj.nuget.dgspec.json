@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
+    "C:\\Users\\jesus\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
+    "C:\\Users\\jesus\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "projectUniqueName": "C:\\Users\\jesus\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
         "projectName": "Cocoteca",
-        "projectPath": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
-        "packagesPath": "C:\\Users\\abrah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\obj\\",
+        "projectPath": "C:\\Users\\jesus\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "packagesPath": "C:\\Users\\jesus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jesus\\Source\\Repos\\Cocoteca\\Cocoteca\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\abrah\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\jesus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -69,6 +71,10 @@
               "target": "Package",
               "version": "[3.1.3, )"
             },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[3.1.3, )"
@@ -100,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

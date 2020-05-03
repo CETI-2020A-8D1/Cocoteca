@@ -1,6 +1,7 @@
 ﻿using Cocoteca.Helper;
 using Cocoteca.Models;
 using Cocoteca.Models.Cliente.Equipo1;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System;
@@ -10,20 +11,27 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Security;
 using System.Threading.Tasks;
 
 namespace Cocoteca
 {
     public class ObtenerDatosCliente
     {
-        private static readonly HttpClient client = new HttpClient();
+
+        private static HttpClientHandler clientHandler = new HttpClientHandler();
+        private static HttpClient client = new HttpClient(clientHandler);
+        private static bool quesadillas = true;
+
 
         static async Task RunAsync()
         {
-            if (client.BaseAddress == null)
+            if (quesadillas)
             {
+                quesadillas = false;
                 // Update port # in the following line.
                 client.BaseAddress = new Uri(CocontroladorAPI.Initial());
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -33,9 +41,9 @@ namespace Cocoteca
 
         public static async Task<List<Inicio>> Inicio()
         {
-            await RunAsync();
+            await RunAsync();        
             List<Inicio> inicio = null;
-            var response = await client.GetAsync($"api/Inicio/");
+            var response = await client.GetAsync($"https://localhost:44341/api/Inicio");
             if (response.IsSuccessStatusCode)
             {
                 inicio = await response.Content.ReadAsAsync<List<Inicio>>();
@@ -69,7 +77,7 @@ namespace Cocoteca
         {
             await RunAsync();
             List<Categoria> categorias = null;
-            var response = await client.GetAsync($"api/Grid/");
+            var response = await client.GetAsync($"https://localhost:44341/api/Grid");
             if (response.IsSuccessStatusCode)
             {
                 categorias = await response.Content.ReadAsAsync<List<Categoria>>();
@@ -135,7 +143,7 @@ namespace Cocoteca
         {
             await RunAsync();
             Categoria categoria = null;
-            var response = await client.GetAsync($"api/CatCategorias/{id}");
+            var response = await client.GetAsync($"https://localhost:44341/api/CatCategorias/{id}");
             if (response.IsSuccessStatusCode)
             {
                 categoria = await response.Content.ReadAsAsync<Categoria>();

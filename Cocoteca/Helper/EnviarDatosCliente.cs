@@ -9,7 +9,8 @@ namespace Cocoteca.Helper
 {
     public class EnviarDatosCliente
     {
-        private static readonly HttpClient client = new HttpClient();
+        private static HttpClientHandler clientHandler = new HttpClientHandler();
+        private static HttpClient client = new HttpClient();
 
         static async Task RunAsync()
         {
@@ -26,6 +27,8 @@ namespace Cocoteca.Helper
         public static async Task<HttpResponseMessage> CrearUsuario(Usuario usuario)
         {
             await RunAsync();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            client = new HttpClient(clientHandler);
             var miContenido = JsonConvert.SerializeObject(usuario);
             var buffer = System.Text.Encoding.UTF8.GetBytes(miContenido);
             var byteContent = new ByteArrayContent(buffer);

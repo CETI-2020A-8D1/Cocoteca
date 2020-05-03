@@ -41,8 +41,6 @@ namespace Cocoteca.Controllers.Cliente
             {
                 return Redirect("~/Error/Error");
             }
-
-
             return View();
         }
 

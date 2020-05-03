@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Cocoteca.Models.Cliente.Equipo1;
+
 namespace Cocoteca.Controllers
 {
     /// <summary>
@@ -24,7 +26,8 @@ namespace Cocoteca.Controllers
                 ViewBag.Categorias = ObtenerDatosCliente.ListaCategorias().Result;
             }
             catch (Exception e)
-            {
+            {            
+                ViewBag.Categorias = new List<Categoria>();
             }
 
             return View();
