@@ -35,7 +35,16 @@ namespace Cocoteca.Controllers.EquipoTripas
             {
                 var response = await cliente.GetStringAsync($"https://localhost:44341/api/MtoCatLibros/{id}");
                 var response_convertida = JsonConvert.DeserializeObject<MtoCatLibros>(response);
+                var responsePais = await cliente.GetStringAsync($"https://localhost:44341/api/CatPaises");
+                var paisConver = JsonConvert.DeserializeObject<List<CatPaises>>(responsePais);
+                var responseCat = await cliente.GetStringAsync($"https://localhost:44341/api/CatCategorias");
+                var catConver = JsonConvert.DeserializeObject<List<CatCategorias>>(responseCat);
+                var responseEdit = await cliente.GetStringAsync($"https://localhost:44341/api/Editorial");
+                var editConver = JsonConvert.DeserializeObject < List < CatEditorial>>(responseEdit);
                 ViewBag.Libro = response_convertida;
+                ViewBag.Paises = paisConver;
+                ViewBag.Categorias = catConver;
+                ViewBag.Editorial = editConver;
             }
             catch (Exception e)
             {

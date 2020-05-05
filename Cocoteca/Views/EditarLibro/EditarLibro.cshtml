@@ -129,9 +129,10 @@
                             <label for="numeroRevision">Editorial</label>
                             <select class="form-control" id="EDITORIAL">
                                 <option selected disabled value="">Seleccione una Editorial...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
+                                @foreach(var y in ViewBag.Editorial)
+                                {
+                                    <option>@y.Nombre</option>
+                                }
                             </select>
                         </div>
 
@@ -139,9 +140,10 @@
                             <label for="numeroRevision">País</label>
                             <select class="form-control" id="PAIS">
                                 <option selected disabled value="">Seleccione un País...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
+                                @foreach (var y in ViewBag.Paises)
+                                {
+                                    <option>@y.Nombre</option>
+                                }
                             </select>
                         </div>
 
@@ -149,9 +151,10 @@
                             <label for="numeroRevision">Categoría</label>
                             <select class="form-control" id="CATEGORIA">
                                 <option selected disabled value="">Seleccione una Categoría...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
+                                @foreach (var y in ViewBag.Categorias)
+                                {
+                                    <option>@y.Nombre</option>
+                                }
                             </select>
                         </div>
                         <div class="input-group">
