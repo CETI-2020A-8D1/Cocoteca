@@ -1079,3 +1079,4 @@ C:\Users\jesus\Source\Repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.c
 C:\Users\jesus\Source\Repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\jesus\Source\Repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Cocoteca.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\jesus\Source\Repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\TodosLibros\DevolverLista.cshtml.g.cs
+C:\Users\jesus\Source\Repos\Cocoteca\Cocoteca\obj\Debug\netcoreapp3.1\Razor\Views\EditarLibro\EditarLibro.cshtml.g.cs

@@ -21,11 +21,14 @@ namespace Cocoteca.Controllers.EquipoTripas
 {
     public class TodosLibrosController : Controller
     {
-        private static HttpClient cliente = new HttpClient();
+        private static HttpClientHandler clientHandler = new HttpClientHandler();
+        private static HttpClient cliente = new HttpClient(clientHandler);
         private static string idFiltro = null;
         private static bool bandera = false;
         public async Task<IActionResult> DevolverLista()
         {
+            if (bandera == false)
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             List<MtoCatLibros> todos_libros = new List<MtoCatLibros>();
             List<CatCategorias> todas_categorias = new List<CatCategorias>();                       
             try

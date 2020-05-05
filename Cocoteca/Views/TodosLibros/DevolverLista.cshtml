@@ -17,7 +17,7 @@ Filtrar por Categoría:
 @foreach (var libro in ViewBag.Libros)
 {
     <body>
-        <a asp-controller="TodosLibros" asp-action="DevolverLista">@libro.Titulo --- ID de Categoría: @libro.Idcategoria</a>        
+        <a asp-controller="EditarLibro" asp-action="EditarLibro" asp-route-id="@libro.Idlibro">@libro.Titulo --- ID de Categoría: @libro.Idcategoria</a>        
         <br />
     </body>
 }
