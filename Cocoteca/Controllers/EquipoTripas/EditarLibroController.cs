@@ -27,8 +27,20 @@ namespace Cocoteca.Controllers.EquipoTripas
         public async Task<IActionResult> EditarLibro(int id)
         {
             if (bandera == false)
+            {
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
+                bandera = true;
+            }
+            try
+            {
+                var response = await cliente.GetStringAsync($"https://localhost:44341/api/MtoCatLibros/{id}");
+                var response_convertida = JsonConvert.DeserializeObject<MtoCatLibros>(response);
+                ViewBag.Libro = response_convertida;
+            }
+            catch (Exception e)
+            {
+                return Redirect("~/Error/Error");
+            }
 
             return View();
         }

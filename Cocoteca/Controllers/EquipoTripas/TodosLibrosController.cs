@@ -24,11 +24,14 @@ namespace Cocoteca.Controllers.EquipoTripas
         private static HttpClientHandler clientHandler = new HttpClientHandler();
         private static HttpClient cliente = new HttpClient(clientHandler);
         private static string idFiltro = null;
-        private static bool bandera = false;
+        private static bool bandera = false, bandera2 = false;
         public async Task<IActionResult> DevolverLista()
         {
-            if (bandera == false)
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            if (bandera2 == false)
+            {
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                bandera2 = true;
+            }
             List<MtoCatLibros> todos_libros = new List<MtoCatLibros>();
             List<CatCategorias> todas_categorias = new List<CatCategorias>();                       
             try
@@ -46,7 +49,7 @@ namespace Cocoteca.Controllers.EquipoTripas
                     else if (idFiltro == libro.Idcategoria.ToString())
                     {
                         todos_libros.Add(libro);
-                    }
+                    }                   
                 }
                 todos_libros.Sort((s1, s2) => s1.Titulo.CompareTo(s2.Titulo));
                 foreach (var categoria in response_convertida2)
