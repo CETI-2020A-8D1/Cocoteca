@@ -1,4 +1,5 @@
-﻿using Cocoteca.Models.Cliente.Equipo1;
+﻿using Cocoteca.Models.Cliente.Equipo_3;
+using Cocoteca.Models.Cliente.Equipo1;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -70,6 +71,17 @@ namespace Cocoteca.Helper
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = client.PutAsync($"api/CatDirecciones/{direccion.iddireccion}", byteContent).Result;
+            // return URI of the created resource.
+            return response;
+        }
+        public static async Task<HttpResponseMessage> ActualizarLibro(MtoCatLibros libro)
+        {
+            await RunAsync();
+            var miContenido = JsonConvert.SerializeObject(libro);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(miContenido);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = client.PutAsync($"api/MtoCatLibros/{ libro.Idlibro}", byteContent).Result;
             // return URI of the created resource.
             return response;
         }

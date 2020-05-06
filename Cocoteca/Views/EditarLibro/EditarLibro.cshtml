@@ -1,4 +1,4 @@
-﻿
+﻿@model Cocoteca.Models.Cliente.Equipo_3.MtoCatLibros;
 @{
     ViewData["Title"] = "EditarLibro";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,82 +28,73 @@
 
         <div class="row justify-content-center">
             <div class="col-9">
-                <form>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                     <div class=" m-4 p-4" style=" background-color:#FFD1BD; font-family: 'Raleway', sans-serif;">
-                        <br><h1 class="mb-3" style="text-align: center; color: #1f1f1f"> Acualizacion de libro:</h1><br>
+                        <br><h1 class="mb-3" style="text-align: center; color: #1f1f1f"> REGISTRO DE LIBROS</h1><br>
 
-                        <div class="input-group">
-                            <label for="exampleFormControlSelect1">ISBN:</label>
+                     <div class="input-group mb-3 ">
+                         <p asp-for="Idlibro" type="text" class="form-control" value=@ViewBag.id aria-label="ISBN" aria-describedby="basic-addon1">@ViewBag.id</p>
                         </div>
+
                         <div class="input-group mb-3 ">
-                            <input type="text" class="form-control" placeholder="@ViewBag.Libro.Isbn" aria-label="ISBN" aria-describedby="basic-addon1">
-</div>
+                            <input asp-for="Isbn" type="text" class="form-control" placeholder="ISBN..." aria-label="ISBN" aria-describedby="basic-addon1">
+                        </div>
 
-<div class="input-group">
-                            <label for="exampleFormControlSelect1">Titulo:</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Titulo" type="text" class="form-control" placeholder="Título..." aria-label="TITULO" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="@ViewBag.Libro.Titulo" aria-label="TITULO" aria-describedby="basic-addon1">
-                        </div>
-                        <div class="input-group">
-                            <label for="exampleFormControlSelect1">Autor:</label>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="@ViewBag.Libro.Autor" aria-label="AUTOR" aria-describedby="basic-addon1">
+                            <input asp-for="Autor" type="text" class="form-control" placeholder="Autor..." aria-label="AUTOR" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" style="background-color: #e4784a; color: #e3e3e3">Sinopsis</span>
                             </div>
-                            <textarea class="form-control" aria-label="SINOPSIS"></textarea>
+                            <textarea asp-for="Sinopsis" class="form-control" aria-label="SINOPSIS"></textarea>
                         </div>
-                        <!-- Quitar descontinuado ? -->
+
                         <div class="input-group">
                             <label for="exampleFormControlSelect1">Descontinuado</label>
                         </div>
 
-                        <div class="form-group">
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadioInline1">Si</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadioInline2">No</label>
-                            </div>
+
+                        <div id="RadioButtonGroup" class="form-group">
+                            <label asp-for="Descontinuado" class="radio-inline">
+                                <input asp-for="Descontinuado" value="true" type="radio">Si
+                            </label>
+                            <label asp-for="Descontinuado" class="radio-inline">
+                                <input asp-for="Descontinuado" value="false" type="radio">No
+                            </label>
                         </div>
-                        <!-- Quitar descontinuado ? -->
-                        <div class="input-group">
-                            <label for="exampleFormControlSelect1">No. Paginas:</label>
-                        </div>
+
+
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="@ViewBag.Libro.Paginas" aria-label="PAGINAS" aria-describedby="basic-addon1">
+                            <input asp-for="Paginas" type="text" class="form-control" placeholder="Número de Páginas" aria-label="PAGINAS" aria-describedby="basic-addon1">
                         </div>
 
 
                         <div class="form-group">
                             <label for="numeroRevision">Revisión</label>
-                            <select class="form-control" id="numeroRevision">
+                            <select asp-for="Revision" class="form-control" id="numeroRevision">
                                 <option selected disabled value="">Seleccione una Revisión...</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
                             </select>
+                        </div>
 
-                        </div>
-                        <div class="input-group">
-                            <label for="exampleFormControlSelect1">Año de publicacion:</label>
-                        </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="@ViewBag.Libro.Ano" aria-label="ANO" aria-describedby="basic-addon1">
+                            <input asp-for="Ano" type="text" class="form-control" placeholder="Año..." aria-label="ANO" aria-describedby="basic-addon1">
                         </div>
 
 
@@ -113,84 +104,73 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" style="background-color: #e4784a; color: #e3e3e3">$</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="PRECIO">
+                            <input asp-for="Precio" type="text" class="form-control" aria-label="PRECIO">
                             <div class="input-group-append">
                                 <span class="input-group-text" style="background-color: #e4784a; color: #e3e3e3">.00</span>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <label for="exampleFormControlSelect1">Cantidad en Stock:</label>
-                        </div>
+
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="@ViewBag.Libro.Stock" aria-label="STOCK" aria-describedby="basic-addon1">
+                            <input asp-for="Stock" type="text" class="form-control" placeholder="Cantidad en Stock..." aria-label="STOCK" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="form-group">
                             <label for="numeroRevision">Editorial</label>
-                            <select class="form-control" id="EDITORIAL">
+                            <select asp-for="Ideditorial" class="form-control" asp-items="ViewBag.Editoriales" id="EDITORIAL">
                                 <option selected disabled value="">Seleccione una Editorial...</option>
-                                @foreach(var y in ViewBag.Editorial)
-                                {
-                                    <option>@y.Nombre</option>
-                                }
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="numeroRevision">País</label>
-                            <select class="form-control" id="PAIS">
+                            <select asp-for="Idpais" class="form-control" asp-items="ViewBag.Paises" id="PAIS">
                                 <option selected disabled value="">Seleccione un País...</option>
-                                @foreach (var y in ViewBag.Paises)
-                                {
-                                    <option>@y.Nombre</option>
-                                }
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="numeroRevision">Categoría</label>
-                            <select class="form-control" id="CATEGORIA">
+                            <select asp-for="Idcategoria" class="form-control" asp-items="ViewBag.Categorias" id="CATEGORIA">
                                 <option selected disabled value="">Seleccione una Categoría...</option>
-                                @foreach (var y in ViewBag.Categorias)
-                                {
-                                    <option>@y.Nombre</option>
-                                }
                             </select>
                         </div>
-                        <div class="input-group">
-                            <label for="exampleFormControlSelect1">Link de la imagen:</label>
-                        </div>
+
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="@ViewBag.Libro.Imagen" aria-label="IMAGEN" aria-describedby="basic-addon1">
+                            <input asp-for="Imagen" type="text" class="form-control" placeholder="Link de Imagen..." aria-label="IMAGEN" aria-describedby="basic-addon1">
                         </div>
 
-                        <button type="button" class="btn btn-lg btn-block btn-search" style="background-color: #EE8D11" data-toggle="modal" data-target="#altaModal">Actualizar la informacion</button>
+                        <button type="button" class="btn btn-lg btn-block btn-search" style="background-color: #EE8D11" data-toggle="modal" data-target="#altaModal">Guardar Libro y Continuar</button>
 
                     </div>
+
+
+
+                    <div class="modal fade" id="altaModal" tabindex="-1" role="dialog" aria-labelledby="altaModalLabel" aria-hidden="true" style="background-color: #e4784a">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" style="background-color: #f3f3f3">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="altaModalLabel">Seguro que deseas continuar?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Revisa que todos los campos ingresados sean correctos y estén escritos correctamente.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" value="Create" class="btn btn-search" style="background-color: #EE8D11">Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="altaModal" tabindex="-1" role="dialog" aria-labelledby="altaModalLabel" aria-hidden="true" style="background-color: #e4784a">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="background-color: #f3f3f3">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="altaModalLabel">Seguro que deseas continuar?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Toda la informacion sera actualizada en la base de datos, Esta todo bien escrito?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-search" style="background-color: #EE8D11">Guardar Cambios</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </body>
 </html>
-

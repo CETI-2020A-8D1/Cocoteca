@@ -24,33 +24,65 @@ namespace Cocoteca.Controllers.EquipoTripas
         private static HttpClientHandler clientHandler = new HttpClientHandler();
         private static HttpClient cliente = new HttpClient(clientHandler);
         private static bool bandera = false;
+        public int idlibro;
+        public List<CatPaises> paises;
+        public List<CatEditorial> editoriales;
+        public List<CatCategorias> categorias;
         public async Task<IActionResult> EditarLibro(int id)
         {
-            if (bandera == false)
+            idlibro = id;
+            ViewBag.id = idlibro;
+            HttpResponseMessage res;
+
+            res = await cliente.GetAsync($"https://localhost:44341/api/CatPaises");
+            if (res.IsSuccessStatusCode)
             {
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-                bandera = true;
-            }
-            try
-            {
-                var response = await cliente.GetStringAsync($"https://localhost:44341/api/MtoCatLibros/{id}");
-                var response_convertida = JsonConvert.DeserializeObject<MtoCatLibros>(response);
-                var responsePais = await cliente.GetStringAsync($"https://localhost:44341/api/CatPaises");
-                var paisConver = JsonConvert.DeserializeObject<List<CatPaises>>(responsePais);
-                var responseCat = await cliente.GetStringAsync($"https://localhost:44341/api/CatCategorias");
-                var catConver = JsonConvert.DeserializeObject<List<CatCategorias>>(responseCat);
-                var responseEdit = await cliente.GetStringAsync($"https://localhost:44341/api/Editorial");
-                var editConver = JsonConvert.DeserializeObject < List < CatEditorial>>(responseEdit);
-                ViewBag.Libro = response_convertida;
-                ViewBag.Paises = paisConver;
-                ViewBag.Categorias = catConver;
-                ViewBag.Editorial = editConver;
-            }
-            catch (Exception e)
-            {
-                return Redirect("~/Error/Error");
+                string result = res.Content.ReadAsStringAsync().Result;
+                paises = JsonConvert.DeserializeObject<List<CatPaises>>(result);
             }
 
+            res = await cliente.GetAsync($"https://localhost:44341/api/Editorial");
+            if (res.IsSuccessStatusCode)
+            {
+                string result = res.Content.ReadAsStringAsync().Result;
+                editoriales = JsonConvert.DeserializeObject<List<CatEditorial>>(result);
+            }
+
+            res = await cliente.GetAsync($"https://localhost:44341/api/CatCategorias");
+            if (res.IsSuccessStatusCode)
+            {
+                string result = res.Content.ReadAsStringAsync().Result;
+                categorias = JsonConvert.DeserializeObject<List<CatCategorias>>(result);
+            }
+
+            ViewData["Paises"] = new SelectList(paises, "Idpais", "Nombre");
+            ViewData["Editoriales"] = new SelectList(editoriales, "Ideditorial", "Nombre");
+            ViewData["Categorias"] = new SelectList(categorias, "Idcategoria", "Nombre");
+            //ViewBag.Categorias = categorias;
+            //ViewBag.Editoriales = editoriales;
+            //ViewBag.Paises = paises;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Idlibro,Isbn,Titulo,Autor,Sinopsis,Descontinuado,Paginas,Revision,Ano,Precio,Stock,Ideditorial,Idpais,Idcategoria,Imagen")]  MtoCatLibros libro)
+        {
+            //"api/MtoCatLibros"
+            
+            HttpResponseMessage res;
+            if (ModelState.IsValid)
+            {
+
+                var myContent = JsonConvert.SerializeObject(libro);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+
+                var resultado = await cliente.PutAsJsonAsync<MtoCatLibros>($"https://localhost:44341/api/MtoCatLibros/"+libro.Idlibro, libro);
+                if (!resultado.IsSuccessStatusCode)
+                {
+                    return Redirect("~/Error/Error");
+                }
+            }
             return View();
         }
     }
