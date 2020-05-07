@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\edalf\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
+    "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {}
   },
   "projects": {
-    "C:\\Users\\edalf\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
+    "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edalf\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "projectUniqueName": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
         "projectName": "Cocoteca",
-        "projectPath": "C:\\Users\\edalf\\Source\\Repos\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
-        "packagesPath": "C:\\Users\\edalf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edalf\\Source\\Repos\\Cocoteca\\Cocoteca\\obj\\",
+        "projectPath": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\Cocoteca.csproj",
+        "packagesPath": "C:\\Users\\abrah\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abrah\\Source\\Cocoteca\\Cocoteca\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\edalf\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\abrah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -106,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -5,22 +5,28 @@
 }
 
 <h1>Todos Los Libros</h1>
+<br>
 <h2>Total de Libros: @ViewBag.Libros.Count</h2>
+<br >
 Filtrar por Categoría: 
 <form>
+    <button class="btn btn-dark" name="boton" value="Todos los libros" asp-action="check"> Todos los libros </button>
     @foreach (var y in ViewBag.Categorias)
     {
-        <button name="boton" value="@y.Idcategoria" asp-action="check">@y.Nombre</button>
+        <button  class="btn btn-dark" name="boton" value="@y.Idcategoria" asp-action="check">@y.Nombre</button>
     }
 </form>
 <br />
-@foreach (var libro in ViewBag.Libros)
-{
-    <body>
-        <a asp-controller="EditarLibro" asp-action="EditarLibro" asp-route-id="@libro.Idlibro">@libro.Titulo --- ID de Categoría: @libro.Idcategoria</a>        
-        <br />
-    </body>
-}
+<body>
+    <div class="list-group">
+        @foreach (var libro in ViewBag.Libros)
+        {
+
+            <a class="list-group-item list-group-item-action" asp-controller="EditarLibro" asp-action="EditarLibro" asp-route-id="@libro.Idlibro">@libro.Titulo --- ID de Categoría: @libro.Idcategoria</a>
+            
+        }
+        </div>
+</body>
 
 
 

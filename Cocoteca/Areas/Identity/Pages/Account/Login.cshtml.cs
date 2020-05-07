@@ -85,7 +85,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
                     var _user = await _userManager.FindByEmailAsync(Input.Email);
                     if(_userManager.IsInRoleAsync(_user, "Almacenista").Result)
-                        return LocalRedirect($"{returnUrl}Almacenista/Listado");
+                        return LocalRedirect($"{returnUrl}TodosLibros/DevolverLista");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

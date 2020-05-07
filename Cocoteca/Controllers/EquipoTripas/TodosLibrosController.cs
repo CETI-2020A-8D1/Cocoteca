@@ -16,15 +16,18 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Security;
 using Cocoteca.Models.Cliente.Equipo_3;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cocoteca.Controllers.EquipoTripas
 {
+    [Authorize(Policy = "RequireRolAlmacenista")]
     public class TodosLibrosController : Controller
     {
         private static HttpClientHandler clientHandler = new HttpClientHandler();
         private static HttpClient cliente = new HttpClient(clientHandler);
         private static string idFiltro = null;
         private static bool bandera = false, bandera2 = false;
+
         public async Task<IActionResult> DevolverLista()
         {
             if (bandera2 == false)
@@ -68,8 +71,16 @@ namespace Cocoteca.Controllers.EquipoTripas
 
         public IActionResult check(string boton)
         {
-            idFiltro = boton;
-            bandera = true;
+            if(boton.Equals("Todos los libros"))
+            {
+                idFiltro = null;
+                bandera = false;
+            }
+            else
+            {
+                idFiltro = boton;
+                bandera = true;
+            }
             return RedirectToAction("DevolverLista");
         }
     }

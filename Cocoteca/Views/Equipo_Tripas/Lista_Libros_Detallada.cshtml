@@ -7,14 +7,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>La Cocoteca</title>
-    <link rel="icon" href="~/coco.png" type="image/icon type">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel=StyleSheet href="~/css/custom.css" type="text/css" media=screen>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -141,16 +134,16 @@
                                                                  height="160px" width="120px">
                                                         </div>
                                                         <div class="ml-3 d-inline-block align-top">
-                                                            <div class="d-inline-block">
-                                                                <h2>
-                                                                    @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                            <h2>
+                                                                @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 1))
                                                                     {
-                                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 1))
-                                                                        {
-                                                                            @Libroslista
-                                                                        }
+                                                                        @Libroslista
                                                                     }
-                                                                </h2>
+                                                                }
+                                                            </h2>
+                                                            <div class="d-inline-block">
                                                                 <h5>
                                                                     <footer class="blockquote-footer">
                                                                         @for (int j = i + (i * 16); j <= i + (i * 16); j++)
@@ -232,14 +225,12 @@
                                                                 <br><br>
                                                             </div>
                                                             <div class="ml-8 d-inline-block align-top">
-                                                                <br><br>
+                                                                <br>
                                                                 <div class="card card-dos mb-5 mb-lg-0" style="width: 16rem; height:16rem;">
 
                                                                     <div class="card-body">
 
 
-                                                                        <h5 class="card-price text-center">
-                                                                        </h5>
                                                                         <hr>
 
                                                                         <p class="font-italic text-muted mb-0 medium">Vendido por: Cocoteca </p>

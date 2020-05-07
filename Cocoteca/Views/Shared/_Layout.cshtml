@@ -31,7 +31,11 @@
                         <li class="nav-item active">
                             <a class="nav-link" asp-area="" asp-controller="ClienteInicio" asp-action="Index">Inicio<span class="sr-only">(current)</span></a>
                         </li>
-                        @await Component.InvokeAsync("Categorias")
+                        @if (!User.IsInRole("Almacenista"))
+                        {
+                            @await Component.InvokeAsync("Categorias")
+                        }
+
 
                         @if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                         {
@@ -41,12 +45,16 @@
 
                         }
                     </ul>
+                    @if (!User.IsInRole("Almacenista"))
+                    {
+                        <form class="form-inline my-1 my-lg-1">
+                            <input class="form-control mr-sm-2 w-auto" type="search" placeholder="Ej. El principito..." aria-label="Search">
+                            <button class="btn btn-search my-2 my-sm-0" type="submit">Buscar</button>
+                        </form>
 
-                    <form class="form-inline my-1 my-lg-1">
-                        <input class="form-control mr-sm-2 w-auto" type="search" placeholder="Ej. El principito..." aria-label="Search">
-                        <button class="btn btn-search my-2 my-sm-0" type="submit">Buscar</button>
-                    </form>
+                    }
                     <partial name="_LoginPartial" />
+
                 </div>
             @*</div>*@
         </nav>
