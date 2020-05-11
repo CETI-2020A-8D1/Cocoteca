@@ -50,7 +50,7 @@ namespace Cocoteca.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "¿Recordarme?")]
             public bool RememberMe { get; set; }
         }
 
@@ -83,6 +83,9 @@ namespace Cocoteca.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var _user = await _userManager.FindByEmailAsync(Input.Email);
+                    if(_userManager.IsInRoleAsync(_user, "Almacenista").Result)
+                        return LocalRedirect($"{returnUrl}TodosLibros/DevolverLista");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -91,12 +94,12 @@ namespace Cocoteca.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Cuenta de usuario bloqueado, demasiados intentos"/*"User account locked out."*/);
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Intento de inicio de sesión inválido");
                     return Page();
                 }
             }

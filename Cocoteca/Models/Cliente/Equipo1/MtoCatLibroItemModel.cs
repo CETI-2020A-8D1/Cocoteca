@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Cocoteca.Models.Cliente.Equipo1
 {
+    /// <summary>
+    /// Modelo que recibe o envía a API Cocoteca de información básica de libro.
+    /// </summary>
     public class MtoCatLibroItem
     {
         public int idlibro { get; set; }

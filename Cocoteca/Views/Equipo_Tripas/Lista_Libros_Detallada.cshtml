@@ -1,0 +1,292 @@
+﻿
+@{
+    ViewData["Title"] = "Lista_Libros_Detallada";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel=StyleSheet href="~/css/custom.css" type="text/css" media=screen>
+</head>
+
+<body>
+
+
+
+    <div class="pb-5">
+        <div class="container container-dos">
+            <div class="row">
+                <div class="col-lg-12 p-5 rounded shadow-sm mb-5 " style="background-color:#FFD1BD">
+
+                    <!-- Espacio por Libro -->
+                    <div class="table-responsive">
+                        <table class="table" style="background-color:#FFFFFF">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="border-0 bg-light px-0">
+                                        <div class="p-2 px-3 text-uppercase">
+
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    string barra = "c0";
+                                    int Longitud_ = Model.Count;
+
+                                }
+
+
+
+
+
+                            <th scope="row" class="border-0">
+                                <div class="row shop-tracking-status">
+
+
+
+                                    @for (int i = 0; i < @Longitud_ / 17; i++)
+                                    {
+                                        @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                        {
+                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 16))
+
+                                            {
+                                                if (Libroslista == 'E')
+                                                {
+                                                    barra = "c2";
+                                                }
+
+                                                if (Libroslista == 'P')
+                                                {
+                                                    barra = "c1";
+                                                }
+                                                if (Libroslista == 'R')
+                                                {
+                                                    barra = "c4";
+                                                }
+                                            }
+                                        }
+                                    }
+                                    <div class="col-md-12">
+                                        <div class="well">
+                                            <div class="order-status">
+                                                <div class="order-status-timeline">
+                                                    <!-- La barra de progreso se llena cambiando c0 por (c1,c2,c3,c4) cada numero siendo un paso completado -->
+                                                    <div class="order-status-timeline-completion @barra"></div>
+                                                </div>
+
+                                                <div class="image-order-status image-order-status-new active img-circle">
+                                                    <span class="status">Aceptado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-active active img-circle">
+                                                    <span class="status">En progreso</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-intransit active img-circle">
+                                                    <span class="status">Enviado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-delivered active img-circle">
+                                                    <span class="status">Realizado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-completed active img-circle">
+                                                    <span class="status">Completado</span>
+                                                    <div class="icon"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                @{
+                                    int Longitud = Model.Count;
+                                    if (Longitud_ == 0)
+                                    {
+                                        Layout = "~/Views/Shared/Error.cshtml";
+
+                                    }
+                                    else
+                                    {
+
+
+                                        for (int i = 0; i < @Longitud / 17; i++)
+                                        {
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <div class="p-2">
+                                                        <div class="d-inline-block">
+                                                            <img src=
+                                                                 @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                            {
+                                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 9))
+                                                                {
+                                                                    @Libroslista
+
+                                                                }
+                                                            }
+                                                                 height="160px" width="120px">
+                                                        </div>
+                                                        <div class="ml-3 d-inline-block align-top">
+                                                            <h2>
+                                                                @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                {
+                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 1))
+                                                                    {
+                                                                        @Libroslista
+                                                                    }
+                                                                }
+                                                            </h2>
+                                                            <div class="d-inline-block">
+                                                                <h5>
+                                                                    <footer class="blockquote-footer">
+                                                                        @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                        {
+                                                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 2))
+                                                                            {
+                                                                                @Libroslista
+                                                                            }
+                                                                        }
+                                                                    </footer>
+                                                                </h5><br>
+                                                                <p>
+                                                                    <font>
+                                                                        <u> <b>ISBN:</b></u> @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                        {
+                                                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 0))
+                                                                            {
+                                                                                @Libroslista
+                                                                            }
+                                                                        }
+                                                                    </font>
+                                                                </p>
+                                                                <p>
+                                                                    <font>
+                                                                        <u> <b>Editorial:</b></u> @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                        {
+                                                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 11))
+                                                                            {
+                                                                                @Libroslista
+                                                                            }
+                                                                        }
+                                                                    </font>
+                                                                </p>
+                                                                <p>
+                                                                    <font>
+                                                                        <u> <b>Genero:</b></u> @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                        {
+                                                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 12))
+                                                                            {
+                                                                                @Libroslista
+                                                                            }
+                                                                        }
+                                                                    </font>
+                                                                </p>
+                                                                <p>
+                                                                    <font>
+                                                                        <u> <b>Paginas:</b></u> @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                        {
+                                                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 4))
+                                                                            {
+                                                                                @Libroslista
+                                                                            }
+                                                                        }
+                                                                    </font>
+                                                                </p>
+                                                                <p>
+                                                                    <font>
+                                                                        <u> <b>Año de Impresion:</b></u> @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                        {
+                                                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 5))
+                                                                            {
+                                                                                @Libroslista
+                                                                            }
+                                                                        }
+                                                                    </font>
+                                                                </p>
+                                                                <p>
+                                                                    <font>
+                                                                        <u> <b>Pais:</b></u> @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                        {
+                                                                            @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 13))
+                                                                            {
+                                                                                @Libroslista
+                                                                            }
+                                                                        }
+                                                                    </font>
+                                                                </p>
+
+                                                                <br><br>
+                                                            </div>
+                                                            <div class="ml-8 d-inline-block align-top">
+                                                                <br>
+                                                                <div class="card card-dos mb-5 mb-lg-0" style="width: 16rem; height:16rem;">
+
+                                                                    <div class="card-body">
+
+
+                                                                        <hr>
+
+                                                                        <p class="font-italic text-muted mb-0 medium">Vendido por: Cocoteca </p>
+                                                                        <p class="font-italic text-muted mb-0 medium">
+                                                                        </p>
+                                                                        <p class="font-italic text-muted mb-0 medium">
+                                                                            Cantidad: @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                            {
+                                                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 10))
+                                                                                {
+                                                                                    @Libroslista
+                                                                                }
+                                                                            }
+                                                                        </p>
+                                                                        <p class="font-italic text-muted mb-0 medium">
+                                                                            Costo Individual: @for (int j = i + (i * 16); j <= i + (i * 16); j++)
+                                                                            {
+                                                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 7))
+                                                                                {
+                                                                                    @Libroslista
+                                                                                }
+                                                                            }
+                                                                        </p>
+                                                                        <hr>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+
+
+
+
+                                                <!-- Te pasaste crack-->
+                                            </ul>
+                                        }
+                                    }
+
+                                }
+                            </th>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

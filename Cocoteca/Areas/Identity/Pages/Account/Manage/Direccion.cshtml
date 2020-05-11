@@ -1,0 +1,71 @@
+﻿@page
+@model DireccionModel
+@{
+    ViewData["Title"] = "Administrar dirección";
+    ViewData["ActivePage"] = ManageNavPages.Direccion;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="direccion-form" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Input.IdDir" type="hidden" />
+            <div class="form-group">
+                <label asp-for="IdEstadoSeleccionado"></label>
+                <select id="estadoId" asp-for="IdEstadoSeleccionado" asp-items="Model.Estados" class="form-control">
+                    <option value="">Selecciona un estado</option>
+                </select>
+                <span asp-validation-for="IdEstadoSeleccionado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdMunicipioSeleccionado"></label>
+                <select id="municipioId" asp-for="IdMunicipioSeleccionado" asp-items="Model.Municipios" class="form-control">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="IdMunicipioSeleccionado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.CodigoPostal"></label>
+                <input asp-for="Input.CodigoPostal" class="form-control" />
+                <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Calle"></label>
+                <input asp-for="Input.Calle" class="form-control" />
+                <span asp-validation-for="Input.Calle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.NoExt"></label>
+                <input asp-for="Input.NoExt" class="form-control" />
+                <span asp-validation-for="Input.NoExt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.NoInt"></label>
+                <input asp-for="Input.NoInt" class="form-control" />
+                <span asp-validation-for="Input.NoInt" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar dirección</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $("#estadoId").on("change", function () {
+                var Idestado = $(this).val();
+                $("#municipioId").empty();
+                $("#municipioId").append("<option value=''>Selecciona un municipio</option>");
+                $.getJSON(`?handler=Municipios&idEstadoSeleccionado=${Idestado}`, (data) => {
+                    $.each(data, function (i, item) {
+                        $("#municipioId").append(`<option value="${item.idmunicipio}">${item.nombre}</option>`);
+                    });
+                });
+            });
+        });
+    </script>
+}

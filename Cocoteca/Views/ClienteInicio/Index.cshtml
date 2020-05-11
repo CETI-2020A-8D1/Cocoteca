@@ -59,7 +59,7 @@
                                             <h5 class="card-text">@cat.mtoCatLibros[i].autor</h5>
                                             <h5 class="card-text">Precio: </h5>
                                             <h5 class="card-text">$ @cat.mtoCatLibros[i].precio cocoins</h5>
-                                            <a class="btn btn-comprar" href="#">Comprar</a>
+                                            <a class="btn btn-comprar"  asp-controller="Equipo_Tripas" asp-action="Libro_Vista" asp-route-id="@cat.mtoCatLibros[i].idlibro">Ver Libro</a>
                                             <a class="btn btn-comprar" href="#">Añadir al carrito</a>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                                             <h5 class="card-text">@cat.mtoCatLibros[i].autor</h5>
                                             <h5 class="card-text">Precio: </h5>
                                             <h5 class="card-text">$ @cat.mtoCatLibros[i].precio cocoins </h5>
-                                            <a class="btn btn-comprar" href="#">Comprar</a>
+                                            <a class="btn btn-comprar" asp-controller="Equipo_Tripas" asp-action="Libro_Vista" asp-route-id="@cat.mtoCatLibros[i].idlibro">Ver Libro</a>
                                             <a class="btn btn-comprar" href="#">Añadir al carrito</a>
                                         </div>
                                     </div>
@@ -112,3 +112,4 @@
 
 
 
+</main>

@@ -1,0 +1,204 @@
+﻿@model Cocoteca.Models.Cliente.Equipo_3.MtoCatLibros;
+@{
+    ViewData["Title"] = "EditarLibro";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alta de libro</title>
+    <link rel=StyleSheet href="~/css/custom.css" type="text/css" media=screen>
+
+</head>
+<body>
+
+    <!-- B A R R A    D E   N A V E G A C I O N     A Q U I  -->
+
+
+    <div class="p-4 container-fluid" style="background-color:#f3f3f3">
+
+        <div class="row justify-content-center">
+            <div class="col-9">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class=" m-4 p-4" style=" background-color:#FFD1BD; font-family: 'Raleway', sans-serif;">
+                        <br><h1 class="mb-3" style="text-align: center; color: #1f1f1f"> REGISTRO DE LIBROS</h1><br>
+
+                        <div class="input-group mb-3 ">
+                            <input asp-for="Idlibro" type="text" class="form-control" value=@ViewBag.id aria-label="ISBN" aria-describedby="basic-addon1" readonly>
+                        </div>
+
+                        <div class="input-group mb-3 ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">ISBN:</span>
+                            </div>
+                            <input asp-for="Isbn" type="text" class="form-control" value=@ViewBag.isbn aria-label="ISBN" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">Titulo:</span>
+                            </div>
+                            <input asp-for="Titulo" type="text" class="form-control" value=@ViewBag.titulo aria-label="TITULO" aria-describedby="basic-addon1">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">Autor:</span>
+                            </div>
+                            <input asp-for="Autor" type="text" class="form-control" value=@ViewBag.autor aria-label="AUTOR" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">Sinopsis</span>
+                            </div>
+                            <input asp-for="Sinopsis" type="text" class="form-control" value=@ViewBag.sinopsis aria-label="SINOPSIS"aria-describedby="basic-addon1" ></input>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="exampleFormControlSelect1">Descontinuado</label>
+                        </div>
+
+
+                        <div id="RadioButtonGroup" class="form-group">
+                            @if (ViewBag.descontinuado == 1)
+                            {
+                                <label asp-for="Descontinuado" class="radio-inline">
+                                    <input asp-for="Descontinuado" value="true" type="radio">Si
+                                </label>
+                                <label asp-for="Descontinuado" class="radio-inline">
+                                    <input asp-for="Descontinuado" value="false" type="radio" checked>No
+                                </label>
+                            }
+                            else
+                            {
+                                <label asp-for="Descontinuado" class="radio-inline">
+                                    <input asp-for="Descontinuado" value="true" type="radio" checked>Si
+                                </label>
+                                <label asp-for="Descontinuado" class="radio-inline">
+                                    <input asp-for="Descontinuado" value="false" type="radio" >No
+                                </label>
+                            }
+
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">Paginas:</span>
+                            </div>
+                            <input asp-for="Paginas" type="text" class="form-control" value=@ViewBag.paginas aria-label="PAGINAS" aria-describedby="basic-addon1">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="numeroRevision">Revisión</label>
+                            <select asp-for="Revision" class="form-control" id="numeroRevision">
+                                <option selected value=@ViewBag.Revision>@ViewBag.Revision</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">Año de creacion:</span>
+                            </div>
+                            <input asp-for="Ano" type="text" class="form-control" value=@ViewBag.ano aria-label="ANO" aria-describedby="basic-addon1">
+                        </div>
+
+
+
+                        <label for="basic-url">Precio</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">$</span>
+                            </div>
+                            <input asp-for="Precio" type="text" value=@ViewBag.precio class="form-control" aria-label="PRECIO">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">Stock:</span>
+                            </div>
+                            <input asp-for="Stock" type="text" class="form-control" value=@ViewBag.stock aria-label="STOCK" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroRevision">Editorial</label>
+                            <select asp-for="Ideditorial" class="form-control" asp-items="ViewBag.Editoriales" id="EDITORIAL">
+                                <option disabled value="">Seleccione una Editorial...</option>
+                                <option selected value=@ViewBag.idEditorial>@ViewBag.nombreEditorial</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroRevision">País</label>
+                            <select asp-for="Idpais" class="form-control" asp-items="ViewBag.Paises" id="PAIS" >
+                                <option disabled value="">Seleccione un País...</option>
+                                <option selected value=@ViewBag.idpais>@ViewBag.nombrePais</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroRevision">Categoría</label>
+                            <select asp-for="Idcategoria" class="form-control" asp-items="ViewBag.Categorias" id="CATEGORIA">
+                                <option disabled value="">Seleccione una Categoría...</option>
+                                <option selected value=@ViewBag.idCategoria>@ViewBag.nombreCategoria</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #e4784a; color: #FFFAF3">Link imagen:</span>
+                            </div>
+                            <input asp-for="Imagen" type="text" class="form-control" value=@ViewBag.imagen aria-label="IMAGEN" aria-describedby="basic-addon1">
+                        </div>
+
+                        <button type="button" class="btn btn-lg btn-block btn-search" style="background-color: #EE8D11" data-toggle="modal" data-target="#altaModal">Guardar Libro y Continuar</button>
+
+                    </div>
+
+
+
+                    <div class="modal fade" id="altaModal" tabindex="-1" role="dialog" aria-labelledby="altaModalLabel" aria-hidden="true" style="background-color: #e4784a">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" style="background-color: #f3f3f3">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="altaModalLabel">Seguro que deseas continuar?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Revisa que todos los campos ingresados sean correctos y estén escritos correctamente.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" value="Create" class="btn btn-search" style="background-color: #EE8D11">Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

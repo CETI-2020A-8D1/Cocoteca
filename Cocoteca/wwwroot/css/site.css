@@ -5,9 +5,15 @@ body {
     margin-top: 10rem;
     font-family: 'Raleway', sans-serif;
 }
-
+/*---- Boton color amarillo ---------*/
 .btn-dark {
     background-color: #EE8D11;
+    border-color: #F3F3F3;
+    color: #F3F3F3;
+}
+/*---------- Boton color rosita -------------*/
+.btn-search {
+    background-color: #e4784a;
     border-color: #F3F3F3;
     color: #F3F3F3;
 }
@@ -18,11 +24,6 @@ body {
     padding-right: 10px;
 }
 
-.btn-search {
-    background-color: #e4784a;
-    border-color: #F3F3F3;
-    color: #F3F3F3;
-}
 
 
 .navbar {

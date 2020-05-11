@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewData["Title"] = "Lista_Compras";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel=StyleSheet href="~/css/custom.css" type="text/css" media=screen>
+ </head>
+<body>
+
+    <div class="pb-5">
+        <div class="container container-dos">
+            <div class="row">
+                <div class="col-lg-12 p-5 rounded shadow-sm mb-5 " style="background-color:#FFD1BD">
+
+                    <!-- Lista de Libros -->
+                    <div class="table-responsive">
+                        <table class="table" style="background-color:#FFFFFF">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="border-0 bg-light px-0">
+                                        <div class="p-2 px-3 text-uppercase">Pedidos Realizados/Usuario</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <th scope="row" class="border-0">
+
+
+
+                                @{ int Longitud = Model.Count;
+                                    String urlError = "https://de10.com.mx/sites/default/files/styles/galeria_photo_760x508/public/2020/03/17/memes_coronavirus_mexico.jpg?itok=JATwW9QJ";
+
+
+
+                                }
+
+
+
+
+                                @for (int i = 0; i < @Longitud / 6; i++)
+                                {
+
+                                    <div class="list-group">
+                                        <button type="button" class="list-group-item list-group-item-action active" disabled style="background-color:#ff9060	">
+                                            No. Pedido:
+                                            @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                            {
+                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j))
+                                                {
+                                                    @Libroslista
+                                                }
+                                            }
+
+
+                                        </button>
+                                        @for (int a = i + (i * 5); a <= i + (i * 5); a++)
+                                        {
+                                            int primero = 0;
+
+                                            @foreach (var Librote in Model)
+                                            {
+                                                if (Librote == Model[a])
+                                                {
+                                                    if (primero == 0)
+                                                    {
+                                                        <a class="dropdown-item" asp-controller="Equipo_Tripas" asp-action="Lista_Libros_Detallada"
+                                                           asp-route-id="@Librote">
+                                                            <li class="list-group-item">
+                                                                <!-- Contenido-->
+
+                                                                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+
+                                                                    <div class="d-inline-block">
+                                                                        <img src=
+                                                                             @{
+                                                                                 if (Longitud == 0)
+                                                                                 {
+                                                                                     @urlError;
+                                                                                 }
+                                                                                 else
+                                                                                 {
+
+
+                                                                             @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                             {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 3))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                             }
+                                                                                     }
+                                                                                 }
+                                                                             height="180px" width="120px">
+                                                                    </div>
+                                                                    <div class="ml-3 d-inline-block align-top">
+                                                                        <div class="media-body order-2 order-lg-1">
+
+                                                                            <p class="font-italic text-muted mb-0 small">Vendido por: Cocoteca </p>
+                                                                            <p class="font-italic text-muted mb-0 small">
+                                                                                Fecha de la compra:
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                                {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 1))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                                }
+                                                                            </p>
+                                                                            <p class="font-italic text-muted mb-0 small">
+                                                                                No. Articulos:
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                                {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 5))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                                }
+                                                                            </p>
+                                                                            <p class="font-italic text-muted mb-0 medium">
+                                                                                Costo Total: $
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                                {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 4))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                                }
+                                                                            </p>
+                                                                            <h6 class="font-weight-bold my-2">
+                                                                                Estado :
+                                                                                @for (int j = i + (i * 5); j <= i + (i * 5); j++)
+                                                                                {
+                                                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(j + 2))
+                                                                                    {
+                                                                                        @Libroslista
+                                                                                    }
+                                                                                }
+
+                                                                            </h6>
+                                                                            <br>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div> <!-- fin del pedido -->
+                                                            </li>
+                                                        </a>
+                                                        primero = 1;
+                                                    }
+
+                                                }
+
+
+                                            }
+
+                                        }
+
+
+
+                                    </div>
+                                    <br>
+                                }
+                                <!-- Agregar los demas pedidos -->
+                                @if (Longitud <= 0)
+                                {
+                                   <p> No tienes pedidos</p>
+                                }
+                            </th>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
