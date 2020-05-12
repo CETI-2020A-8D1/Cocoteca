@@ -176,6 +176,7 @@ namespace Cocoteca
                 if (createPowerUser.Succeeded)
                 {
                     poweruser = await UserManager.FindByEmailAsync(Configuration["SAdm:AdminUserEmail"]);
+
                     var resul = await EnviarDatosCliente.CrearUsuario(
                     new Usuario()
                     {

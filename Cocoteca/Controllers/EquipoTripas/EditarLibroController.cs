@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Cocoteca.Controllers.EquipoTripas
 {
-    [Authorize(Policy = "RequireRolAlmacenista")]
+    [Authorize(Policy = "RequiereRolAlmacenista")]
     public class EditarLibroController : Controller
     {
         private static HttpClientHandler clientHandler = new HttpClientHandler();
