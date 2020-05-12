@@ -147,6 +147,5 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
                 return true;
             return false;
         }
-
     }
 }

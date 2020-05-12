@@ -42,7 +42,6 @@ namespace Cocoteca
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-
             // Políticas que permiten identificar que roles pueden acceder a que controladores.
             services.AddAuthorization(options =>
             {
@@ -125,6 +124,9 @@ namespace Cocoteca
                     name: "default",
                     //Se inicia la aplicación en la acción Index del controlador ClienteInicio
                     pattern: "{controller=ClienteInicio}/{action=Index}/{id?}");
+				endpoints.MapControllerRoute(
+					name: "create",
+                    pattern: "{controller=Libros}/{action=Create}/{id?}");
                 endpoints.MapRazorPages();
             });
 

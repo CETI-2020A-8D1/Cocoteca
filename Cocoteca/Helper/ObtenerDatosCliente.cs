@@ -13,6 +13,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cocoteca
 {
@@ -22,7 +24,7 @@ namespace Cocoteca
         private static HttpClientHandler clientHandler = new HttpClientHandler();
         private static HttpClient client = new HttpClient(clientHandler);
         private static bool quesadillas = true;
-
+        static CocopelAPI _api = new CocopelAPI();
 
         static async Task RunAsync()
         {
@@ -51,7 +53,7 @@ namespace Cocoteca
             }
             throw new Exception();
         }
-        /*public static List<Inicio> Inicio()
+        public static List<Inicio> Inicio()
         {
             List<Inicio> inicio;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/Inicio");
@@ -70,8 +72,7 @@ namespace Cocoteca
             {
                 throw e;
             }
-        }*/
-
+        }
 
         public static async Task<List<Categoria>> ListaCategorias()
         {
@@ -118,10 +119,11 @@ namespace Cocoteca
             }
             throw new Exception();
         }
-        /*public static List<MtoCatLibroItem> ListaLibros(int id)
+
+        public static List<Inicio> Busqueda(String nombre)
         {
-            List<MtoCatLibroItem> libros;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/Grid/{id}");
+            List<Inicio> inicio;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/Busqueda/{nombre}");
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -129,15 +131,15 @@ namespace Cocoteca
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     var json = reader.ReadToEnd();
-                    libros = JsonConvert.DeserializeObject<List<MtoCatLibroItem>>(json);
+                    inicio = JsonConvert.DeserializeObject<List<Inicio>>(json);
                 }
-                return libros;
+                return inicio;
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }*/
+		}
 
         public static async Task<Categoria> Categoria(int id)
         {
@@ -184,10 +186,11 @@ namespace Cocoteca
             }
             throw new Exception();
         }
-        /*public static List<Municipio> MunicipiosEnEstado (int id)
+
+        public static List<Categoria> ListaCategorias()
         {
-            List<Municipio> municipios;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/MunicipiosEstado/{id}");
+            List<Categoria> categorias;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/Grid");
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -195,15 +198,15 @@ namespace Cocoteca
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     var json = reader.ReadToEnd();
-                    municipios = JsonConvert.DeserializeObject<List<Municipio>>(json);
+                    categorias = JsonConvert.DeserializeObject<List<Categoria>>(json);
                 }
-                return municipios;
+                return categorias;
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }*/
+		}
 
         public static async Task<List<Estado>> Estados()
         {
@@ -250,10 +253,11 @@ namespace Cocoteca
             }
             throw new Exception();
         }
-        /*public static Direccion Direccion(string id)
+
+        public static List<MtoCatLibroItem> ListaLibros(int id)
         {
-            Direccion dir = new Direccion();
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/DatosCliente/Direccion/{id}");
+            List<MtoCatLibroItem> libros;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/Grid/{id}");
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -261,15 +265,15 @@ namespace Cocoteca
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     var json = reader.ReadToEnd();
-                    dir = JsonConvert.DeserializeObject<Direccion>(json);
+                    libros = JsonConvert.DeserializeObject<List<MtoCatLibroItem>>(json);
                 }
-                return dir;
+                return libros;
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }*/
+		}
 
         public static async Task<bool> DireccionExiste(string id)
         {
@@ -316,10 +320,11 @@ namespace Cocoteca
             }
             throw new Exception();
         }
-        /*public static Estado Estado(int id)
+
+        public static List<MtoCatLibroItem> ListaLibros(String nombre)
         {
-            Estado estados = new Estado();
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/DatosCliente/Estado/{id}");
+            List<MtoCatLibroItem> libros;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/Grid/nombre/{nombre}");
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -327,15 +332,15 @@ namespace Cocoteca
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     var json = reader.ReadToEnd();
-                    estados = JsonConvert.DeserializeObject<Estado>(json);
+                    libros = JsonConvert.DeserializeObject<List<MtoCatLibroItem>>(json);
                 }
-                return estados;
+                return libros;
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }*/
+		}
 
         public static async Task<Municipio> Municipio(int id)
         {
@@ -382,10 +387,11 @@ namespace Cocoteca
             }
             throw new Exception();
         }
-        /*public static Usuario Usuario(string id)
+
+        public static Categoria Categoria(int id)
         {
-            Usuario usuario = new Usuario();
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/DatosCliente/Usuario/{id}");
+            Categoria cat;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($@"{CocontroladorAPI.Initial()}api/CatCategorias/{id}");
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -393,16 +399,14 @@ namespace Cocoteca
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     var json = reader.ReadToEnd();
-                    usuario = JsonConvert.DeserializeObject<Usuario>(json);
+                    cat = JsonConvert.DeserializeObject<Categoria>(json);
                 }
-                return usuario;
+                return cat;
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }*/
-
+        }
     }
-
 }

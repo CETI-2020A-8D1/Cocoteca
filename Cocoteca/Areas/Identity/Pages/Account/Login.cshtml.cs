@@ -49,7 +49,6 @@ namespace Cocoteca.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
-
             [Display(Name = "¿Recordarme?")]
             public bool RememberMe { get; set; }
         }
