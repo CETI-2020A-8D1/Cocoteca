@@ -4,9 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
 using Cocoteca.Helper;
-using Cocoteca.Models;
 using Cocoteca.Models.Cliente.Equipo1;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Rendering;

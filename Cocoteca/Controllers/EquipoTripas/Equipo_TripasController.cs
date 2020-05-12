@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using Cocoteca.Models.Cliente.Equipo_3;
 using Cocoteca.Helper;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Cocoteca.Controllers.EquipoTripas.Lista_Compras
