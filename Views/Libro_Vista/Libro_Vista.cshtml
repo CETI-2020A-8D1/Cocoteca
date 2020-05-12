@@ -1,0 +1,220 @@
+﻿<div>
+    @{
+        ViewData["Title"] = "Libro_Vista";
+    }
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>La Cocoteca</title>
+        <link rel="icon" href="imagenes/coco.png" type="image/icon type">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel=StyleSheet href="css/custom.css" type="text/css" media=screen>
+        <link rel=StyleSheet href="css/libroindividual.css" type="text/css" media=screen>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #ff9060; font-family: 'Raleway', sans-serif;">
+            <a class="navbar-brand" href="#">
+                <img src="imagenes/imagotipo.png" alt="Cocoteca" width="200px" height="30px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categor&iacute;as
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Categoria 1</a>
+                            <a class="dropdown-item" href="#">Categoria 2</a>
+                            <a class="dropdown-item" href="#">Categoria 3</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <form class="form-inline my-1 my-lg-1">
+                    <input class="form-control mr-sm-2 w-auto" type="search" placeholder="Ej. El principito..." aria-label="Search">
+                    <button class="btn btn-search my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+
+                <li class="nav-item">
+                    <div class="box-1">
+                        <div class="btn btn-one">
+                            <span><img src="imagenes/usuario.png" width="30px" height="30px"> Inicia sesi&oacute;n</span>
+                        </div>
+                    </div>
+                </li>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="carrito" src="imagenes/carrito.png" alt="carrito" width="30px" height="30px">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Ir al carrito</a>
+                            <a class="dropdown-item" href="#">Lista de pedidos</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="pb-5">
+            <div class="container container-dos">
+                <div class="row">
+                    <div class="col-lg-12 p-5 rounded shadow-sm mb-5 " style="background-color:#FFD1BD">
+
+                        <!-- Shopping cart table -->
+                        <div class="table-responsive">
+                            <table class="table" style="background-color:#FFFFFF">
+                                <thead>
+                                    <tr>
+                                        @{ String categoria = ((IEnumerable<string>)Model).ElementAt(11);
+                                        }
+                                        <th scope="col" class="border-0 bg-light px-0">
+                                            <div class="p-2 px-3 text-uppercase">Cocoteca/libros/@categoria</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <th scope="row" class="border-0">
+                                    <div class="p-2">
+                                        <div class="d-inline-block">
+
+                                            <img src=@foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(9))
+                                            {
+                                                            @Libroslista
+                                            } height="400px" width="320px">
+                                        </div>
+                                        <div class="ml-3 d-inline-block align-top">
+                                            <h2>
+                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(1))
+                                                {
+                                                    @Libroslista
+                                                }
+                                            </h2>
+                                            <div class="d-inline-block">
+
+                                                <h5>
+                                                    <footer class="blockquote-footer">
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(2))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </footer>
+                                                </h5><br>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>ISBN:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(0))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Editorial:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(10))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Paginas:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(4))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Año de Impresion:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(6))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Pais:</b></u>
+                                                        @{ String pais = ((IEnumerable<string>)Model).ElementAt(12);
+                                                        }
+                                                        @pais
+                                                    </font>
+                                                </p>
+                                            </div>
+                                            <div class="ml-8 d-inline-block align-top">
+                                                <br>
+                                                <div class="card card-dos mb-5 mb-lg-0" style="width: 18rem; height:16rem;">
+
+                                                    <div class="card-body">
+                                                        @{ String enStock = ((IEnumerable<string>)Model).ElementAt(8);
+                                                        }
+                                                        <h5 class="card-title text-muted text-uppercase text-center">
+                                                            @enStock
+
+                                                        </h5>
+
+                                                        <h5 class="card-price text-center">
+                                                            $@foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(7))
+                                                            {
+                                                                @Libroslista
+                                                            }
+                                                        </h5>
+                                                        <hr>
+                                                        <div class="box-1">
+                                                            <div class="btn btn-dos ">
+                                                                <span><img src="imagenes/compra.png" width="30px" height="30px"> Añadir</span>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="card" style="width: 35rem;">
+                                                <div class="card-body">
+                                                    <p><font><u> <b>Sinopsis:</b></u></font></p>
+                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(3))
+                                                    {
+                                                        @Libroslista
+                                                    }
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </th>
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+</div>

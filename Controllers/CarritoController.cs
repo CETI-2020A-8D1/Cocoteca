@@ -87,9 +87,9 @@ namespace Cocoteca.Controllers
                     }
                 }
                 ViewData["carritoId"] = carrito.Idcompra;
-                ViewData["clienteId"] = carrito.Idcliente;
+                ViewData["clienteId"] = carrito.Idusuario;
                 idCarrito = carrito.Idcompra;
-                idCliente = carrito.Idcliente;
+                idCliente = carrito.Idusuario;
                 if (siHayCarrito)
                 {
                     res = await cliente.GetAsync("api/TraConceptoCompras/" + carrito.Idcompra);
@@ -156,6 +156,7 @@ namespace Cocoteca.Controllers
 
                 try
                 {
+                    
                     var myContent = JsonConvert.SerializeObject(carrito[0]);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                     var byteContent = new ByteArrayContent(buffer);
@@ -190,14 +191,7 @@ namespace Cocoteca.Controllers
             // RedirectToAction("CarritoView");
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-=======
-=======
 
->>>>>>> 50e1c0fa36355b1b49ffcf1dd96dfbd0bfd94514
         // GET: Funcion guadar las compras cambiadas
         /// <summary>
         ///  Esta funcion recibe las compras (TraConceptoCompra) donde el cliente modifico el numero de libros y los guarda en un arreglo para su posterior actulizacion, realizada cunado el cliente sale del carrito
@@ -209,12 +203,7 @@ namespace Cocoteca.Controllers
         /// <param name="cantidad">Cantidad de libros de la compra</param>
         /// <param name="sumar">True: la cantidad aunmento, False: la cantidad disminuyo</param>
         /// <param name="totalView">Precio totao</param>
-<<<<<<< HEAD
->>>>>>> 49b4cfd47ad39d546724d3679f695d310b79385b
-=======
->>>>>>> parent of 1c4348b... n
-=======
->>>>>>> 50e1c0fa36355b1b49ffcf1dd96dfbd0bfd94514
+
         public void agregarLibrosCambiados(int idConcepto, int compra, int libro, int cantidad, bool sumar, int totalView)
         {
             TraConceptoCompra conceptocompra = new TraConceptoCompra();
