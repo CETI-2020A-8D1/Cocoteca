@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocoteca", "Cocoteca\Cocoteca.csproj", "{5E2D0666-0138-4CF9-AE1A-C90F4348C17C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocoteca", "Cocoteca.csproj", "{5E2D0666-0138-4CF9-AE1A-C90F4348C17C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

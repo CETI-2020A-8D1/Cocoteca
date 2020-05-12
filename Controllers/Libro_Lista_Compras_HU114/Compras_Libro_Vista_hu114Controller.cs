@@ -5,8 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Helpers;
-using CocontroladorAPI.Models;
+using Cocoteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

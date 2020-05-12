@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CocontroladorAPI.Models;
+using Cocoteca.Models;
 using Cocoteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
