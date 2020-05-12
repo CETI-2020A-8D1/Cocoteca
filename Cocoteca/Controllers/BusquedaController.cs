@@ -12,6 +12,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
+/*
+ Quiondi soy el controlador de busqueda, como andan, ya se meveo?
+     
+     */
 namespace Cocoteca.Controllers
 {
     public class BusquedaController : Controller
