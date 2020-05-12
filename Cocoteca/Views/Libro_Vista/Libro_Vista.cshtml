@@ -1,6 +1,6 @@
 ﻿<div>
     @{
-        ViewData["Title"] = "Home Page";
+        ViewData["Title"] = "Libro_Vista";
     }
     <!DOCTYPE html>
 
@@ -82,8 +82,10 @@
                             <table class="table" style="background-color:#FFFFFF">
                                 <thead>
                                     <tr>
+                                        @{ String categoria = ((IEnumerable<string>)Model).ElementAt(11);
+                                        }
                                         <th scope="col" class="border-0 bg-light px-0">
-                                            <div class="p-2 px-3 text-uppercase">Cocoteca/libros</div>
+                                            <div class="p-2 px-3 text-uppercase">Cocoteca/libros/@categoria</div>
                                         </th>
                                     </tr>
                                 </thead>
@@ -91,62 +93,85 @@
                                 <th scope="row" class="border-0">
                                     <div class="p-2">
                                         <div class="d-inline-block">
+
                                             <img src=@foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(9))
-                                                        {
+                                            {
                                                             @Libroslista
-                                                        } height="400px" width="320px">
+                                            } height="400px" width="320px">
                                         </div>
                                         <div class="ml-3 d-inline-block align-top">
+                                            <h2>
+                                                @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(1))
+                                                {
+                                                    @Libroslista
+                                                }
+                                            </h2>
                                             <div class="d-inline-block">
-                                                <h2>
-                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(1))
-                                                    {
-                                                        @Libroslista
-                                                    }
-                                                </h2>
-                                                <h5><footer class="blockquote-footer">
-                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(2))
-                                                    {
-                                                        @Libroslista
-                                                    }
-                                                </footer></h5><br>
-                                                <p><font>
-                                                <u> <b>ISBN:</b></u>  
-                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).Where(n => n.Length == 4).First())
-                                                    {
-                                                        @Libroslista
-                                                    }
-                                                </font></p>
-                                                <p><font>
-                                                <u> <b>Editorial:</b></u>
-                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(10))
-                                                    {
-                                                        @Libroslista
-                                                    }
-                                                </font></p>
-                                                <p><font>
-                                                <u> <b>Paginas:</b></u>
-                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(4))
-                                                    {
-                                                        @Libroslista
-                                                    }
-                                                </font></p>
-                                                <p><font>
-                                                <u> <b>Año de Impresion:</b></u>
-                                                    @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(6))
-                                                    {
-                                                        @Libroslista
-                                                    }
-                                                </font></p>
-                                                <br><br>
+
+                                                <h5>
+                                                    <footer class="blockquote-footer">
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(2))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </footer>
+                                                </h5><br>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>ISBN:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(0))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Editorial:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(10))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Paginas:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(4))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Año de Impresion:</b></u>
+                                                        @foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(6))
+                                                        {
+                                                            @Libroslista
+                                                        }
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                    <font>
+                                                        <u> <b>Pais:</b></u>
+                                                        @{ String pais = ((IEnumerable<string>)Model).ElementAt(12);
+                                                        }
+                                                        @pais
+                                                    </font>
+                                                </p>
                                             </div>
                                             <div class="ml-8 d-inline-block align-top">
-                                                <br><br>
+                                                <br>
                                                 <div class="card card-dos mb-5 mb-lg-0" style="width: 18rem; height:16rem;">
 
                                                     <div class="card-body">
+                                                        @{ String enStock = ((IEnumerable<string>)Model).ElementAt(8);
+                                                        }
+                                                        <h5 class="card-title text-muted text-uppercase text-center">
+                                                            @enStock
 
-                                                        <h5 class="card-title text-muted text-uppercase text-center">En Stock</h5>
+                                                        </h5>
 
                                                         <h5 class="card-price text-center">
                                                             $@foreach (var Libroslista in ((IEnumerable<string>)Model).ElementAt(7))
@@ -164,6 +189,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <br><br>
                                             <div class="card" style="width: 35rem;">
                                                 <div class="card-body">
                                                     <p><font><u> <b>Sinopsis:</b></u></font></p>
@@ -173,6 +199,7 @@
                                                     }
                                                 </div>
                                             </div>
+                                            <br>
                                         </div>
                                     </div>
 
