@@ -1,0 +1,46 @@
+﻿@model Cocoteca.Models.UserDetail
+
+@{
+    ViewData["Title"] = "DetallesUsuario";
+    Layout = "~/Views/Shared/_VacioLayout.cshtml";
+}
+
+@using Cocoteca.Models;
+
+<h1>DetallesUsuario</h1>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <p>Nombre</p>@*@Html.DisplayNameFor(model => model.nombre)*@
+        </dt>
+        <dd class="col-sm-10">
+            <p>@ViewBag.Users.nombre</p>@*@Html.DisplayFor(model => model.nombre)*@
+        </dd>
+        <dt class="col-sm-2">
+            <p>Apellido</p>@*@Html.DisplayNameFor(model => model.apellido)*@
+        </dt>
+        <dd class="col-sm-10">
+            <p>@ViewBag.Users.apellido</p>@*@Html.DisplayFor(model => model.apellido)*@
+        </dd>
+        <dt class="col-sm-2">
+            <p>Direccion</p>@*@Html.DisplayNameFor(model => model.apellido)*@
+        </dt>
+
+        @foreach (var item in ViewBag.Users.catDirecciones)
+        {
+        <dd class="col-sm-10">
+            <p>@item</p>
+        </dd>
+        }
+        @*<dd class="col-sm-10">
+            <p>@ViewBag.Users.catDirecciones</p>@Html.DisplayFor(model => model.apellido)
+        </dd>*@
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@ViewBag.Users.idusuario">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

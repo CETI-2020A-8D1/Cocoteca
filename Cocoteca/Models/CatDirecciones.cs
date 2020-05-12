@@ -15,5 +15,10 @@ namespace Cocoteca.Models
 
         public virtual CatMunicipios IdmunicipioNavigation { get; set; }
         public virtual MtoCatUsuarios IdusuarioNavigation { get; set; }
+
+        public override string ToString()
+        {
+            return Calle + " " + NoExterior + " interior " + NoInterior + "\n" + " Codigo postal " + CodigoPostal;
+        }
     }
 }

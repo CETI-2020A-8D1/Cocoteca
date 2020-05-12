@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Cocoteca.Models;
 
 namespace Cocoteca.Data
 {
@@ -17,5 +18,6 @@ namespace Cocoteca.Data
             : base(options)
         {
         }
+        public DbSet<Cocoteca.Models.User> User { get; set; }
     }
 }
