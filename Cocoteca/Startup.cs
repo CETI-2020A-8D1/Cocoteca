@@ -124,9 +124,6 @@ namespace Cocoteca
                     name: "default",
                     //Se inicia la aplicación en la acción Index del controlador ClienteInicio
                     pattern: "{controller=ClienteInicio}/{action=Index}/{id?}");
-				endpoints.MapControllerRoute(
-					name: "create",
-                    pattern: "{controller=Libros}/{action=Create}/{id?}");
                 endpoints.MapRazorPages();
             });
 
