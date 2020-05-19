@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Cocoteca</title>
+    <link rel="icon" href="~/coco.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -47,8 +48,8 @@
                     </ul>
                     @if (!User.IsInRole("Almacenista"))
                     {
-						<form method="get" action=@Url.Action("Carruselbusqueda", "Busqueda")>
-							<div class=" form-group">
+						<form class="form-inline my-1 my-lg-1" method="get" action=@Url.Action("Carruselbusqueda", "Busqueda")>
+							<div class="form-group">
 								@Html.TextBox("nombre", null,  new { placeholder = "Ej. El principito...", @class = "form-control mr-sm-2 w-auto" })
 							</div>
 							<input type="submit" value="Buscar" button class="btn btn-search my-2 my-sm-0" />

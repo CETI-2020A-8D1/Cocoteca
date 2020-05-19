@@ -43,12 +43,14 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [DataType(DataType.CreditCard)]
+            [Required(ErrorMessage = "El campo Código Postal es requerido")]
+            [MinLength(5, ErrorMessage = "El Código Postal debe ser de 5 dígitos")]
+            [StringLength(5, ErrorMessage = "El Código Postal debe ser de 5 dígitos")]
+            [DataType(DataType.PostalCode)]
             [Display(Name = "Codigo Postal")]
             public int CodigoPostal { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "El campo Calle es requerido")]
             [StringLength(128)]
             [DataType(DataType.Text)]
             [Display(Name = "Calle")]
@@ -61,17 +63,17 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
             [Display(Name = "No. interior (si es que hay)")]
             public string NoInt { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "El campo No. Exterior  es requerido")]
             [Display(Name = "No. exterior")]
             public int NoExt { get; set; }
         }
 
-        [Required]
+        [Required(ErrorMessage = "El campo Estado es requerido")]
         [BindProperty(SupportsGet = true)]
         [Display(Name = "Estado")]
         public int IdEstadoSeleccionado { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo Municipio es requerido")]
         [BindProperty]
         [Display(Name = "Municipio")]
         public int IdMunicipioSeleccionado { get; set; }

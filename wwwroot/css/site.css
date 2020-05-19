@@ -19,6 +19,13 @@ body {
     color: #F3F3F3;
 }
 
+/* NavBar Pill del perfil del usuario*/
+
+.nav-pills .nav-link.active,
+.show > .nav-pills .nav-link {
+    background-color: #ff9060;
+}
+
 /*---------- Nav Bar ------------- */
 .form-inline {
     padding-left: 10px;
