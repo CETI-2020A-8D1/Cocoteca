@@ -28,8 +28,6 @@ namespace Cocoteca.Helper
         public static async Task<HttpResponseMessage> CrearUsuario(Usuario usuario)
         {
             await RunAsync();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            client = new HttpClient(clientHandler);
             var miContenido = JsonConvert.SerializeObject(usuario);
             var buffer = System.Text.Encoding.UTF8.GetBytes(miContenido);
             var byteContent = new ByteArrayContent(buffer);

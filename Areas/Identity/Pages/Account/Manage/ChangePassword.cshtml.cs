@@ -33,12 +33,12 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required (ErrorMessage = "El campo Contraseña Actual es requerido")]
             [DataType(DataType.Password)]
-            [Display(Name = "Actual contraseña")]
+            [Display(Name = "Contraseña Actual")]
             public string OldPassword { get; set; }
 
-            [Required]
+            [Required (ErrorMessage = "El campo Nueva Contraseña es requerido")]
             [StringLength(100, ErrorMessage = "La {0} debe tener mínimo {2} y máximo {1} caracteres.", MinimumLength = 4)]
             [DataType(DataType.Password)]
             [Display(Name = "Nueva contraseña")]
