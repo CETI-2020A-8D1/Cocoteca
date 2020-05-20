@@ -36,19 +36,17 @@ namespace Cocoteca.Controllers.EquipoTripas
             ViewBag.id = idlibro;
             HttpResponseMessage res;
             var httpClient = new HttpClient();
-            var json_Libros = await httpClient.GetStringAsync($@"{CocontroladorAPI.Initial()}api/DatosCliente/Libros/{id}");
+            var json_Libros = await httpClient.GetStringAsync($"https://localhost:44341/api/MtoCatLibros/{id}");
             var json_Editoriales = await httpClient.GetStringAsync("https://localhost:44341/api/Editorial");
             var json_Categorias = await httpClient.GetStringAsync("https://localhost:44341/api/CatCategorias");
             var json_Paises = await httpClient.GetStringAsync("https://localhost:44341/api/CatPaises");
 
 
-            var LibrosLista = JsonConvert.DeserializeObject<List<MtoCatLibros>>(json_Libros);
+            var Libro = JsonConvert.DeserializeObject<MtoCatLibros>(json_Libros);
             var Editorial_Lista = JsonConvert.DeserializeObject<List<CatEditorial>>(json_Editoriales);
             var Categoria_Lista = JsonConvert.DeserializeObject<List<CatCategorias>>(json_Categorias);
             var Paises_Lista = JsonConvert.DeserializeObject<List<CatPaises>>(json_Paises);
-            foreach (var Libro in LibrosLista)
-            {
-                
+             
                 isbn = Libro.Isbn;
                 titulo= Libro.Titulo;
                 autor = Libro.Autor;
@@ -96,7 +94,7 @@ namespace Cocoteca.Controllers.EquipoTripas
 
 
 
-            }
+            
             ViewBag.isbn = isbn;
             ViewBag.autor = autor;
             ViewBag.titulo = titulo;
@@ -136,7 +134,7 @@ namespace Cocoteca.Controllers.EquipoTripas
             //ViewBag.Categorias = categorias;
             //ViewBag.Editoriales = editoriales;
             //ViewBag.Paises = paises;
-            if(LibrosLista.Count <= 0)
+            if(Libro == null)
             {
                 return Redirect("~/Error/Error");
             }
