@@ -17,7 +17,7 @@ namespace Cocoteca.Helper
         /// <returns>Un string de la conexión a el Cocontrolador API</returns>
         public static string Initial()
         {
-            return "https://localhost:44341/";
+            return "http://localhost:61067/";
         }
     }
 

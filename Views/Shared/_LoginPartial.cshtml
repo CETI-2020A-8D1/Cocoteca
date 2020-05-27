@@ -32,7 +32,7 @@
                     <img class="carrito" src="~/carrito.png" alt="carrito" style="width:30px; height:30px">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Ir al carrito</a>
+                    <a class="dropdown-item" asp-controller="Carrito" asp-action="CarritoView" asp-route-id="@User">Ir al carrito</a>
                     <a class="dropdown-item" asp-controller="Equipo_Tripas" asp-action="Lista_Compras">Lista de pedidos</a>
                 </div>
             </li>

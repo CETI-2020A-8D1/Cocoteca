@@ -45,7 +45,7 @@ namespace Cocoteca
         {
             await RunAsync();        
             List<Inicio> inicio = null;
-            var response = await client.GetAsync($"https://localhost:44341/api/Inicio");
+            var response = await client.GetAsync($"http://localhost:61067/api/Inicio");
             if (response.IsSuccessStatusCode)
             {
                 inicio = await response.Content.ReadAsAsync<List<Inicio>>();
@@ -117,7 +117,7 @@ namespace Cocoteca
         {
             await RunAsync();
             Categoria categoria = null;
-            var response = await client.GetAsync($"https://localhost:44341/api/CatCategorias/{id}");
+            var response = await client.GetAsync($"http://localhost:61067/api/CatCategorias/{id}");
             if (response.IsSuccessStatusCode)
             {
                 categoria = await response.Content.ReadAsAsync<Categoria>();
@@ -144,7 +144,7 @@ namespace Cocoteca
         {
             await RunAsync();
             List<Categoria> categorias = null;
-            var response = await client.GetAsync($"https://localhost:44341/api/Grid");
+            var response = await client.GetAsync($"http://localhost:61067/api/Grid");
             if (response.IsSuccessStatusCode)
             {
                 categorias = await response.Content.ReadAsAsync<List<Categoria>>();
