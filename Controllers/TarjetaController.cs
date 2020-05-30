@@ -9,21 +9,22 @@ namespace Cocoteca.Controllers
 {
     public class TarjetaController : Controller
     {
-        public IActionResult Tarjeta()
+        [HttpGet]
+        public ActionResult Tarjeta()
         {
-            TarjetaCredito obj = new TarjetaCredito();
-            try
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Tarjeta(TarjetaCredito usuario)
+        {
+            if (string.IsNullOrEmpty(usuario.Titular) ||
+            string.IsNullOrEmpty(usuario.Numero))
             {
-                obj.Titular = Request.Form["owner"].ToString();
-                obj.Numero = Request.Form["cardNumber"].ToString();
-                obj.FechaCaducidad = DateTime.Parse(Request.Form["fecha"]);
-                obj.Cvv = Convert.ToInt32(Request.Form["cvv"]);
-            }catch(Exception e)
-            {
-                return View(obj);
+                ViewBag.Error = "Ningun campo puede estar vacío";
+                return View(usuario);
             }
-
-            return View(obj);
+            // Regresamos al inicio
+            return RedirectToAction("Home", "Index");
         }
     }
 }
