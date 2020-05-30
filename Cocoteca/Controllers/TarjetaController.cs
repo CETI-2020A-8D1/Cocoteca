@@ -12,16 +12,10 @@ namespace Cocoteca.Controllers
         public IActionResult Tarjeta()
         {
             TarjetaCredito obj = new TarjetaCredito();
-            try
-            {
-                obj.Titular = Request.Form["owner"].ToString();
-                obj.Numero = Request.Form["cardNumber"].ToString();
-                obj.FechaCaducidad = DateTime.Parse(Request.Form["fecha"]);
-                obj.Cvv = Convert.ToInt32(Request.Form["cvv"]);
-            }catch(Exception e)
-            {
-                return View(obj);
-            }
+            ViewData["owner"] = obj.Titular;
+            ViewData["cardNumber"] = obj.Numero;
+            ViewData["fecha"] = obj.FechaCaducidad;
+            ViewData["cvv"] = obj.Cvv;
 
             return View(obj);
         }
