@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Cocoteca.Models
 {
-    public partial class TarjetaCredito
+    public partial class Tarjeta
     {
         public string Titular { get; set; }
         public string Numero { get; set; }

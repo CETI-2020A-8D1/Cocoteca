@@ -3,7 +3,7 @@
     ViewData["Title"] = "Tarjeta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Cocoppel.Models.TarjetaCredito
+@model Cocoteca.Models.Tarjeta
 <h2>Metodo de pago</h2>
 @if (!string.IsNullOrEmpty(ViewBag.Error))
 {
@@ -35,18 +35,18 @@
         <option value="12">Diciembre</option>
     </select>
     <select name="Año">
-        <option value="21"> 2021</option>
-        <option value="22"> 2022</option>
-        <option value="23"> 2023</option>
-        <option value="24"> 2024</option>
-        <option value="25"> 2025</option>
-        <option value="26"> 2026</option>
+        <option value="2021"> 2021</option>
+        <option value="2022"> 2022</option>
+        <option value="2023"> 2023</option>
+        <option value="2024"> 2024</option>
+        <option value="2025"> 2025</option>
+        <option value="2026"> 2026</option>
     </select>
     <br />
     <label> Tipo de tarjeta</label>
     <br />
-    <input type="radio" id="Credito" name="Tipo" value="Credito">
-    <label for="Credtio">Credito</label>
+    <input type="radio" id="Credito" name="Tipo" value="Credito" checked>
+    <label for="Credito">Credito</label>
     <br />
     <input type="radio" id="Debito" name="Tipo" value="Debito">
     <label for="Debito">Debito</label>
