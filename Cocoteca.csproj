@@ -25,6 +25,7 @@
     <Folder Include="Models\Cliente\Equipo2\" />
     <Folder Include="Models\Cliente\Equipo3\" />
     <Folder Include="Models\Cliente\Equipo4\" />
+    <Folder Include="Models\Tarjetas\" />
     <Folder Include="Views\Almacenista\" />
   </ItemGroup>
 
