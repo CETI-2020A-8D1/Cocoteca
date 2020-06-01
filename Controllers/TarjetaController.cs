@@ -35,7 +35,7 @@ namespace Cocoteca.Controllers
                 string tipo = usuario.Tipo;
                 tipo = usuario.Tipo;
 
-                Transaccion transaccion = new Transaccion(usuario, "1", precio);
+                Transaccion transaccion = new Transaccion(usuario, 1, precio);
 
                 var content = JsonConvert.SerializeObject(transaccion);
 
