@@ -23,6 +23,10 @@ namespace Cocoteca.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Este metodo busca y guarda en un alista todos los paises, editorial y categorias para despues mostrar en una lista desplegable esos valores en la vista
+        /// </summary>
+        /// <returns>retorn la vista de create</returns>
         public async Task<IActionResult> Create()
         {
             HttpClient cliente = _api.Initial();
@@ -58,6 +62,11 @@ namespace Cocoteca.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Este metodo es el que inserta un nuevo libro a la base de datos, los datos los recive de la vista 
+        /// </summary>
+        /// <param name="libro">Libro con los datos que se va a crear, que se va a insertar en la base de datos</param>
+        /// <returns>retorn ala vista de create </returns>
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Isbn,Titulo,Autor,Sinopsis,Descontinuado,Paginas,Revision,Ano,Precio,Stock,Ideditorial,Idpais,Idcategoria,Imagen")]  MtoCatLibros libro)
         {
