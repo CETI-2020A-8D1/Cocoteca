@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Cocoteca.Models
 {
+    /// <summary>
+    /// Editorial de libro.
+    /// </summary>
     public partial class CatEditorial
     {
         public CatEditorial()

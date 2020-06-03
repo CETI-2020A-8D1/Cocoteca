@@ -14,6 +14,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Cocoteca.Areas.Identity.Pages.Account
 {
+    /// <summary>
+    /// Login de la aplicación.
+    /// Cualquier usuario hace su inicio de sesión desde este lugar, sea: super admin, admin, cliente o almacenista.
+    /// </summary>
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
@@ -21,6 +25,12 @@ namespace Cocoteca.Areas.Identity.Pages.Account
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
+        /// <summary>
+        /// Constructor de la clase.
+        /// </summary>
+        /// <param name="signInManager">Provee de las APIs para el inicio de sesión del usuario</param>
+        /// <param name="logger">Interfaz generica para el log in</param>
+        /// <param name="userManager">Provee de las API para administrar al usuario almacenado en la sesión</param>
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
             UserManager<IdentityUser> userManager)
@@ -40,6 +50,9 @@ namespace Cocoteca.Areas.Identity.Pages.Account
         [TempData]
         public string ErrorMessage { get; set; }
 
+        /// <summary>
+        /// Clase que recibe los datos de inicio de sesión del usuario.
+        /// </summary>
         public class InputModel
         {
             [Required]
@@ -53,6 +66,11 @@ namespace Cocoteca.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
+        /// <summary>
+        /// Muestra la página de inicio de sesión.
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns>La página web para el inicio de sesión</returns>
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
@@ -70,6 +88,12 @@ namespace Cocoteca.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
+        /// <summary>
+        /// Verifica que los datos de inicio de sesión estén en la base de datos, si es redirige a la página web
+        /// correpondiente al usuario, de lo contrario indica el error y vuellve a mostrar el formulario de iniciio de sesión.
+        /// </summary>
+        /// <param name="returnUrl">url de reedirección del sitio.</param>
+        /// <returns>Página actual o redirección a otra página.</returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
