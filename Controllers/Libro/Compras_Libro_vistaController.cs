@@ -7,6 +7,8 @@ using Cocoteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
+
+//Este controlador se actualizo y ahora su funcion esta implementada en el controlador llamado "Equipo_TripasController". Este ya no se usa para nada.
 namespace Cocoteca.Controllers.Libro
 {
     public class Compras_Libro_vistaController : Controller

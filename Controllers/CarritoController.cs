@@ -327,6 +327,10 @@ namespace Cocoteca.Controllers
             }
         }
 
+        /// <summary>
+        /// Este metodo elimina un libro del carrito, elimina el registro de que se quiere comprar ese libro
+        /// </summary>
+        /// <param name="indice"> libro a eliminar del carrito</param>
         public void Eliminar(int indice)
         {
             HttpClient cliente = _api.Initial();
@@ -340,6 +344,11 @@ namespace Cocoteca.Controllers
             }
         }
 
+        /// <summary>
+        /// Este metodo muestra una pagina con un mensaje, por lo regular es usado para mostrar errores
+        /// </summary>
+        /// <param name="error"> mensaje que se quiere mostrar</param>
+        /// <returns></returns>
         public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;

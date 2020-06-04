@@ -17,11 +17,18 @@ namespace Cocoteca.Controllers
     public class BusquedaController : Controller
     {
         static CocopelAPI _api = new CocopelAPI();
+
+    
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Este metodo busca un libro con un nombre especificado y retorna la view con el libro encontrado
+        /// </summary>
+        /// <param name="nombre">nombre del libro que se esta buscando</param>
+        /// <returns></returns>
         public async Task<IActionResult> Carruselbusqueda(String nombre)
         {
             HttpClient cliente = _api.Initial();
@@ -70,6 +77,11 @@ namespace Cocoteca.Controllers
             return View(busqueda);
         }
 
+        /// <summary>
+        /// Este metodo muestra una pagina con un mensaje, por lo regular es usado para mostrar errores
+        /// </summary>
+        /// <param name="error"> mensaje que se quiere mostrar</param>
+        /// <returns></returns>
         public async Task<IActionResult> Error(string error)
         {
             ViewData["msg"] = error;
