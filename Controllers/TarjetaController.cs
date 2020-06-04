@@ -8,7 +8,7 @@ using Cocoteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
-
+//Este controlador se encarga de recibir por medio de post (recibe) y Get (muestra la vista ) las variables de la clase TarjetaCredito 
 namespace Cocoteca.Controllers
 {
     /// <summary>
@@ -18,11 +18,13 @@ namespace Cocoteca.Controllers
     {
         static readonly HttpClient client = new HttpClient();
         int precio = 200;
-
         /// <summary>
         /// HTTPGet Tarjeta
         /// </summary>
         /// <returns>La vista /Tarjeta/Tarjeta, un formulario para introducir datos de tarjeta de crédito o débito</returns>
+
+        //Gracias a la etiquete HttpGet se muestra la vista con el mismo nombre del controlador
+
         [HttpGet]
         public ActionResult Tarjeta()
         {
@@ -34,7 +36,10 @@ namespace Cocoteca.Controllers
         /// </summary>
         /// <param name="usuario">Tarjeta devuelta por el formulario /Tarjeta/Tarjeta</param>
         /// <returns></returns>
+        //Gracias a la etiqueta POST y el metodo se pueden recibir las variables de la vista con su formulario y asi poder trabajar con ello 
+
         [HttpPost]
+        
         public async Task<IActionResult> Tarjeta(Tarjeta usuario)
         {
             // Revisa si el campo del titular o el número esta vacío

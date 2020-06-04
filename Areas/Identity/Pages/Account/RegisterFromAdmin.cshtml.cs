@@ -105,6 +105,11 @@ namespace Cocoteca.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
+        /// <summary>
+        /// Envía al formulario de registro de usuarios como admin.
+        /// </summary>
+        /// <param name="returnUrl">URL de reedirección</param>
+        /// <returns>Página web con formulario de registro de usuarios como admin</returns>
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;

@@ -19,6 +19,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Cocoteca.Areas.Identity.Pages.Account
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
@@ -27,6 +30,13 @@ namespace Cocoteca.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        /// <summary>
+        /// Constructor del modelo de registro.
+        /// </summary>
+        /// <param name="userManager">Provee de las API para administrar al usuario almacenado en la sesión</param>
+        /// <param name="signInManager">Provee de las APIs para el inicio de sesión del usuario</param>
+        /// <param name="logger">Interfaz generica para el log in</param>
+        /// <param name="emailSender">Usada para enviar la confirmación por correo</param>
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
@@ -46,6 +56,9 @@ namespace Cocoteca.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        /// <summary>
+        /// Campos necesarios para crear una cuenta.
+        /// </summary>
         public class InputModel
         {
             [Required(ErrorMessage = "El campo Email es requerido")]
@@ -77,12 +90,23 @@ namespace Cocoteca.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
+        /// <summary>
+        /// Envía al formulario de registro.
+        /// </summary>
+        /// <param name="returnUrl">URL de reedirección</param>
+        /// <returns>Página web con formulario de registro de usuarios.</returns>
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        /// <summary>
+        /// Verifica que la información sea correcta, si es así realiza el registro del usuario.
+        /// </summary>
+        /// <param name="returnUrl">URL de reedirección</param>
+        /// <returns>Si la información es correcta lo redirige a la página correspondiente, de lo
+        /// contrario le indica los errores en el formulario.</returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
