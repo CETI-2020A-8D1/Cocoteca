@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Cocoteca.Models
 {
+    /// <summary>
+    /// Modelo de direcciones físicas de usuarios.
+    /// </summary>
     public partial class CatDirecciones
     {
         public int Iddireccion { get; set; }
