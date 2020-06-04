@@ -3,12 +3,14 @@
     ViewData["Title"] = "Tarjeta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!--Tiene como modelo Tarjeta de credito, para obtener las variables con las cuales trabajar -->
 @model Cocoteca.Models.Tarjeta
 <h2>Metodo de pago</h2>
 @if (!string.IsNullOrEmpty(ViewBag.Error))
 {
     <div class="error">@ViewBag.Error</div>
 }
+<!-- Este formulario se muestra para obtener la informacion de la tarjeta del cliente recibiendo diferentes variables-->
 <form action ="/tarjeta/Tarjeta" method="POST">
     <label for="login">Numero de Tarjeta:</label>
     <input type="text" name="Numero" value="@(Model!=null ? Model.Numero : string.Empty)" />

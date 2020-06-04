@@ -10,6 +10,10 @@ namespace Cocoteca.Controllers
 {
     public class DatosUsuarioController : Controller
     {
+        /// <summary>
+        /// DatosUsuarioController es un controlador que se encarga de recibir la informacion que proviene de obtener datos y la envia a la pagina correspondiente, se utiliza para las dos paginas tanto lista como detalles
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             try
