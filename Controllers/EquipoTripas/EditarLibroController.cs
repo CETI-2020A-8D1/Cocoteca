@@ -16,9 +16,17 @@ using System.Net.Security;
 using Cocoteca.Models.Cliente.Equipo_3;
 using Microsoft.AspNetCore.Authorization;
 
+
+/** Controlador de Actualizacion de datos
+ * Dentro de este controlador se toma la informacion de un libro para llenar los campos de la vista y poder editar la informacion existente de un libro seleccionado
+ */
 namespace Cocoteca.Controllers.EquipoTripas
 {
-    [Authorize(Policy = "RequiereRolAlmacenista")]
+    /** Clase Editar libro
+     * Lo que se hace dentro de esta clase primeramente es tomar la informacion del libro que se desea editar, la almacenamos en variables manipulables
+     * desde la vista y cargamos la vista, para que el usuario autorizado pueda modificar esa informacion y asi poder proceder a actualizarla.
+     */
+    [Authorize(Policy = "RequiereRolAlmacenista")]//Solo pueden acceder los usuario con permiso de Admin,Super Admin o de Almacenista.
     public class EditarLibroController : Controller
     {
         private static HttpClientHandler clientHandler = new HttpClientHandler();
@@ -30,6 +38,11 @@ namespace Cocoteca.Controllers.EquipoTripas
         public List<CatPaises> paises;
         public List<CatEditorial> editoriales;
         public List<CatCategorias> categorias;
+
+        /** Funcion de Captura de datos
+         * Esta funcion hace la consulta a la BD para obtener la informacion del libro, almacenarla en una variable viewBag y asi mostrarla 
+         * en la vista. Si ocurre cualquier error al realizar la consulta te manda a la ventana de error, de lo contrario, carga la vista correspondiente
+         */
         public async Task<IActionResult> EditarLibro(int id)
         {
             idlibro = id;
@@ -68,7 +81,7 @@ namespace Cocoteca.Controllers.EquipoTripas
 
                 foreach (var Pais in Paises_Lista)
                 {
-                    if (Libro.Idpais == Pais.Idpais)
+                    if (Libro.Idpais == Pais.Idpais)//Se buscaba entre todos los id de los paises para saber cual era el nombre del del libro.
                     {
                         idpais = Pais.Idpais;
                         nombrePais = Pais.Nombre;
@@ -76,16 +89,15 @@ namespace Cocoteca.Controllers.EquipoTripas
                 }
                 foreach (var Editorial in Editorial_Lista)
                 {
-                    if (Libro.Ideditorial == Editorial.Ideditorial)
+                    if (Libro.Ideditorial == Editorial.Ideditorial)//Se buscaba entre todos los id de las editoriales para saber cual era el nombre del del libro.
                     {
                         ViewBag.idEditorial = Editorial.Ideditorial;
                         ViewBag.nombreEditorial = Editorial.Nombre;
                     }
                 }
-
                 foreach (var Categoria in Categoria_Lista)
                 {
-                    if (Libro.Idcategoria == Categoria.Idcategoria)
+                    if (Libro.Idcategoria == Categoria.Idcategoria)//Se buscaba entre todos los id de las categorias para saber cual era el nombre del del libro.
                     {
                         ViewBag.idCategoria = Categoria.Idcategoria;
                         ViewBag.nombreCategoria = Categoria.Nombre;
@@ -111,21 +123,21 @@ namespace Cocoteca.Controllers.EquipoTripas
             if (res.IsSuccessStatusCode)
             {
                 string result = res.Content.ReadAsStringAsync().Result;
-                paises = JsonConvert.DeserializeObject<List<CatPaises>>(result);
+                paises = JsonConvert.DeserializeObject<List<CatPaises>>(result);//Toma todos los paises para mostrarlos en la parte donde se modifica el pais en el libro, para que solo seleccione las opciones disponibles en la BD
             }
 
             res = await cliente.GetAsync($"https://localhost:44341/api/Editorial");
             if (res.IsSuccessStatusCode)
             {
                 string result = res.Content.ReadAsStringAsync().Result;
-                editoriales = JsonConvert.DeserializeObject<List<CatEditorial>>(result);
+                editoriales = JsonConvert.DeserializeObject<List<CatEditorial>>(result);//Toma todos las editoriales para mostrarlos en la parte donde se modifica la editorial en el libro, para que solo seleccione las opciones disponibles en la BD
             }
 
             res = await cliente.GetAsync($"https://localhost:44341/api/CatCategorias");
             if (res.IsSuccessStatusCode)
             {
                 string result = res.Content.ReadAsStringAsync().Result;
-                categorias = JsonConvert.DeserializeObject<List<CatCategorias>>(result);
+                categorias = JsonConvert.DeserializeObject<List<CatCategorias>>(result);//Toma todos las categorias para mostrarlos en la parte donde se modifica la categoria en el libro, para que solo seleccione las opciones disponibles en la BD
             }
 
             ViewData["Paises"] = new SelectList(paises, "Idpais", "Nombre");
@@ -134,7 +146,7 @@ namespace Cocoteca.Controllers.EquipoTripas
             //ViewBag.Categorias = categorias;
             //ViewBag.Editoriales = editoriales;
             //ViewBag.Paises = paises;
-            if(Libro == null)
+            if(Libro == null)//Si no se encontraba el libro te mandaba a la ventana de error
             {
                 return Redirect("~/Error/Error");
             }
@@ -145,6 +157,11 @@ namespace Cocoteca.Controllers.EquipoTripas
             
         }
 
+        /**Funcion de Actualzacion de datos
+         * Esta funcion es la que toma los datos del libro, ya sea que se actualicen o no, para hacer la consulta hacia la base de datos y actualizar 
+         * los datos anteriores con los nuevos escritos en esta vista y si es exitosa te devolvera a la pagina de la lista de TOdos lo libros, de lo contrario
+         * te mandara a la ventana de error..
+         */
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Idlibro,Isbn,Titulo,Autor,Sinopsis,Descontinuado,Paginas,Revision,Ano,Precio,Stock,Ideditorial,Idpais,Idcategoria,Imagen")]  MtoCatLibros libro)
         {
