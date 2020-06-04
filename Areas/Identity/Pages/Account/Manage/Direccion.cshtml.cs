@@ -17,12 +17,20 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Cocoteca.Areas.Identity.Pages.Account.Manage
 {
+    /// <summary>
+    /// Permite añadir o editar la dirección física de un cliente.
+    /// </summary>
     [Authorize(Policy = "RequiereRolCliente")]
     public partial class DireccionModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
+        /// <summary>
+        /// Constructor del modelo de dirección.
+        /// </summary>
+        /// <param name="userManager">Provee de las API para administrar al usuario almacenado en la sesión</param>
+        /// <param name="signInManager">Provee de las APIs para el inicio de sesión del usuario</param>
         public DireccionModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager)
@@ -41,6 +49,9 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
         public SelectList Estados { get; set; }
         public SelectList Municipios { get; set; }
 
+        /// <summary>
+        /// Modelo que recibe los datos de la dirección del usuario.
+        /// </summary>
         public class InputModel
         {
             [Required(ErrorMessage = "El campo Código Postal es requerido")]
@@ -78,6 +89,11 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
         [Display(Name = "Municipio")]
         public int IdMunicipioSeleccionado { get; set; }
 
+        /// <summary>
+        /// Carga los datos de dirección del usuario y la lista de estados.
+        /// </summary>
+        /// <param name="user">Usuario que desea acceder a su dirección</param>
+        /// <returns>Indicación de que terminó la taarea.</returns>
         private async Task LoadAsync(IdentityUser user)
         {
             try
@@ -111,6 +127,10 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
 
         }
 
+        /// <summary>
+        /// Envía al formulario de dirección con los datos de dirección de el usuario.
+        /// </summary>
+        /// <returns>Página web con el formulario de la dirección del usuario con la sesión iniciada.</returns>
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -124,6 +144,10 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
+        /// <summary>
+        /// Obtiene los municipios del estado seleccionado.
+        /// </summary>
+        /// <returns>Un resultado Json con el listado de  municipios correspondientes al estado.</returns>
         public JsonResult OnGetMunicipios()
         {
             List<Municipio> municipios;
@@ -131,6 +155,11 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
             return new JsonResult(municipios);
         }
 
+        /// <summary>
+        /// Verifica que los datos introducidos sean correctos y estén completos, si es así actualiza la base de datos,
+        /// crea la dirección si el usuario no tiene una.
+        /// </summary>
+        /// <returns>El formulario con una confirmación de los cambios o la señalización de los errores.</returns>
         public async Task<IActionResult> OnPostAsync()
         {
             string returnUrl = Url.Content("~/Error/Error");
@@ -200,6 +229,11 @@ namespace Cocoteca.Areas.Identity.Pages.Account.Manage
             }
         }
 
+        /// <summary>
+        /// Verifica si datos introducidos por el usuario son los mismos a los anteriores.
+        /// </summary>
+        /// <param name="user">Usuario del que debe comparar los datos.</param>
+        /// <returns>TRUE si son iguales, FALSE si no son iguales.</returns>
         private async Task<bool> dirIgualAsync(IdentityUser user)
         {
             var datos = ObtenerDatosCliente.Direccion(await _userManager.GetUserIdAsync(user)).Result;

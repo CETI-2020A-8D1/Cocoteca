@@ -21,12 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Almacenista\" />
     <Folder Include="Models\Cliente\Equipo2\" />
     <Folder Include="Models\Cliente\Equipo3\" />
     <Folder Include="Models\Cliente\Equipo4\" />
     <Folder Include="Models\Tarjetas\" />
-    <Folder Include="Views\Almacenista\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

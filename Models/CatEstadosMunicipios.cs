@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Cocoteca.Models
 {
+    /// <summary>
+    /// Modelo relación estado-municipio.
+    /// </summary>
     public partial class CatEstadosMunicipios
     {
         public int IdestadoMunicipio { get; set; }
