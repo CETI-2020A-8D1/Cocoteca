@@ -12,6 +12,10 @@ namespace Cocoteca.Helper
 {
     public class ObtenerDatosUsuarios
     {
+        /// <summary>
+        /// ObtenerDatosUsuarios es un controlador donde se crea una request para el controlador y la respuesta se deserializa para tomar unicamente los datos necesarios, funciona tanto con la lista de usuarios completa como con la informacion en detalles de los usuario
+        /// </summary>
+        /// <returns>regresa un tipo usuario con la informacion recabada en el request</returns>
         public static List<User> Usuarios()
         {
             List<User> usuario;

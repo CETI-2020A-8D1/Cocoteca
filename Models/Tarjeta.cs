@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+//Esta clase nos ayuda a tener un modelo de una tarjeta
 namespace Cocoteca.Models
 {
     public partial class Tarjeta
