@@ -35,7 +35,7 @@ namespace Cocoteca.Controllers
                 paises = JsonConvert.DeserializeObject<List<CatPaises>>(result);
             }
 
-            res = await cliente.GetAsync("api/Editorial");
+            res = await cliente.GetAsync("api/CatEditorial");
             if (res.IsSuccessStatusCode)
             {
                 string result = res.Content.ReadAsStringAsync().Result;
